@@ -1,0 +1,62 @@
+{
+  "styled-components": {
+    "scope": "typescriptreact,typescript",
+    "prefix": "callstyle",
+    "body": [
+      "const Styled$1 = styled.$2`",
+      "  $3",
+      "`"
+    ],
+    "description": "styled-componentsを使うときのの雛形"
+  },
+  "styled-components use global theme and css": {
+    "scope": "css,scss,typescriptreact,typescript",
+    "prefix": "calltheme",
+    "body": [
+      "\\${({ theme }) =>",
+      "  css`",
+      "    $1",
+      "  `",
+      "}"
+    ],
+    "description": "styled-componentでtheme.tsのthemeとcssを呼び出す"
+  },
+  "styled-components use global theme": {
+    "scope": "css,scss,typescriptreact,typescript",
+    "prefix": "callthemeonly",
+    "body": [
+      "\\${({ theme }) => theme.$1 }"
+    ],
+    "description": "styled-componentでtheme.tsのthemeのみを呼び出す"
+  },
+  "React FC": {
+    "scope": "typescriptreact",
+    "prefix": "fcx",
+    "body": [
+      "import React, { FCX } from 'react'",
+      "import styled, { css } from 'styled-components'\n",
+      "type Props = { $2 }\n",
+      "export const ${TM_FILENAME_BASE}: FCX<Props> = ({ className }) => {",
+      "  return (",
+      "    <div className={className}>",
+      "      $1",
+      "    </div>",
+      "  )",
+      "}\n"
+    ],
+    "description": "React関数コンポーネントの雛形"
+  },
+  "React Hooks": {
+    "scope": "typescript",
+    "prefix": "usehook",
+    "body": [
+      "import { $1 } from 'react'\n",
+      "type ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Return = {\n",
+      "}\n",
+      "export const ${TM_FILENAME_BASE} = (): ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Return => {",
+      "  $2",
+      "  return",
+      "}"
+    ]
+  }
+}
