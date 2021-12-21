@@ -7,15 +7,9 @@ import { AppProvider } from "provider/AppProvider";
 const App: FC = () => {
   return (
     <AppProvider>
-      <AppContainer>
-        <GlobalStyle />
-      </AppContainer>
+      <GlobalStyle />
     </AppProvider>
   );
 };
-
-const AppContainer = styled.div`
-  height: 200vh;
-`;
 
 export default App;
