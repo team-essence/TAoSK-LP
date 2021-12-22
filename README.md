@@ -1,46 +1,178 @@
-# Getting Started with Create React App
+# TAoSK - LP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+フォルダ構成やコーディング規約等はここを参照しよう</br>
+`npm` は禁止 `yarn` を使う
 
-## Available Scripts
+## 初期インストール
 
-In the project directory, you can run:
+`cd TAoSK`</br>
+`yarn`</br>
 
-### `npm start`
+## 起動方法
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`yarn start`</br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## フォルダ構成
 
-### `npm test`
+```bash
+TAoSK-lp/
+      ├─ public
+      ├─ src/
+            ├─ components/
+                  ├─ ui/
+                  ├─ models/
+            ├─ hooks/
+            ├─ consts/
+            ├─ providers/
+            ├─ utils/
+                  ├─ animations/
+            ├─ env/
+            ├─ styles/
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| ディレクトリ     | 役割                                  |
+| ---------------- | ------------------------------------- |
+| components       | ui: 各パーツ models: ビジネスロジック |
+| hooks            | hooks 関数                            |
+| consts           | 変更が無い値                          |
+| providers        | provider の設定                       |
+| types            | 共通で使う型                          |
+| utils            | 通常関数                              |
+| utils/animations | gsapのアニメーションを管理            |
+| env              | env 系の設定                          |
+| styles           | 初期スタイル設定                      |
 
-### `npm run build`
+## コード規約
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### コードについて
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- any は禁止。unknown を使う
+  - やむを得ず使用する場合はコメントアウトを書く
+- as は API との関係もあるため禁止とまではいかないが、極力使わないようにする
+  - レビューの際に厳しくチェックする
+- 色の変数名は name-that-color を使う
+  - [Name that Color - Chirag Mehta : chir.ag](https://chir.ag/projects/name-that-color)
+- コメントアウトで何か書くときは、該当するものがあれば Prefix を付けるようにする
+  - ex: TODO, FIXME, BUG, HACK, XXX
+    - HACK と XXX は危険なコードの意味。なんとなく XXX の方が危険そうなイメージある
+  - VSCode の拡張機能の "Todo Tree" を入れる
+    - 左のサイドバー下のチェックアイコンを押すと、上記の ex で示した prefix がついたコメントアウトが一覧で確認できる
+- プロジェクト共通の定数についてはコンスタンスケースを使う
+  - 主に `src/consts` や `src/styles/theme.ts` が該当
+  - ex. SIZE_14, HEADER_HEIGHT, RED_OXIDE
+- enum 禁止
+  - オブジェクトに`as const`をつける
+- utils, hooks 内のフォルダに関しては、JSDoc で説明を書く
+  - param, return に関しては必須ではないが、わかりづらいと判断した場合は追加する
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### コンポーネントについて
 
-### `npm run eject`
+- 1 コンポーネント最大 300~350 行までとする
+  - スタイルの関係でどうしても収まらない場合もあるかもしれないが、その場合でも少なくともスタイル以外の部分は 200~250 行で収めるようにする
+- map 内でさらに map を使うような場合はコンポーネントに分ける
+- 単一責任の原則を守る
+  - 今回は使う機会はないかもしれないが頭に入れておいて欲しい
+  - 1 コンポーネント内に複数アクターを扱う処理を書かないようにする
+    - アクター: 人事、一般ユーザー
+  - 例えば、同じ画面でも一般ユーザーと人事で表示内容が異なる場合、それぞれでコンポーネントを分ける
+    - テキストが少し分岐する程度なら分けなくても良いが、処理そのものが変わるような場合は分ける
+- コンポーネント作成時は、props で className を受け取れるようにするために、FCX の型を仕様する
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - これをしないと、`styled(Component)``` のようにコンポーネントをスタイル拡張する際に、スタイルが付与できなくなる
+  - 詳しくはこの記事を参考: [React.FC 型を拡張する - Qiita](https://qiita.com/Takepepe/items/f66c7e2e1d22b431f148)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```tsx
+  import React, { FCX } from "react";
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  const Text: FCX<Props> = (props) => {
+    return <Component className={props.className}>hoge</Component>;
+  };
+  ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- コンポーネントに margin をつけない
+  - 参考: [UI コンポーネントにはマージンをつけるな！絶対にだ！！ - Qiita](https://qiita.com/otsukayuhi/items/d88b5158745f700be534)
 
-## Learn More
+### hooks と utils について
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- "共通できるか" という視点ではなく、機能単位でどんどんファイルに分けていく
+- 見た目の関心ごと以外のロジックはなるべくファイルに切り出すようにする
+- useState などの hooks を使う処理は hooks フォルダ内に、それらを一切使わない純粋な JS の処理のみを記述する場合は utils に格納する
+- 2~5 行程度であれば切り出さなくても良い
+  - この処理が utils に属するものであれば、コンポーネントの外に記述する
+- フォルダ内はどんどん増えていくが、無理に分けようとはせず、明確な共通部分が自然とできた時に初めてフォルダ分けする
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### その他考え中のこと
+
+- hooks 内の粒度について
+  - いくらコンポーネント内を行数制限つけたとしても、カスタムフックが肥大して見づらくなったらどうしようもないよなぁ
+  - フック内もどうにか見やすくできるようなルールを設けたい
+    - 行数制限でどうにかできるようなものでもなさそうだしむずい
+
+### ファイル名・クラス名・変数・関数名とかの命名
+
+[codic](https://codic.jp/engine)を使う
+
+### ファイル名・クラス名
+
+拡張子が tsx のコンポーネントファイルに関してはアッパーキャメルを使う
+
+```js
+// 例
+UserData.tsx, PostForm.tsx;
+class User extends React.Component {}
+const App: FC = () => {};
+```
+
+それ以外の通常の ts ファイルなどに関してはローワーキャメルを使う
+
+```js
+// 例
+multipleIncludes.ts, formatDate.ts,
+```
+
+### 変数・関数名
+
+ローワーキャメルを使う
+
+```js
+// 例
+const userData = "hoge";
+const createUser = () => {};
+const [state, setState] = useState("");
+```
+
+### コンポーネントの呼び出しと書き出し
+
+基本的に default export は禁止、export を利用する
+
+```js
+// 例
+import { Button } from "components/Button";
+
+export const Hoge = () => {
+  // 処理
+};
+```
+
+### styled-components の使用
+
+- 記述する際はコンポーネントの 1 番下に置く
+- 通常のコンポーネントと勘違いが起きないように、接頭辞に「Styled」を付ける
+
+```js
+// 例
+import { Button } from "components/Button";
+
+export const Hoge = () => {
+  return (
+    <StyledContainer>
+      <p>hoge</p>
+      <Button />
+    </StyledContainer>
+  );
+};
+
+const StyledContainer = styled.div`
+  background-color: "#fff";
+`;
+```
