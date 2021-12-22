@@ -1,25 +1,29 @@
 import React, { FCX } from "react";
+import { AtLeast } from "types/carousel";
 import { calculateVwBasedOnFigma } from "utils/figma/calculateSizeBasedOnFigma";
 import styled, { keyframes, css } from "styled-components";
 
 type Props = {
   direction: "left" | "right";
+  images: AtLeast<4, string>;
 };
 
-export const Carousel: FCX<Props> = ({ direction }) => {
+export const Carousel: FCX<Props> = ({ direction, images }) => {
   return (
     <StyledContainer>
       <StyledUl direction={direction}>
-        <StyledLi>1</StyledLi>
-        <StyledLi>2</StyledLi>
-        <StyledLi>3</StyledLi>
-        <StyledLi>4</StyledLi>
+        {images.map((image, index) => (
+          <StyledLi key={index} length={images.length}>
+            <img src={image} alt="slide" />
+          </StyledLi>
+        ))}
       </StyledUl>
       <StyledUl direction={direction}>
-        <StyledLi>1</StyledLi>
-        <StyledLi>2</StyledLi>
-        <StyledLi>3</StyledLi>
-        <StyledLi>4</StyledLi>
+        {images.map((image, index) => (
+          <StyledLi key={index} length={images.length}>
+            <img src={image} alt="slide" />
+          </StyledLi>
+        ))}
       </StyledUl>
     </StyledContainer>
   );
@@ -56,8 +60,12 @@ const StyledUl = styled.ul<{ direction: "left" | "right" }>`
         15s infinite linear 0.5s both;
     `}
 `;
-const StyledLi = styled.li`
-  width: calc(100vw / 4);
+const StyledLi = styled.li<{ length: number }>`
+  /* ${({ length }) =>
+    css`
+      width: calc(100vw / ${length});
+    `} */
+  width: ${calculateVwBasedOnFigma(442)};
   height: ${calculateVwBasedOnFigma(280)};
   background: #f0f;
   margin: 0 ${calculateVwBasedOnFigma(20)};
