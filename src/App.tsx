@@ -7,7 +7,7 @@ const App: FC = () => {
   return (
     <AppProvider>
       <GlobalStyle />
-      <Carousel />
+      <Carousel direction="right" />
     </AppProvider>
   );
 };
