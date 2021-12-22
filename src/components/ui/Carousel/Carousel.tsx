@@ -8,9 +8,9 @@ type Props = {
   images: AtLeast<4, string>;
 };
 
-export const Carousel: FCX<Props> = ({ direction, images }) => {
+export const Carousel: FCX<Props> = ({ direction, images, className }) => {
   return (
-    <StyledContainer>
+    <StyledContainer className={className}>
       <StyledUl direction={direction}>
         {images.map((image, index) => (
           <StyledLi key={index}>
