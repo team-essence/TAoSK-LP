@@ -56,11 +56,16 @@ export const theme = {
 
   COLORS: {
     TEXT: {
+      WHITE: "#fff",
       BLACK: "#454545",
     },
 
     BACKGROUND: {
       WHITE: "#fff",
+    },
+
+    BORDER: {
+      CHOCOLATE: "#4D2709",
     },
   },
 } as const;
