@@ -57,9 +57,15 @@ export const theme = {
   COLORS: {
     TEXT: {
       BLACK: "#454545",
+      WHITE: "#fff",
     },
 
     BACKGROUND: {
+      WHITE: "#fff",
+      BLACK: "#000",
+    },
+
+    BORDER: {
       WHITE: "#fff",
     },
   },
