@@ -14,7 +14,7 @@ export const SiteFooter: FCX = ({ className }) => {
   return (
     <StyledFooter className={className}>
       <StyledFooterHead ref={sizeInspectedEl}>
-        <FlexContainer>
+        <StyledLogoContainer>
           <p>
             <a href="!#">
               <StyledTAoSK src="/footer/taosk.svg" alt="taosk" />
@@ -25,22 +25,22 @@ export const SiteFooter: FCX = ({ className }) => {
               <StyledHalTokyo src="/footer/hal.svg" alt="hal" />
             </a>
           </p>
-        </FlexContainer>
-        <FlexContainer>
-          <p>
+        </StyledLogoContainer>
+        <StyledSNSContainer>
+          <StyledPlay>
             <a href="!#">TAoSKをプレイする</a>
-          </p>
+          </StyledPlay>
           <p>
             <a href="https://www.instagram.com/hal_ms2022/">
-              <img src="/footer/insta.svg" alt="insta" />
+              <StyledSNS src="/footer/insta.svg" alt="insta" />
             </a>
           </p>
           <p>
             <a href="https://github.com/team-essence">
-              <img src="/footer/github.svg" alt="github" />
+              <StyledSNS src="/footer/github.svg" alt="github" />
             </a>
           </p>
-        </FlexContainer>
+        </StyledSNSContainer>
       </StyledFooterHead>
       <StyledBorder />
       <StyledCopyright height={height}>
@@ -63,11 +63,24 @@ const StyledFooterHead = styled(FlexContainer)`
   justify-content: space-between;
   padding: ${calculateVwBasedOnFigma(16)} ${calculateVwBasedOnFigma(64)};
 `;
+const StyledLogoContainer = styled(FlexContainer)`
+  gap: ${calculateVwBasedOnFigma(40)};
+`;
+const StyledSNSContainer = styled(FlexContainer)`
+  gap: ${calculateVwBasedOnFigma(40)};
+`;
 const StyledTAoSK = styled.img`
   width: ${calculateVwBasedOnFigma(117)};
 `;
 const StyledHalTokyo = styled.img`
   width: ${calculateVwBasedOnFigma(146)};
+`;
+const StyledSNS = styled.img`
+  width: ${calculateVwBasedOnFigma(30)};
+`;
+const StyledPlay = styled.p`
+  font-size: ${({ theme }) => theme.FONT_SIZES.SIZE_16};
+  color: ${({ theme }) => theme.COLORS.TEXT.GRAY};
 `;
 const StyledBorder = styled.div`
   border: 1px solid ${({ theme }) => theme.COLORS.BORDER.DOVE_GRAY};

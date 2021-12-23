@@ -58,6 +58,7 @@ export const theme = {
     TEXT: {
       BLACK: "#454545",
       WHITE: "#fff",
+      GRAY: "#ccc",
     },
 
     BACKGROUND: {
