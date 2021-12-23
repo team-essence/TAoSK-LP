@@ -38,6 +38,7 @@
     "no-console": ["warn"],
     "quotes": ["error", "single"],
     "semi": ["warn", "never", { "beforeStatementContinuationChars": "never" }],
+    "react-hooks/exhaustive-deps": "off",
     "semi-spacing": [
       "warn",
       {
