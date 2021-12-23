@@ -1,38 +1,40 @@
-import { FCX, useEffect, useState } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import styled from "styled-components";
-import { firstViewAnimation } from "utils/animations/firstView";
-import { calculateMinSizeBasedOnFigma } from "utils/figma/calculateSizeBasedOnFigma";
+import React, { FCX, useEffect, useState } from 'react'
+import styled, { css } from 'styled-components'
+import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 
-type Props = {};
+type Props = {}
 
 export const FirstViewHeader: FCX<Props> = ({ className }) => {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    firstViewAnimation();
-  }, []);
+  const { innerDisplayStyle } = useCalculateFirstViewAnimatedSize()
 
   return (
-    <FirstViewHeaderContainer className={className} id="first-view__background">
-      <TestImg src="/screen/screen_test.jpg" alt="test img" />
-    </FirstViewHeaderContainer>
-  );
-};
+    <StyledFirstViewHeaderContainer className={className} id="first-view__background">
+      <StyledInnerDisplay {...innerDisplayStyle} />
+    </StyledFirstViewHeaderContainer>
+  )
+}
 
-const FirstViewHeaderContainer = styled.header`
+const StyledFirstViewHeaderContainer = styled.header`
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url("/background/first_view_test.jpg");
+  background: url('/background/test.png');
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-`;
+`
 
-const TestImg = styled.img`
-  position: absolute;
-  top: 8.9vh;
-  left: 21.2%;
-  width: 40%;
-`;
+type StyledInnerDisplay = ReturnType<typeof useCalculateFirstViewAnimatedSize>['innerDisplayStyle']
+const StyledInnerDisplay = styled.div<StyledInnerDisplay>`
+  ${({ top, left, width, height, theme }) =>
+    css`
+      position: absolute;
+      top: ${top}px;
+      left: ${left}px;
+      width: ${width}px;
+      height: ${height}px;
+      background-image: url('/screen/screen_test.jpg');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+    `}
+`
