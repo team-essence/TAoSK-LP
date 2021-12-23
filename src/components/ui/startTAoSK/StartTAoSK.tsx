@@ -1,5 +1,6 @@
 import React, { FCX } from "react";
 import { calculateVwBasedOnFigma } from "utils/figma/calculateSizeBasedOnFigma";
+import { mediaQuery } from "utils/response/mediaQuery";
 import styled, { css } from "styled-components";
 
 export const StartTAoSK: FCX = ({ className }) => {
@@ -68,11 +69,20 @@ const StyledText = styled.p`
   background: linear-gradient(0deg, #4d2709, #4d2709 100%);
   -webkit-background-clip: text;
   -webkit-text-stroke: 5px transparent;
+  ${mediaQuery.md`
+    -webkit-text-stroke: 4px transparent;
+  `}
+  ${mediaQuery.sm`
+    -webkit-text-stroke: 2px transparent;
+  `}
 `;
 const StyledFlexContainer = styled.div`
   display: flex;
   align-items: center;
   gap: ${calculateVwBasedOnFigma(48)};
+  ${mediaQuery.sm`
+    display: block;
+  `}
 `;
 const StyledRightWrapper = styled.div`
   display: flex;
