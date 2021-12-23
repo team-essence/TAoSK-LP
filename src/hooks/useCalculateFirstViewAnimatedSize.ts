@@ -23,20 +23,20 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     () => -(innerDisplayStyle.left * animatedBgSizeRatio),
     [innerDisplayStyle.left, animatedBgSizeRatio],
   )
+  const tailedInnerPcTop = useMemo(
+    () => (innerDisplayStyle.height - innerDisplayStyle.width * windowAspectRatio) / 2,
+    [
+      innerDisplayStyle.top,
+      innerDisplayStyle.width,
+      innerDisplayStyle.height,
+      tailedHeight,
+      windowAspectRatio,
+    ],
+  )
   const innerPcCenterHeightPosition = useMemo(() => {
     const top = innerDisplayStyle.top + tailedHeight / 2
-    const preservedScreenBgHeight = innerDisplayStyle.width * windowAspectRatio
-    const tailedInnerPcTop = (innerDisplayStyle.height - preservedScreenBgHeight) / 2
-
     return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
-  }, [
-    innerDisplayStyle.top,
-    innerDisplayStyle.width,
-    innerDisplayStyle.height,
-    tailedHeight,
-    windowAspectRatio,
-    animatedBgSizeRatio,
-  ])
+  }, [tailedInnerPcTop, animatedBgSizeRatio])
   const isRegistered = useRef<boolean>(false)
 
   const firstViewAnimation = useCallback(() => {
@@ -60,7 +60,40 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         backgroundPosition: `${innerPcCenterWidthPosition}px ${innerPcCenterHeightPosition}px`,
       },
     )
-  }, [tailedHeight, animatedBgSizeRatio, innerPcCenterWidthPosition, innerPcCenterHeightPosition])
+    gsap.fromTo(
+      '#first-view__inner-display',
+      {
+        top: `${innerDisplayStyle.top}px`,
+        left: `${innerDisplayStyle.left}px`,
+        width: `${innerDisplayStyle.width}px`,
+        height: `${innerDisplayStyle.height}px`,
+      },
+      {
+        scrollTrigger: {
+          trigger: '#first-view__background',
+          start: 'top',
+          end: '200px',
+          markers: true,
+          pin: true,
+          scrub: true,
+        },
+        top: `-${tailedInnerPcTop}px`,
+        left: '0px',
+        width: `${innerDisplayStyle.width * animatedBgSizeRatio}px`,
+        height: `${innerDisplayStyle.height * animatedBgSizeRatio}px`,
+      },
+    )
+  }, [
+    innerDisplayStyle.width,
+    innerDisplayStyle.height,
+    innerDisplayStyle.top,
+    innerDisplayStyle.left,
+    tailedInnerPcTop,
+    tailedHeight,
+    animatedBgSizeRatio,
+    innerPcCenterWidthPosition,
+    innerPcCenterHeightPosition,
+  ])
 
   useEffect(() => {
     if (!isRegistered.current) {
