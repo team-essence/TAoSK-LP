@@ -57,10 +57,16 @@ export const theme = {
   COLORS: {
     TEXT: {
       BLACK: "#454545",
+      WHITE: "#fff",
     },
 
     BACKGROUND: {
       WHITE: "#fff",
+      MINE_SHAFT: "#2A2A2A",
+    },
+
+    BORDER: {
+      DOVE_GRAY: "#666",
     },
   },
 } as const;
