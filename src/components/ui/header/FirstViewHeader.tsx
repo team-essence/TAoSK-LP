@@ -10,26 +10,30 @@ export const FirstViewHeader: FCX<Props> = ({ className }) => {
 
   return (
     <StyledFirstViewHeaderContainer className={className} id="first-view__background">
-      <StyledTopBg />
-      <StyledFirstViewDummy />
-      <StyledBottomBg />
+      <StyledBgWrapper>
+        <StyledTopBg />
+        <StyledFirstViewDummy />
+        <StyledBottomBg />
+      </StyledBgWrapper>
       <StyledInnerDisplay id="first-view__inner-display" />
     </StyledFirstViewHeaderContainer>
   )
 }
 
 const StyledFirstViewHeaderContainer = styled.header`
-  display: flex;
-  flex-direction: column;
   position: relative;
   width: 100vw;
   height: 100vh;
   background-image: url('/background/test.png');
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 0 center;
 `
-
+// StyledFirstViewHeaderContainerにflexを付与するとアニメーションが崩れるため、wrapperを挟む必要がある
+const StyledBgWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`
 const StyledTopBg = styled.div`
   flex-grow: 1;
   width: 100vw;
@@ -38,7 +42,6 @@ const StyledTopBg = styled.div`
   background-position: center bottom;
   background-repeat: repeat-y;
 `
-
 const StyledFirstViewDummy = styled.div`
   width: 100vw;
   height: calc(
@@ -47,7 +50,6 @@ const StyledFirstViewDummy = styled.div`
   background-color: transparent;
   background-repeat: no-repeat;
 `
-
 const StyledBottomBg = styled.div`
   flex-grow: 1;
   width: 100%;
@@ -56,7 +58,6 @@ const StyledBottomBg = styled.div`
   background-position: center top;
   background-repeat: repeat-y;
 `
-
 const StyledInnerDisplay = styled.div`
   position: absolute;
   background-image: url('/screen/screen_test.jpg');

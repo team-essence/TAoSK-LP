@@ -72,21 +72,6 @@ export const theme = {
       MINE_SHAFT: '#2A2A2A',
       DOVE_GRAY: '#666',
     },
-
-    GRADATION: {
-      FIRST_VIEW_TOP_BG: {
-        left: '#FAF8FB',
-        right: '#CAC6C7',
-      },
-      FIRST_VIEW_BOTTOM_BG: {
-        FIRST: '#C6BDB6',
-        SECOND: '#D5CFCF',
-        THIRD: '#DEDAD9',
-        FORTH: '#D0C8C6',
-        FIFTH: '#C6C2BF',
-        SIXTH: '#CAC4C4',
-      },
-    },
   },
 } as const
 

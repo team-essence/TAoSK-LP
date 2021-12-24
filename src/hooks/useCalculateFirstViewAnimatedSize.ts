@@ -38,6 +38,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
   const firstViewAnimation = useCallback(() => {
     if (!innerWidth || !innerHeight) return
 
+    // それぞれのCSSプロパティの値は、アニメーション前と後で単位を合わせないと予期したスタイルにならない
     gsap.fromTo(
       '#first-view__background',
       {
@@ -98,6 +99,6 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
       gsap.registerPlugin(ScrollTrigger)
       isRegistered.current = true
     }
-    // firstViewAnimation()
+    firstViewAnimation()
   }, [firstViewAnimation])
 }
