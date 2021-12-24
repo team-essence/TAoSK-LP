@@ -7,7 +7,10 @@ import {
   getViewBgAspectRatio,
 } from 'utils/getFirstViewSizeRatio'
 
-type UseCalculateInnerPcStyle = Record<'width' | 'height' | 'left' | 'top' | 'tailedHeight', number>
+type UseCalculateInnerPcStyle = Record<
+  'width' | 'height' | 'left' | 'top' | 'tailedHeight' | 'viewBgHeight',
+  number
+>
 
 /**
  * ファーストビュー内のPCの初期位置と初期サイズを計算する
@@ -49,5 +52,6 @@ export const useCalculateInnerPcStyle = (
     width,
     height,
     tailedHeight,
+    viewBgHeight,
   }
 }

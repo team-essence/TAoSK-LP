@@ -9,7 +9,8 @@ export const FirstViewHeader: FCX<Props> = ({ className }) => {
   useCalculateFirstViewAnimatedSize()
 
   return (
-    <StyledFirstViewHeaderContainer className={className} id="first-view__background">
+    <StyledFirstViewHeaderContainer id="first-view__container" className={className}>
+      <StyledFirstViewBackground id="first-view__background" />
       <StyledBgWrapper>
         <StyledTopBg />
         <StyledFirstViewDummy />
@@ -24,13 +25,23 @@ const StyledFirstViewHeaderContainer = styled.header`
   position: relative;
   width: 100vw;
   height: 100vh;
+`
+const StyledFirstViewBackground = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_2};
+  position: relative;
+  width: 100%;
+  height: 100%;
   background-image: url('/background/test.png');
   background-repeat: no-repeat;
 `
 // StyledFirstViewHeaderContainerにflexを付与するとアニメーションが崩れるため、wrapperを挟む必要がある
 const StyledBgWrapper = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_1};
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 `
@@ -59,6 +70,7 @@ const StyledBottomBg = styled.div`
   background-repeat: repeat-y;
 `
 const StyledInnerDisplay = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_3};
   position: absolute;
   background-image: url('/screen/screen_test.jpg');
   background-repeat: no-repeat;

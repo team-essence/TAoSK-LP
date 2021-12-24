@@ -10,29 +10,39 @@ import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
 export const useCalculateFirstViewAnimatedSize = (): void => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const windowAspectRatio = useMemo(() => innerHeight / innerWidth, [innerWidth, innerHeight])
-  const { tailedHeight, ...innerDisplayStyle } = useCalculateInnerPcStyle(innerWidth, innerHeight)
+  const { tailedHeight, viewBgHeight, ...innerDisplayStyle } = useCalculateInnerPcStyle(
+    innerWidth,
+    innerHeight,
+  )
+
+  const initialViewBgPositionTop = useMemo(() => {
+    if (innerHeight <= viewBgHeight) {
+      return -(tailedHeight / 2)
+    } else {
+      return tailedHeight / 2
+    }
+  }, [innerHeight, innerDisplayStyle.height, tailedHeight])
+
   const animatedBgSizeRatio = useMemo(
     () => innerWidth / innerDisplayStyle.width,
     [innerWidth, innerDisplayStyle.width],
   )
+
   const innerPcCenterWidthPosition = useMemo(
     () => -(innerDisplayStyle.left * animatedBgSizeRatio),
     [innerDisplayStyle.left, animatedBgSizeRatio],
   )
+
   const tailedInnerPcTop = useMemo(
     () => (innerDisplayStyle.height - innerDisplayStyle.width * windowAspectRatio) / 2,
-    [
-      innerDisplayStyle.top,
-      innerDisplayStyle.width,
-      innerDisplayStyle.height,
-      tailedHeight,
-      windowAspectRatio,
-    ],
+    [innerDisplayStyle.width, innerDisplayStyle.height, windowAspectRatio],
   )
+
   const innerPcCenterHeightPosition = useMemo(() => {
     const top = innerDisplayStyle.top + tailedHeight / 2
     return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
   }, [tailedInnerPcTop, animatedBgSizeRatio])
+
   const isRegistered = useRef<boolean>(false)
 
   const firstViewAnimation = useCallback(() => {
@@ -43,11 +53,11 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
       '#first-view__background',
       {
         backgroundSize: '100%',
-        backgroundPosition: `0px -${tailedHeight / 2}px`,
+        backgroundPosition: `0px ${initialViewBgPositionTop}px`,
       },
       {
         scrollTrigger: {
-          trigger: '#first-view__background',
+          trigger: '#first-view__container',
           start: 'top',
           end: '1000px',
           markers: true,
@@ -69,7 +79,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
       },
       {
         scrollTrigger: {
-          trigger: '#first-view__background',
+          trigger: '#first-view__container',
           start: 'top',
           end: '1000px',
           markers: true,
@@ -88,7 +98,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     innerDisplayStyle.top,
     innerDisplayStyle.left,
     tailedInnerPcTop,
-    tailedHeight,
+    initialViewBgPositionTop,
     animatedBgSizeRatio,
     innerPcCenterWidthPosition,
     innerPcCenterHeightPosition,
