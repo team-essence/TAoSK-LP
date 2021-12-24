@@ -31,11 +31,7 @@ export const StartTAoSK: FCX = ({ className }) => {
             <StyledStartButton>
               <a href="!#">
                 <StyledStartButtonImage
-                  src={
-                    innerWidth >= 576
-                      ? "/startTaosk/start.svg"
-                      : "/startTaosk/sm-start.svg"
-                  }
+                  src="/startTaosk/start.svg"
                   alt="今すぐ始める"
                 />
               </a>
