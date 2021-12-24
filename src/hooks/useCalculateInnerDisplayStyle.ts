@@ -7,15 +7,15 @@ import {
   getViewBgAspectRatio,
 } from 'utils/getFirstViewSizeRatio'
 
-type UseCalculateInnerDisplayStyle = Record<
-  'width' | 'height' | 'left' | 'top' | 'tailedHeight',
-  number
->
+type UseCalculateInnerPcStyle = Record<'width' | 'height' | 'left' | 'top' | 'tailedHeight', number>
 
-export const useCalculateInnerDisplayStyle = (
+/**
+ * ファーストビュー内のPCの初期位置と初期サイズを計算する
+ */
+export const useCalculateInnerPcStyle = (
   innerWidth: number,
   innerHeight: number,
-): UseCalculateInnerDisplayStyle => {
+): UseCalculateInnerPcStyle => {
   const widthRatio = getInnerPcWidthRatio()
   const innerPcAspectRatio = getInnerPcAspectRatio()
   const xPerWidthRatio = getInnerPcXPerWidthRatio()

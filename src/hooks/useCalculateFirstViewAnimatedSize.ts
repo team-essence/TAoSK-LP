@@ -2,15 +2,15 @@ import { useRef, useMemo, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
-import { useCalculateInnerDisplayStyle } from 'hooks/useCalculateInnerDisplayStyle'
+import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerDisplayStyle'
 
+/**
+ * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
+ */
 export const useCalculateFirstViewAnimatedSize = (): void => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const windowAspectRatio = useMemo(() => innerHeight / innerWidth, [innerWidth, innerHeight])
-  const { tailedHeight, ...innerDisplayStyle } = useCalculateInnerDisplayStyle(
-    innerWidth,
-    innerHeight,
-  )
+  const { tailedHeight, ...innerDisplayStyle } = useCalculateInnerPcStyle(innerWidth, innerHeight)
   const animatedBgSizeRatio = useMemo(
     () => innerWidth / innerDisplayStyle.width,
     [innerWidth, innerDisplayStyle.width],
