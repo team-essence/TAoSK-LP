@@ -9,36 +9,34 @@ import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
  */
 export const useCalculateFirstViewAnimatedSize = (): void => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
-  const windowAspectRatio = useMemo(() => innerHeight / innerWidth, [innerWidth, innerHeight])
-  const { tailedHeight, viewBgHeight, ...innerDisplayStyle } = useCalculateInnerPcStyle(
-    innerWidth,
-    innerHeight,
+  const windowAspectRatio = useMemo<number>(
+    () => innerHeight / innerWidth,
+    [innerWidth, innerHeight],
+  )
+  const { tailedHeight, viewBgHeight, isFitIntoWindow, ...innerDisplayStyle } =
+    useCalculateInnerPcStyle(innerWidth, innerHeight)
+
+  const initialViewBgPositionTop = useMemo<number>(
+    () => (isFitIntoWindow ? -(tailedHeight / 2) : tailedHeight / 2),
+    [innerHeight, innerDisplayStyle.height, tailedHeight],
   )
 
-  const initialViewBgPositionTop = useMemo(() => {
-    if (innerHeight <= viewBgHeight) {
-      return -(tailedHeight / 2)
-    } else {
-      return tailedHeight / 2
-    }
-  }, [innerHeight, innerDisplayStyle.height, tailedHeight])
-
-  const animatedBgSizeRatio = useMemo(
+  const animatedBgSizeRatio = useMemo<number>(
     () => innerWidth / innerDisplayStyle.width,
     [innerWidth, innerDisplayStyle.width],
   )
 
-  const innerPcCenterWidthPosition = useMemo(
+  const innerPcCenterWidthPosition = useMemo<number>(
     () => -(innerDisplayStyle.left * animatedBgSizeRatio),
     [innerDisplayStyle.left, animatedBgSizeRatio],
   )
 
-  const tailedInnerPcTop = useMemo(
+  const tailedInnerPcTop = useMemo<number>(
     () => (innerDisplayStyle.height - innerDisplayStyle.width * windowAspectRatio) / 2,
     [innerDisplayStyle.width, innerDisplayStyle.height, windowAspectRatio],
   )
 
-  const innerPcCenterHeightPosition = useMemo(() => {
+  const innerPcCenterHeightPosition = useMemo<number>(() => {
     const top = innerDisplayStyle.top + tailedHeight / 2
     return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
   }, [tailedInnerPcTop, animatedBgSizeRatio])

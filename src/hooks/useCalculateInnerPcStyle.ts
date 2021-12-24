@@ -10,7 +10,7 @@ import {
 type UseCalculateInnerPcStyle = Record<
   'width' | 'height' | 'left' | 'top' | 'tailedHeight' | 'viewBgHeight',
   number
->
+> & { isFitIntoWindow: boolean }
 
 /**
  * ファーストビュー内のPCの初期位置と初期サイズを計算する
@@ -25,21 +25,22 @@ export const useCalculateInnerPcStyle = (
   const aspectPositionRatio = getAspectInnerPcPositionRatio()
   const viewBgAspectRatio = getViewBgAspectRatio()
 
-  const width = useMemo(() => innerWidth * widthRatio, [innerWidth])
-  const height = useMemo(() => width * innerPcAspectRatio, [width])
-  const viewBgHeight = useMemo(() => innerWidth * viewBgAspectRatio, [innerWidth])
+  const width = useMemo<number>(() => innerWidth * widthRatio, [innerWidth])
+  const height = useMemo<number>(() => width * innerPcAspectRatio, [width])
+  const viewBgHeight = useMemo<number>(() => innerWidth * viewBgAspectRatio, [innerWidth])
+  const isFitIntoWindow = useMemo<boolean>(
+    () => innerHeight <= viewBgHeight,
+    [innerHeight, viewBgHeight],
+  )
 
-  const tailedHeight = useMemo(() => {
-    if (innerHeight <= viewBgHeight) {
-      return viewBgHeight - innerHeight
-    } else {
-      return innerHeight - viewBgHeight
-    }
-  }, [innerWidth, innerHeight])
+  const tailedHeight = useMemo<number>(
+    () => (isFitIntoWindow ? viewBgHeight - innerHeight : innerHeight - viewBgHeight),
+    [innerWidth, innerHeight],
+  )
 
-  const left = useMemo(() => innerWidth * xPerWidthRatio, [innerWidth])
-  const top = useMemo(() => {
-    if (innerHeight <= viewBgHeight) {
+  const left = useMemo<number>(() => innerWidth * xPerWidthRatio, [innerWidth])
+  const top = useMemo<number>(() => {
+    if (isFitIntoWindow) {
       return left * aspectPositionRatio - tailedHeight / 2
     } else {
       return left * aspectPositionRatio + tailedHeight / 2
@@ -53,5 +54,6 @@ export const useCalculateInnerPcStyle = (
     height,
     tailedHeight,
     viewBgHeight,
+    isFitIntoWindow,
   }
 }
