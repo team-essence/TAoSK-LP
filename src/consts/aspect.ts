@@ -3,7 +3,7 @@ export const viewBackgroundImage = {
   HEIGHT: 1258,
 } as const
 
-export const innerDisplayImage = {
+export const innerPcImage = {
   WIDTH: 1044,
   HEIGHT: 588,
   X: 406, // PC画面が置かれている背景画像の左端をx=0, 上端をy=0とする

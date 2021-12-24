@@ -1,12 +1,12 @@
-import { viewBackgroundImage, innerDisplayImage, screenBackgroundImage } from 'consts/aspect'
+import { viewBackgroundImage, innerPcImage, screenBackgroundImage } from 'consts/aspect'
 
-export const getInnerPcWidthRatio = () => innerDisplayImage.WIDTH / viewBackgroundImage.WIDTH
+export const getInnerPcWidthRatio = () => innerPcImage.WIDTH / viewBackgroundImage.WIDTH
 
-export const getInnerPcAspectRatio = () => innerDisplayImage.HEIGHT / innerDisplayImage.WIDTH
+export const getInnerPcAspectRatio = () => innerPcImage.HEIGHT / innerPcImage.WIDTH
 
-export const getInnerPcXPerWidthRatio = () => innerDisplayImage.X / viewBackgroundImage.WIDTH
+export const getInnerPcXPerWidthRatio = () => innerPcImage.X / viewBackgroundImage.WIDTH
 
-export const getAspectInnerPcPositionRatio = () => innerDisplayImage.Y / innerDisplayImage.X
+export const getAspectInnerPcPositionRatio = () => innerPcImage.Y / innerPcImage.X
 
 export const getViewBgAspectRatio = () => viewBackgroundImage.HEIGHT / viewBackgroundImage.WIDTH
 

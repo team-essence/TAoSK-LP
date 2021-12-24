@@ -50,7 +50,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         scrollTrigger: {
           trigger: '#first-view__background',
           start: 'top',
-          end: '200px',
+          end: '1000px',
           markers: true,
           pin: true,
           scrub: true,
@@ -72,7 +72,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         scrollTrigger: {
           trigger: '#first-view__background',
           start: 'top',
-          end: '200px',
+          end: '1000px',
           markers: true,
           pin: true,
           scrub: true,
