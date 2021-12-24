@@ -53,11 +53,11 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
   }, [tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
 
   const innerPcAnimatedHeightPosition = useMemo<number>(() => {
-    const top = innerPcStyle.top + tailedHeight / 2
     if (isFitIntoWindow) {
+      const top = innerPcStyle.top + tailedHeight / 2
       return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
     } else {
-      return -top
+      return -(innerPcStyle.top - tailedHeight / 2) * animatedBgSizeRatio
     }
   }, [tailedInnerPcTop, animatedBgSizeRatio])
 
