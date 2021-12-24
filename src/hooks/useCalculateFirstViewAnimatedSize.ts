@@ -98,6 +98,6 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
       gsap.registerPlugin(ScrollTrigger)
       isRegistered.current = true
     }
-    firstViewAnimation()
+    // firstViewAnimation()
   }, [firstViewAnimation])
 }

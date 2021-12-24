@@ -1,6 +1,7 @@
 import React, { FCX } from 'react'
 import styled from 'styled-components'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
+import { viewBackgroundImage } from 'consts/aspect'
 
 type Props = {}
 
@@ -9,23 +10,57 @@ export const FirstViewHeader: FCX<Props> = ({ className }) => {
 
   return (
     <StyledFirstViewHeaderContainer className={className} id="first-view__background">
+      <StyledTopBg />
+      <StyledFirstViewDummy />
+      <StyledBottomBg />
       <StyledInnerDisplay id="first-view__inner-display" />
     </StyledFirstViewHeaderContainer>
   )
 }
 
 const StyledFirstViewHeaderContainer = styled.header`
+  display: flex;
+  flex-direction: column;
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background: url('/background/test.png');
+  background-image: url('/background/test.png');
   background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0 center;
+`
+
+const StyledTopBg = styled.div`
+  flex-grow: 1;
+  width: 100vw;
+  background-image: url('/background/first_view_top.svg');
+  background-size: 100%;
+  background-position: center bottom;
+  background-repeat: repeat-y;
+`
+
+const StyledFirstViewDummy = styled.div`
+  width: 100vw;
+  height: calc(
+    100vw * ${viewBackgroundImage.HEIGHT} / ${viewBackgroundImage.WIDTH} - 2px
+  ); // 上下の要素に隙間が開いてしまうため-2pxする
+  background-color: transparent;
+  background-repeat: no-repeat;
+`
+
+const StyledBottomBg = styled.div`
+  flex-grow: 1;
+  width: 100%;
+  background-image: url('/background/first_view_bottom.svg');
+  background-size: 100%;
+  background-position: center top;
+  background-repeat: repeat-y;
 `
 
 const StyledInnerDisplay = styled.div`
   position: absolute;
   background-image: url('/screen/screen_test.jpg');
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100vw;
   background-position: center;
 `
