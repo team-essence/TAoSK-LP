@@ -13,8 +13,10 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     () => innerHeight / innerWidth,
     [innerWidth, innerHeight],
   )
-  const { tailedHeight, viewBgHeight, isFitIntoWindow, ...innerDisplayStyle } =
-    useCalculateInnerPcStyle(innerWidth, innerHeight)
+  const { tailedHeight, viewBgHeight, isFitIntoWindow, ...innerPcStyle } = useCalculateInnerPcStyle(
+    innerWidth,
+    innerHeight,
+  )
 
   const initialViewBgPositionTop = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -22,44 +24,58 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return tailedHeight / 2
     }
-  }, [innerHeight, innerDisplayStyle.height, tailedHeight])
+  }, [innerHeight, innerPcStyle.height, tailedHeight])
 
   const animatedBgSizeRatio = useMemo<number>(() => {
     if (isFitIntoWindow) {
-      return innerWidth / innerDisplayStyle.width
+      return innerWidth / innerPcStyle.width
     } else {
-      return innerHeight / innerDisplayStyle.height
+      return innerHeight / innerPcStyle.height
     }
-  }, [innerWidth, innerDisplayStyle.width])
-
-  const innerPcCenterWidthPosition = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return -(innerDisplayStyle.left * animatedBgSizeRatio)
-    } else {
-      const tailedInnerPcLeft =
-        (innerDisplayStyle.width - innerDisplayStyle.height * (1 / windowAspectRatio)) / 2
-      return -(innerDisplayStyle.left + tailedInnerPcLeft) * animatedBgSizeRatio
-    }
-  }, [
-    innerDisplayStyle.width,
-    innerDisplayStyle.height,
-    innerDisplayStyle.left,
-    animatedBgSizeRatio,
-  ])
+  }, [innerWidth, innerPcStyle.width])
 
   const tailedInnerPcTop = useMemo<number>(
-    () => (innerDisplayStyle.height - innerDisplayStyle.width * windowAspectRatio) / 2,
-    [innerDisplayStyle.width, innerDisplayStyle.height, windowAspectRatio],
+    () => (innerPcStyle.height - innerPcStyle.width * windowAspectRatio) / 2,
+    [innerPcStyle.width, innerPcStyle.height, windowAspectRatio],
   )
 
-  const innerPcCenterHeightPosition = useMemo<number>(() => {
-    const top = innerDisplayStyle.top + tailedHeight / 2
+  const tailedInnerPcLeft = useMemo<number>(
+    () => (innerPcStyle.width - innerPcStyle.height * (1 / windowAspectRatio)) / 2,
+    [innerPcStyle.width, innerPcStyle.height],
+  )
+
+  const innerPcAnimatedWidthPosition = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return -(innerPcStyle.left * animatedBgSizeRatio)
+    } else {
+      return -(innerPcStyle.left + tailedInnerPcLeft) * animatedBgSizeRatio
+    }
+  }, [tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
+
+  const innerPcAnimatedHeightPosition = useMemo<number>(() => {
+    const top = innerPcStyle.top + tailedHeight / 2
     if (isFitIntoWindow) {
       return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
     } else {
       return -top
     }
   }, [tailedInnerPcTop, animatedBgSizeRatio])
+
+  const innerPcAnimatedTop = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return -tailedInnerPcTop
+    } else {
+      return 0
+    }
+  }, [tailedInnerPcTop])
+
+  const innerPcAnimatedLeft = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return 0
+    } else {
+      return -(innerPcStyle.left + tailedInnerPcLeft)
+    }
+  }, [innerPcStyle.left, tailedInnerPcTop])
 
   const isRegistered = useRef<boolean>(false)
 
@@ -84,16 +100,16 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
         },
 
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
-        backgroundPosition: `${innerPcCenterWidthPosition}px ${innerPcCenterHeightPosition}px`,
+        backgroundPosition: `${innerPcAnimatedWidthPosition}px ${innerPcAnimatedHeightPosition}px`,
       },
     )
     gsap.fromTo(
       '#first-view__inner-display',
       {
-        top: `${innerDisplayStyle.top}px`,
-        left: `${innerDisplayStyle.left}px`,
-        width: `${innerDisplayStyle.width}px`,
-        height: `${innerDisplayStyle.height}px`,
+        top: `${innerPcStyle.top}px`,
+        left: `${innerPcStyle.left}px`,
+        width: `${innerPcStyle.width}px`,
+        height: `${innerPcStyle.height}px`,
       },
       {
         scrollTrigger: {
@@ -104,22 +120,24 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
           pin: true,
           scrub: true,
         },
-        top: `-${tailedInnerPcTop}px`,
-        left: '0px',
-        width: `${innerDisplayStyle.width * animatedBgSizeRatio}px`,
-        height: `${innerDisplayStyle.height * animatedBgSizeRatio}px`,
+        top: `${innerPcAnimatedTop}px`,
+        left: `${innerPcAnimatedLeft}px`,
+        width: `${innerPcStyle.width * animatedBgSizeRatio}px`,
+        height: `${innerPcStyle.height * animatedBgSizeRatio}px`,
       },
     )
   }, [
-    innerDisplayStyle.width,
-    innerDisplayStyle.height,
-    innerDisplayStyle.top,
-    innerDisplayStyle.left,
+    innerPcStyle.width,
+    innerPcStyle.height,
+    innerPcStyle.top,
+    innerPcStyle.left,
     tailedInnerPcTop,
+    innerPcAnimatedLeft,
     initialViewBgPositionTop,
     animatedBgSizeRatio,
-    innerPcCenterWidthPosition,
-    innerPcCenterHeightPosition,
+    innerPcAnimatedWidthPosition,
+    innerPcAnimatedHeightPosition,
+    innerPcAnimatedTop,
   ])
 
   useEffect(() => {

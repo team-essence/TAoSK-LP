@@ -74,6 +74,6 @@ const StyledInnerDisplay = styled.div`
   position: absolute;
   background-image: url('/screen/screen_test.jpg');
   background-repeat: no-repeat;
-  background-size: 100vw;
+  background-size: 100%;
   background-position: center;
 `
