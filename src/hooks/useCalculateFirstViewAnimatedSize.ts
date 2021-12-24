@@ -13,7 +13,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     () => innerHeight / innerWidth,
     [innerWidth, innerHeight],
   )
-  const { tailedHeight, viewBgHeight, isFitIntoWindow, ...innerPcStyle } = useCalculateInnerPcStyle(
+  const { tailedHeight, isFitIntoWindow, ...innerPcStyle } = useCalculateInnerPcStyle(
     innerWidth,
     innerHeight,
   )

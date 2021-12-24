@@ -8,7 +8,7 @@ import {
 } from 'utils/getFirstViewSizeRatio'
 
 type UseCalculateInnerPcStyle = Record<
-  'width' | 'height' | 'left' | 'top' | 'tailedHeight' | 'viewBgHeight',
+  'width' | 'height' | 'left' | 'top' | 'tailedHeight',
   number
 > & { isFitIntoWindow: boolean }
 
@@ -53,7 +53,6 @@ export const useCalculateInnerPcStyle = (
     width,
     height,
     tailedHeight,
-    viewBgHeight,
     isFitIntoWindow,
   }
 }
