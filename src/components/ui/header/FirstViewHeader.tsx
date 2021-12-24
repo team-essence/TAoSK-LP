@@ -31,7 +31,7 @@ const StyledFirstViewBackground = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url('/background/test.png');
+  background-image: url('/background/first_view_test.jpg');
   background-repeat: no-repeat;
 `
 // StyledFirstViewHeaderContainerにflexを付与するとアニメーションが崩れるため、wrapperを挟む必要がある
