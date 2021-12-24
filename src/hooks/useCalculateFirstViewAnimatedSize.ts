@@ -16,20 +16,36 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
   const { tailedHeight, viewBgHeight, isFitIntoWindow, ...innerDisplayStyle } =
     useCalculateInnerPcStyle(innerWidth, innerHeight)
 
-  const initialViewBgPositionTop = useMemo<number>(
-    () => (isFitIntoWindow ? -(tailedHeight / 2) : tailedHeight / 2),
-    [innerHeight, innerDisplayStyle.height, tailedHeight],
-  )
+  const initialViewBgPositionTop = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return -(tailedHeight / 2)
+    } else {
+      return tailedHeight / 2
+    }
+  }, [innerHeight, innerDisplayStyle.height, tailedHeight])
 
-  const animatedBgSizeRatio = useMemo<number>(
-    () => innerWidth / innerDisplayStyle.width,
-    [innerWidth, innerDisplayStyle.width],
-  )
+  const animatedBgSizeRatio = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return innerWidth / innerDisplayStyle.width
+    } else {
+      return innerHeight / innerDisplayStyle.height
+    }
+  }, [innerWidth, innerDisplayStyle.width])
 
-  const innerPcCenterWidthPosition = useMemo<number>(
-    () => -(innerDisplayStyle.left * animatedBgSizeRatio),
-    [innerDisplayStyle.left, animatedBgSizeRatio],
-  )
+  const innerPcCenterWidthPosition = useMemo<number>(() => {
+    if (isFitIntoWindow) {
+      return -(innerDisplayStyle.left * animatedBgSizeRatio)
+    } else {
+      const tailedInnerPcLeft =
+        (innerDisplayStyle.width - innerDisplayStyle.height * (1 / windowAspectRatio)) / 2
+      return -(innerDisplayStyle.left + tailedInnerPcLeft) * animatedBgSizeRatio
+    }
+  }, [
+    innerDisplayStyle.width,
+    innerDisplayStyle.height,
+    innerDisplayStyle.left,
+    animatedBgSizeRatio,
+  ])
 
   const tailedInnerPcTop = useMemo<number>(
     () => (innerDisplayStyle.height - innerDisplayStyle.width * windowAspectRatio) / 2,
