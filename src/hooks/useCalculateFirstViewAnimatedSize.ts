@@ -73,7 +73,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     if (isFitIntoWindow) {
       return 0
     } else {
-      return -(innerPcStyle.left + tailedInnerPcLeft)
+      return -(tailedInnerPcLeft * animatedBgSizeRatio)
     }
   }, [innerPcStyle.left, tailedInnerPcTop])
 
