@@ -4,11 +4,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerDisplayStyle } from 'hooks/useCalculateInnerDisplayStyle'
 
-type UseCalculateFirstViewAnimatedSizeReturn = {
-  innerDisplayStyle: Omit<ReturnType<typeof useCalculateInnerDisplayStyle>, 'tailedHeight'>
-}
-
-export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimatedSizeReturn => {
+export const useCalculateFirstViewAnimatedSize = (): void => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const windowAspectRatio = useMemo(() => innerHeight / innerWidth, [innerWidth, innerHeight])
   const { tailedHeight, ...innerDisplayStyle } = useCalculateInnerDisplayStyle(
@@ -102,6 +98,4 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     }
     firstViewAnimation()
   }, [firstViewAnimation])
-
-  return { innerDisplayStyle }
 }

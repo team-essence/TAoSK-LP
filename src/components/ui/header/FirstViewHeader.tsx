@@ -5,11 +5,11 @@ import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAn
 type Props = {}
 
 export const FirstViewHeader: FCX<Props> = ({ className }) => {
-  const { innerDisplayStyle } = useCalculateFirstViewAnimatedSize()
+  useCalculateFirstViewAnimatedSize()
 
   return (
     <StyledFirstViewHeaderContainer className={className} id="first-view__background">
-      <StyledInnerDisplay id="first-view__inner-display" {...innerDisplayStyle} />
+      <StyledInnerDisplay id="first-view__inner-display" />
     </StyledFirstViewHeaderContainer>
   )
 }
@@ -22,8 +22,7 @@ const StyledFirstViewHeaderContainer = styled.header`
   background-repeat: no-repeat;
 `
 
-type StyledInnerDisplay = ReturnType<typeof useCalculateFirstViewAnimatedSize>['innerDisplayStyle']
-const StyledInnerDisplay = styled.div<StyledInnerDisplay>`
+const StyledInnerDisplay = styled.div`
   position: absolute;
   background-image: url('/screen/screen_test.jpg');
   background-repeat: no-repeat;
