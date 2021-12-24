@@ -64,6 +64,7 @@ export const theme = {
     BACKGROUND: {
       WHITE: '#fff',
       BLACK: '#000',
+      MINE_SHAFT: '#2A2A2A',
     },
 
     BORDER: {

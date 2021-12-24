@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import { GlobalStyle } from "styles/global/globalStyle";
-import { AppProvider } from "provider/AppProvider";
-import { View } from "View";
-import { leftScrollImage, rightScrollImage } from "consts/carouselImage";
-import { Carousel } from "components/ui/carousel/Carousel";
-import { StartTAoSK } from "components/ui/startTAoSK/StartTAoSK";
-import { SiteFooter } from "components/ui/footer/SiteFooter";
+import React, { FC } from 'react'
+import { GlobalStyle } from 'styles/global/globalStyle'
+import { AppProvider } from 'provider/AppProvider'
+import { View } from 'View'
+import { leftScrollImage, rightScrollImage } from 'consts/carouselImage'
+import { Carousel } from 'components/ui/carousel/Carousel'
+import { StartTAoSK } from 'components/ui/startTAoSK/StartTAoSK'
+import { SiteFooter } from 'components/ui/footer/SiteFooter'
 
 const App: FC = () => {
   return (
@@ -17,7 +17,7 @@ const App: FC = () => {
       <StartTAoSK />
       <SiteFooter />
     </AppProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
