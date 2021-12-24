@@ -54,7 +54,11 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
 
   const innerPcCenterHeightPosition = useMemo<number>(() => {
     const top = innerDisplayStyle.top + tailedHeight / 2
-    return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
+    if (isFitIntoWindow) {
+      return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
+    } else {
+      return -top
+    }
   }, [tailedInnerPcTop, animatedBgSizeRatio])
 
   const isRegistered = useRef<boolean>(false)
