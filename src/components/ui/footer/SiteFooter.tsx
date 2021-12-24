@@ -1,16 +1,16 @@
-import React, { FCX, useMemo } from "react";
-import { calculateVwBasedOnFigma } from "utils/figma/calculateSizeBasedOnFigma";
-import { mediaQuery } from "utils/response/mediaQuery";
-import { useWatchElementAspect } from "hooks/useWatchElementAspect";
-import styled, { css } from "styled-components";
+import React, { FCX, useMemo } from 'react'
+import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { mediaQuery } from 'utils/response/mediaQuery'
+import { useWatchElementAspect } from 'hooks/useWatchElementAspect'
+import styled, { css } from 'styled-components'
 
 export const SiteFooter: FCX = ({ className }) => {
-  const { sizeInspectedEl, height } = useWatchElementAspect<HTMLDivElement>();
+  const { sizeInspectedEl, height } = useWatchElementAspect<HTMLDivElement>()
 
   const year = useMemo(() => {
-    const d = new Date();
-    return d.getFullYear();
-  }, []);
+    const d = new Date()
+    return d.getFullYear()
+  }, [])
 
   return (
     <StyledFooter className={className}>
@@ -22,11 +22,7 @@ export const SiteFooter: FCX = ({ className }) => {
             </a>
           </p>
           <p>
-            <a
-              href="https://www.hal.ac.jp/tokyo/campuslife/ms"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.hal.ac.jp/tokyo/campuslife/ms" target="_blank" rel="noreferrer">
               <StyledHalTokyo src="/footer/hal.svg" alt="hal" />
             </a>
           </p>
@@ -38,20 +34,12 @@ export const SiteFooter: FCX = ({ className }) => {
             </a>
           </StyledPlay>
           <p>
-            <a
-              href="https://www.instagram.com/hal_ms2022/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.instagram.com/hal_ms2022/" target="_blank" rel="noreferrer">
               <StyledSNS src="/footer/insta.svg" alt="insta" />
             </a>
           </p>
           <p>
-            <a
-              href="https://github.com/team-essence"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://github.com/team-essence" target="_blank" rel="noreferrer">
               <StyledSNS src="/footer/github.svg" alt="github" />
             </a>
           </p>
@@ -62,8 +50,8 @@ export const SiteFooter: FCX = ({ className }) => {
         &copy; {year} H458 TAoSK All Rights Reserved
       </StyledCopyright>
     </StyledFooter>
-  );
-};
+  )
+}
 
 const FlexContainer = styled.div`
   display: flex;
@@ -71,7 +59,7 @@ const FlexContainer = styled.div`
   ${mediaQuery.sm`
      display: block;
   `}
-`;
+`
 const StyledFooter = styled.footer`
   position: relative;
   height: ${calculateVwBasedOnFigma(120)};
@@ -82,21 +70,21 @@ const StyledFooter = styled.footer`
   ${mediaQuery.sm`
      height: 188px;
   `}
-`;
+`
 const StyledFooterHead = styled(FlexContainer)`
   justify-content: space-between;
   padding: ${calculateVwBasedOnFigma(16)} ${calculateVwBasedOnFigma(64)};
   ${mediaQuery.sm`
      padding: 20px 55px;
   `}
-`;
+`
 const StyledLogoContainer = styled(FlexContainer)`
   gap: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
      display: flex;
      gap: 40px;
   `}
-`;
+`
 const StyledSNSContainer = styled(FlexContainer)`
   gap: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
@@ -106,25 +94,25 @@ const StyledSNSContainer = styled(FlexContainer)`
      justify-content: center;
      margin-top: 42px;
   `}
-`;
+`
 const StyledTAoSK = styled.img`
   width: ${calculateVwBasedOnFigma(117)};
   ${mediaQuery.sm`
      width: 117px;
   `}
-`;
+`
 const StyledHalTokyo = styled.img`
   width: ${calculateVwBasedOnFigma(146)};
   ${mediaQuery.sm`
      width: 146px;
   `}
-`;
+`
 const StyledSNS = styled.img`
   width: ${calculateVwBasedOnFigma(30)};
   ${mediaQuery.sm`
      width: 30px;
   `}
-`;
+`
 const StyledPlay = styled.p`
   font-size: ${({ theme }) => theme.FONT_SIZES.SIZE_16};
   font-weight: ${({ theme }) => theme.FONT_WEIGHTS.BOLD};
@@ -132,10 +120,10 @@ const StyledPlay = styled.p`
   ${mediaQuery.sm`
      font-size: 16px;
   `}
-`;
+`
 const StyledBorder = styled.div`
   border: 1px solid ${({ theme }) => theme.COLORS.BORDER.DOVE_GRAY};
-`;
+`
 const StyledCopyright = styled.p<{ height: number }>`
   display: grid;
   place-items: center;
@@ -154,4 +142,4 @@ const StyledCopyright = styled.p<{ height: number }>`
         height: calc(188px - ${height + 2}px);
       `}
     `}
-`;
+`
