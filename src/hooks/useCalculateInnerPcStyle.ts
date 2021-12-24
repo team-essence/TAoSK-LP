@@ -22,14 +22,26 @@ export const useCalculateInnerPcStyle = (
   const aspectPositionRatio = getAspectInnerPcPositionRatio()
   const viewBgAspectRatio = getViewBgAspectRatio()
 
-  const tailedHeight = useMemo(
-    () => innerWidth * viewBgAspectRatio - innerHeight,
-    [innerWidth, innerHeight],
-  )
   const width = useMemo(() => innerWidth * widthRatio, [innerWidth])
   const height = useMemo(() => width * innerPcAspectRatio, [width])
+  const viewBgHeight = useMemo(() => innerWidth * viewBgAspectRatio, [innerWidth])
+
+  const tailedHeight = useMemo(() => {
+    if (innerHeight <= viewBgHeight) {
+      return viewBgHeight - innerHeight
+    } else {
+      return innerHeight - viewBgHeight
+    }
+  }, [innerWidth, innerHeight])
+
   const left = useMemo(() => innerWidth * xPerWidthRatio, [innerWidth])
-  const top = useMemo(() => left * aspectPositionRatio - tailedHeight / 2, [left, tailedHeight])
+  const top = useMemo(() => {
+    if (innerHeight <= viewBgHeight) {
+      return left * aspectPositionRatio - tailedHeight / 2
+    } else {
+      return left * aspectPositionRatio + tailedHeight / 2
+    }
+  }, [left, tailedHeight])
 
   return {
     top,
