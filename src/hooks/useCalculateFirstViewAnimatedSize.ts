@@ -36,6 +36,8 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
   const isRegistered = useRef<boolean>(false)
 
   const firstViewAnimation = useCallback(() => {
+    if (!innerWidth || !innerHeight) return
+
     gsap.fromTo(
       '#first-view__background',
       {
