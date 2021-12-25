@@ -1,15 +1,14 @@
 import React, { FCX } from 'react'
-import styled from 'styled-components'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
+import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
 import { viewBackgroundImage } from 'consts/aspect'
+import styled, { css } from 'styled-components'
 
-type Props = {}
-
-export const FirstViewHeader: FCX<Props> = ({ className }) => {
+export const FirstViewHeader: FCX = ({ className }) => {
   const { scrollVolume } = useWatchScrollVolume()
+  const { screenImage } = useChangeScreenImage()
   useCalculateFirstViewAnimatedSize()
-  console.log(scrollVolume)
 
   return (
     <StyledFirstViewHeaderContainer id="first-view__container" className={className}>
@@ -19,7 +18,11 @@ export const FirstViewHeader: FCX<Props> = ({ className }) => {
         <StyledFirstViewDummy />
         <StyledBottomBg />
       </StyledBgWrapper>
-      <StyledInnerDisplay id="first-view__inner-display" />
+      <StyledInnerDisplay
+        id="first-view__inner-display"
+        scrollVolume={scrollVolume}
+        screenImage={screenImage}
+      />
     </StyledFirstViewHeaderContainer>
   )
 }
@@ -72,11 +75,15 @@ const StyledBottomBg = styled.div`
   background-position: center top;
   background-repeat: repeat-y;
 `
-const StyledInnerDisplay = styled.div`
-  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_3};
-  position: absolute;
-  background-image: url('/screen/screen1.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
+const StyledInnerDisplay = styled.div<{ scrollVolume: number; screenImage: string }>`
+  ${({ theme, scrollVolume, screenImage }) =>
+    css`
+      background-image: url(${screenImage});
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+      transition: background-image 0.5s;
+      z-index: ${theme.Z_INDEX.INDEX_3};
+    `}
 `
