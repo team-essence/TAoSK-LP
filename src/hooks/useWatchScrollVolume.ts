@@ -8,9 +8,10 @@ export const useWatchScrollVolume = (): UseWatchScrollVolumeReturn => {
   const [scrollVolume, setScrollVolume] = useState<number>(0)
   const isComponentMounted = useRef<boolean>(false)
 
-  const isScrollToggle = useCallback(() => {
+  const getScrollVolume = useCallback(() => {
     if (isComponentMounted.current) return
     isComponentMounted.current = true
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop
     requestAnimationFrame(() => {
       setScrollVolume(scrollTop)
@@ -19,9 +20,9 @@ export const useWatchScrollVolume = (): UseWatchScrollVolumeReturn => {
   }, [])
 
   useEffect(() => {
-    document.addEventListener('scroll', isScrollToggle)
+    document.addEventListener('scroll', getScrollVolume)
     return () => {
-      document.removeEventListener('scroll', isScrollToggle)
+      document.removeEventListener('scroll', getScrollVolume)
     }
   }, [])
 
