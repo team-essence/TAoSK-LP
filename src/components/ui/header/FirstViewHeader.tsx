@@ -1,12 +1,15 @@
 import React, { FCX } from 'react'
 import styled from 'styled-components'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
+import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import { viewBackgroundImage } from 'consts/aspect'
 
 type Props = {}
 
 export const FirstViewHeader: FCX<Props> = ({ className }) => {
+  const { scrollVolume } = useWatchScrollVolume()
   useCalculateFirstViewAnimatedSize()
+  console.log(scrollVolume)
 
   return (
     <StyledFirstViewHeaderContainer id="first-view__container" className={className}>
