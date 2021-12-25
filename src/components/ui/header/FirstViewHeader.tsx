@@ -31,7 +31,7 @@ const StyledFirstViewBackground = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url('/background/first_view_test.jpg');
+  background-image: url('/background/first_view.png');
   background-repeat: no-repeat;
 `
 // StyledFirstViewHeaderContainerにflexを付与するとアニメーションが崩れるため、wrapperを挟む必要がある
@@ -72,7 +72,7 @@ const StyledBottomBg = styled.div`
 const StyledInnerDisplay = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_3};
   position: absolute;
-  background-image: url('/screen/screen_test.jpg');
+  background-image: url('/screen/screen1.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
