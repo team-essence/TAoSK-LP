@@ -28,7 +28,9 @@ export const VideoArea: FCX<Props> = ({ className }) => {
               プロジェクトがモンスターとして、貴方の前に立ちはだかる......。
               RPGの世界で仲間と共にプロジェクトモンスターをやっつけよう！
             </StyledText>
-            <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" />
+            <a href="!#">
+              <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" />
+            </a>
           </StyledTextContainer>
         </StyledInnerContent>
       </StyledCenterContent>
@@ -106,6 +108,7 @@ const StyledText = styled.p`
   -webkit-text-stroke: 5px transparent;
 `
 const StyledStartButtonImage = styled.img`
+  margin: 0 auto;
   width: ${calculateVwBasedOnFigma(314)};
   display: block;
 `
