@@ -12,7 +12,7 @@ type Props = {
 export const Modal: FCX<Props> = ({ className, title, children }) => {
   return (
     <StyledWrapper>
-      {!!title && <StyledNamePlate>{title}</StyledNamePlate>}
+      <StyledNamePlate>{title}</StyledNamePlate>
       <StyledChildrenWrapper className={className}>{children}</StyledChildrenWrapper>
       <StyledDragonSymbolWrapper>
         <StyledDragonSymbolLeft />
@@ -31,6 +31,7 @@ const StyledWrapper = styled.div`
   position: relative;
   width: ${calculateMinSizeBasedOnFigma(1120)};
   height: ${calculateMinSizeBasedOnFigma(573)};
+  padding: ${calculateMinSizeBasedOnFigma(55)} ${calculateMinSizeBasedOnFigma(70)};
   z-index: ${({ theme }) => theme.Z_INDEX.MODAL};
 `
 const StyledNamePlate = styled.p`

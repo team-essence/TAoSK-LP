@@ -58,6 +58,7 @@ export const VideoArea: FCX<Props> = ({ className }) => {
 }
 
 const StyledContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -66,6 +67,7 @@ const StyledContainer = styled.div`
   background: url('/background/brown_bg.png') center center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_8};
 `
 const StyledWeapon = styled.img`
   aspect-ratio: 1 / 1;
