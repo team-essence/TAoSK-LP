@@ -21,7 +21,9 @@ export const View: FCX = ({ className }) => {
     <ViewContainer className={className}>
       <FirstViewHeader />
       <StyledFixeContainer>
-        {innerWidth >= 574 ? <VideoArea /> : <MobileVideoArea />}
+        <StyledVideoAreaContainer>
+          {innerWidth >= 574 ? <VideoArea /> : <MobileVideoArea />}
+        </StyledVideoAreaContainer>
         <StyledFeatureWrap />
         <StyledModalContainer>
           <HPandMPVisualizationModal />
@@ -69,6 +71,9 @@ const StyledCarouselContainer = styled.div`
   & > div {
     margin-bottom: ${calculateVwBasedOnFigma(20)};
   }
+`
+const StyledVideoAreaContainer = styled.div`
+  padding-top: ${calculateVwBasedOnFigma(137)};
 `
 const StyledStartTAoSKContainer = styled.div`
   margin: ${calculateVwBasedOnFigma(106)} 0;
