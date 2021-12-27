@@ -1,32 +1,23 @@
-import React, { FCX, useEffect } from 'react'
-import { Footer } from 'components/ui/footer/Footer'
+import React, { FCX } from 'react'
 import { FirstViewHeader } from 'components/ui/header/FirstViewHeader'
+import { leftScrollImage, rightScrollImage } from 'consts/carouselImage'
+import { Carousel } from 'components/ui/carousel/Carousel'
+import { StartTAoSK } from 'components/ui/startTAoSK/StartTAoSK'
+import { SiteFooter } from 'components/ui/footer/SiteFooter'
 import styled from 'styled-components'
-import { Spacer } from 'components/ui/spacer/Spacer'
 
-type Props = {}
-
-export const View: FCX<Props> = ({ className }) => {
+export const View: FCX = ({ className }) => {
   return (
     <ViewContainer className={className}>
       <FirstViewHeader />
-
-      {/* <Spacer size={200} /> */}
-
-      <MainContainer></MainContainer>
-
-      <Footer />
+      <Carousel direction="left" images={leftScrollImage} />
+      <Carousel direction="right" images={rightScrollImage} />
+      <StartTAoSK />
+      <SiteFooter />
     </ViewContainer>
   )
 }
 
 const ViewContainer = styled.div`
   overflow-x: hidden;
-`
-
-const MainContainer = styled.main`
-  width: 100%;
-  height: 50vh;
-  background: #f00;
-  border-top: 10px solid #ff0;
 `

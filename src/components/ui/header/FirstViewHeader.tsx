@@ -1,11 +1,13 @@
 import React, { FCX } from 'react'
-import styled from 'styled-components'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
+import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
+import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
 import { viewBackgroundImage } from 'consts/aspect'
+import styled, { css } from 'styled-components'
 
-type Props = {}
-
-export const FirstViewHeader: FCX<Props> = ({ className }) => {
+export const FirstViewHeader: FCX = ({ className }) => {
+  const { scrollVolume } = useWatchScrollVolume()
+  const { screenImage } = useChangeScreenImage()
   useCalculateFirstViewAnimatedSize()
 
   return (
@@ -16,7 +18,11 @@ export const FirstViewHeader: FCX<Props> = ({ className }) => {
         <StyledFirstViewDummy />
         <StyledBottomBg />
       </StyledBgWrapper>
-      <StyledInnerDisplay id="first-view__inner-display" />
+      <StyledInnerDisplay
+        id="first-view__inner-display"
+        scrollVolume={scrollVolume}
+        screenImage={screenImage}
+      />
     </StyledFirstViewHeaderContainer>
   )
 }
@@ -31,7 +37,7 @@ const StyledFirstViewBackground = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url('/background/first_view_test.jpg');
+  background-image: url('/background/first_view.png');
   background-repeat: no-repeat;
 `
 // StyledFirstViewHeaderContainerにflexを付与するとアニメーションが崩れるため、wrapperを挟む必要がある
@@ -69,11 +75,15 @@ const StyledBottomBg = styled.div`
   background-position: center top;
   background-repeat: repeat-y;
 `
-const StyledInnerDisplay = styled.div`
-  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_3};
-  position: absolute;
-  background-image: url('/screen/screen_test.jpg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
+const StyledInnerDisplay = styled.div<{ scrollVolume: number; screenImage: string }>`
+  ${({ theme, scrollVolume, screenImage }) =>
+    css`
+      background-image: url(${screenImage});
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+      transition: background-image 0.5s;
+      z-index: ${theme.Z_INDEX.INDEX_3};
+    `}
 `
