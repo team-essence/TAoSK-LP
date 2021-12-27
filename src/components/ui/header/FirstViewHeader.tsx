@@ -9,7 +9,6 @@ export const FirstViewHeader: FCX = ({ className }) => {
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
   useCalculateFirstViewAnimatedSize()
-  console.log(scrollVolume)
 
   return (
     <StyledFirstViewHeaderContainer id="first-view__container" className={className}>

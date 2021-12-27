@@ -4,6 +4,8 @@ import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { FirstViewHeader } from 'components/ui/header/FirstViewHeader'
 import { VideoArea } from 'components/ui/videoArea/VideoArea'
 import { MobileVideoArea } from 'components/ui/videoArea/MobileVideoArea'
+import { Feature } from 'components/ui/label/Feature'
+import { HPandMPVisualizationModal } from 'components/ui/modal/HPandMPVisualizationModal'
 import { Carousel } from 'components/ui/carousel/Carousel'
 import { StartTAoSK } from 'components/ui/startTAoSK/StartTAoSK'
 import { SiteFooter } from 'components/ui/footer/SiteFooter'
@@ -16,6 +18,8 @@ export const View: FCX = ({ className }) => {
     <ViewContainer className={className}>
       <FirstViewHeader />
       {innerWidth >= 574 ? <VideoArea /> : <MobileVideoArea />}
+      <Feature />
+      <HPandMPVisualizationModal />
       <Carousel direction="left" images={leftScrollImage} />
       <Carousel direction="right" images={rightScrollImage} />
       <StartTAoSK />

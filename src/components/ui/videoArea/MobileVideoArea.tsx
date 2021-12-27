@@ -6,7 +6,11 @@ type Props = {}
 export const MobileVideoArea: FCX<Props> = ({ className }) => {
   return (
     <StyledContainer className={className}>
-      <StyledTitleImage src="/videoArea/mb_title.png" alt="全ての仕事をゲームの成果で!" />
+      <StyledTitleImage
+        src="/videoArea/mb_title.png"
+        alt="全ての仕事をゲームの成果で!"
+        loading="lazy"
+      />
       <StyledVideo></StyledVideo>
       <StyledTextContainer>
         <StyledText>
@@ -20,7 +24,7 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
           プロジェクトモンスターをやっつけよう！
         </StyledText>
         <a href="!#">
-          <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" />
+          <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" loading="lazy" />
         </a>
       </StyledTextContainer>
     </StyledContainer>
