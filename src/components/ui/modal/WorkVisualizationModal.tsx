@@ -60,11 +60,11 @@ const StyledWrap = styled.div`
 const StyledFlexContainer = styled.div`
   display: flex;
   gap: ${calculateMinSizeBasedOnFigma(16)};
+  justify-content: center;
   align-items: flex-end;
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(677)};
-  padding-top: ${calculateMinSizeBasedOnFigma(8)};
 `
 const StyledDragonImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(261)};

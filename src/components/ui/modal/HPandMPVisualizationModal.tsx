@@ -63,6 +63,7 @@ const StyledWrap = styled.div`
 const StyledFlexContainer = styled.div`
   display: flex;
   gap: ${calculateMinSizeBasedOnFigma(16)};
+  justify-content: center;
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(607)};

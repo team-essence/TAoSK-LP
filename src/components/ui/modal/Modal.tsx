@@ -26,12 +26,14 @@ export const Modal: FCX<Props> = ({ className, title, children }) => {
   )
 }
 
+const padding = `${calculateMinSizeBasedOnFigma(65)} ${calculateMinSizeBasedOnFigma(70)}
+${calculateMinSizeBasedOnFigma(55)}` // ts-styled-pluginエラーを避けるため
 const StyledWrapper = styled.div`
   display: inline-block;
   position: relative;
   width: ${calculateMinSizeBasedOnFigma(1120)};
   height: ${calculateMinSizeBasedOnFigma(573)};
-  padding: ${calculateMinSizeBasedOnFigma(55)} ${calculateMinSizeBasedOnFigma(70)};
+  padding: ${padding};
   z-index: ${({ theme }) => theme.Z_INDEX.MODAL};
 `
 const StyledNamePlate = styled.p`
