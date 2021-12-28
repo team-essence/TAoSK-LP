@@ -42,6 +42,9 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
                 loading="lazy"
               />
             </StyledTextImageContainer>
+            <StyledEggContainer>
+              <StyledEggImage src="/modal/egg.png" alt="egg" loading="lazy" />
+            </StyledEggContainer>
           </StyledWrap>
         </Modal>
       )}
@@ -84,4 +87,12 @@ const StyledTextImageContainer = styled.div`
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(569)};
+`
+const StyledEggContainer = styled.div`
+  position: absolute;
+  left: ${calculateMinSizeBasedOnFigma(-124)};
+  bottom: ${calculateMinSizeBasedOnFigma(-114)};
+`
+const StyledEggImage = styled.img`
+  width: ${calculateMinSizeBasedOnFigma(231)};
 `
