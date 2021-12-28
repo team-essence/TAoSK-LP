@@ -1,4 +1,5 @@
 import React, { FCX } from 'react'
+import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled from 'styled-components'
 
 type Props = {}
@@ -6,11 +7,13 @@ type Props = {}
 export const MobileVideoArea: FCX<Props> = ({ className }) => {
   return (
     <StyledContainer className={className}>
-      <StyledTitleImage
-        src="/videoArea/mb_title.png"
-        alt="全ての仕事をゲームの成果で!"
-        loading="lazy"
-      />
+      <StyledTitleImageContainer>
+        <StyledTitleImage
+          src="/videoArea/mb_title.png"
+          alt="全ての仕事をゲームの成果で!"
+          loading="lazy"
+        />
+      </StyledTitleImageContainer>
       <StyledVideo></StyledVideo>
       <StyledTextContainer>
         <StyledText>
@@ -23,50 +26,60 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
           <br />
           プロジェクトモンスターをやっつけよう！
         </StyledText>
-        <a href="!#">
+        <StyledStartButtonContainer href="!#">
           <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" loading="lazy" />
-        </a>
+        </StyledStartButtonContainer>
       </StyledTextContainer>
     </StyledContainer>
   )
 }
 
 const StyledContainer = styled.div`
+  position: relative;
   width: 100%;
-  height: 651px;
+  height: ${calculateVwBasedOnFigma(2300)};
   padding: 56px 14px;
+  padding: ${calculateVwBasedOnFigma(190)} ${calculateVwBasedOnFigma(60)};
   background: url('/background/mb_brown_bg.png') center center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_8};
 `
 // TODO: youtubeAPI or videoタグで実装
 const StyledVideo = styled.div`
-  width: 386px;
-  height: 217px;
+  width: 100%;
+  height: ${calculateVwBasedOnFigma(840)};
   border-radius: 10px;
-  margin-top: 24px;
+  margin-top: ${calculateVwBasedOnFigma(60)};
   background: #f0f;
 `
+const StyledTitleImageContainer = styled.div`
+  width: ${calculateVwBasedOnFigma(1300)};
+  margin: 0 auto;
+`
 const StyledTitleImage = styled.img`
-  aspect-ratio: 1 / 1;
-  width: 382px;
-  height: 42px;
+  width: ${calculateVwBasedOnFigma(1300)};
 `
 const StyledTextContainer = styled.div`
   text-align: center;
-  width: 320px;
+  width: ${calculateVwBasedOnFigma(1200)};
   margin: 0 auto;
 `
 const StyledText = styled.p`
-  font-size: 16px;
+  font-size: ${calculateVwBasedOnFigma(56)};
   color: ${({ theme }) => theme.COLORS.TEXT.WHITE};
-  padding: 24px 0;
+  padding: ${calculateVwBasedOnFigma(64)} 0;
   line-height: 2;
   background: linear-gradient(0deg, #4d2709, #4d2709 100%);
   -webkit-background-clip: text;
   -webkit-text-stroke: 5px transparent;
 `
 const StyledStartButtonImage = styled.img`
-  width: 310px;
+  width: ${calculateVwBasedOnFigma(1000)};
   display: block;
+`
+const StyledStartButtonContainer = styled.a`
+  display: block;
+  width: ${calculateVwBasedOnFigma(1000)};
+  margin: 0 auto;
 `

@@ -68,7 +68,7 @@ const StyledFooter = styled.footer`
      height: ${calculateVwBasedOnFigma(160)};
   `}
   ${mediaQuery.sm`
-     height: 188px;
+     height: ${calculateVwBasedOnFigma(700)};
   `}
 `
 const StyledFooterHead = styled(FlexContainer)`
@@ -76,13 +76,15 @@ const StyledFooterHead = styled(FlexContainer)`
   padding: ${calculateVwBasedOnFigma(16)} ${calculateVwBasedOnFigma(64)};
   ${mediaQuery.sm`
      padding: 20px 55px;
+     padding: ${calculateVwBasedOnFigma(80)} ${calculateVwBasedOnFigma(150)};
   `}
 `
 const StyledLogoContainer = styled(FlexContainer)`
   gap: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
      display: flex;
-     gap: 40px;
+     gap: ${calculateVwBasedOnFigma(40)};
+     justify-content: center;
   `}
 `
 const StyledSNSContainer = styled(FlexContainer)`
@@ -90,27 +92,27 @@ const StyledSNSContainer = styled(FlexContainer)`
   ${mediaQuery.sm`
      display: flex;
      flex-direction: row-reverse;
-     gap: 20px;
+     gap: ${calculateVwBasedOnFigma(80)};
      justify-content: center;
-     margin-top: 42px;
+     margin-top: ${calculateVwBasedOnFigma(100)};
   `}
 `
 const StyledTAoSK = styled.img`
   width: ${calculateVwBasedOnFigma(117)};
   ${mediaQuery.sm`
-     width: 117px;
+     width: ${calculateVwBasedOnFigma(440)};
   `}
 `
 const StyledHalTokyo = styled.img`
   width: ${calculateVwBasedOnFigma(146)};
   ${mediaQuery.sm`
-     width: 146px;
+    width: ${calculateVwBasedOnFigma(490)};
   `}
 `
 const StyledSNS = styled.img`
   width: ${calculateVwBasedOnFigma(30)};
   ${mediaQuery.sm`
-     width: 30px;
+     width: ${calculateVwBasedOnFigma(110)};
   `}
 `
 const StyledPlay = styled.p`
@@ -118,7 +120,8 @@ const StyledPlay = styled.p`
   font-weight: ${({ theme }) => theme.FONT_WEIGHTS.BOLD};
   color: ${({ theme }) => theme.COLORS.TEXT.GRAY};
   ${mediaQuery.sm`
-     font-size: 16px;
+     font-size: ${calculateVwBasedOnFigma(50)};
+     padding-bottom: ${calculateVwBasedOnFigma(16)};
   `}
 `
 const StyledBorder = styled.div`
@@ -138,8 +141,8 @@ const StyledCopyright = styled.p<{ height: number }>`
         height: calc(${calculateVwBasedOnFigma(160)} - ${height + 2}px);
       `}
       ${mediaQuery.sm`
-        font-size: 10px;
-        height: calc(188px - ${height + 2}px);
+        font-size: ${calculateVwBasedOnFigma(26)};
+        height: ${calculateVwBasedOnFigma(142)};
       `}
     `}
 `

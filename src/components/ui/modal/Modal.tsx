@@ -1,6 +1,7 @@
 import React, { FCX, ReactNode } from 'react'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import { strokeTextShadow } from 'utils/strokeTextShadow'
+import { mediaQuery } from 'utils/response/mediaQuery'
 import styled, { css } from 'styled-components'
 import { animation } from 'styles/animation/modalAnimation'
 
@@ -12,7 +13,9 @@ type Props = {
 export const Modal: FCX<Props> = ({ className, title, children }) => {
   return (
     <StyledWrapper>
-      <StyledNamePlate>{title}</StyledNamePlate>
+      <StyledNamePlate>
+        <StyledGradationTitle>{title}</StyledGradationTitle>
+      </StyledNamePlate>
       <StyledChildrenWrapper className={className}>{children}</StyledChildrenWrapper>
       <StyledDragonSymbolWrapper>
         <StyledDragonSymbolLeft />
@@ -26,13 +29,22 @@ export const Modal: FCX<Props> = ({ className, title, children }) => {
   )
 }
 
+const padding = `${calculateMinSizeBasedOnFigma(65)} ${calculateMinSizeBasedOnFigma(70)}
+${calculateMinSizeBasedOnFigma(55)}` // ts-styled-pluginエラーを避けるため
+const mobilePadding = `${calculateMinSizeBasedOnFigma(132)} ${calculateMinSizeBasedOnFigma(86)}
+${calculateMinSizeBasedOnFigma(36)}` // ts-styled-pluginエラーを避けるため
 const StyledWrapper = styled.div`
   display: inline-block;
   position: relative;
   width: ${calculateMinSizeBasedOnFigma(1120)};
   height: ${calculateMinSizeBasedOnFigma(573)};
-  padding: ${calculateMinSizeBasedOnFigma(55)} ${calculateMinSizeBasedOnFigma(70)};
+  padding: ${padding};
   z-index: ${({ theme }) => theme.Z_INDEX.MODAL};
+  ${mediaQuery.sm`
+     width: 100%;
+     height: ${calculateMinSizeBasedOnFigma(1750)};
+     padding: ${mobilePadding};
+  `}
 `
 const StyledNamePlate = styled.p`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_1};
@@ -51,10 +63,16 @@ const StyledNamePlate = styled.p`
   ${({ theme }) =>
     css`
       color: ${theme.COLORS.TEXT.WHITE};
-      font-size: ${theme.FONT_SIZES.SIZE_20};
+      font-size: ${theme.FONT_SIZES.SIZE_24};
       font-weight: ${theme.FONT_WEIGHTS.BOLD};
-      ${strokeTextShadow('2px', theme.COLORS.TEXT.BLACK)};
+      /* ${strokeTextShadow('2px', theme.COLORS.TEXT.BLACK)}; */
     `}
+  ${mediaQuery.sm`
+    font-size: ${calculateMinSizeBasedOnFigma(60)};
+    top: calc(-35px / 2);
+    width: ${calculateMinSizeBasedOnFigma(1120)};
+    height: ${calculateMinSizeBasedOnFigma(140)};
+  `}
 `
 const StyledChildrenWrapper = styled.div`
   ${animation.children}
@@ -109,4 +127,10 @@ const StyledDragonSymbolLeft = styled.div`
 const StyledDragonSymbolRight = styled.div`
   ${dragonSymbolCss}
   ${animation.bgRight}
+`
+const StyledGradationTitle = styled.div`
+  background: linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  background: -webkit-linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `

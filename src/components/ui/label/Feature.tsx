@@ -1,5 +1,6 @@
 import React, { FCX } from 'react'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { mediaQuery } from 'utils/response/mediaQuery'
 import styled from 'styled-components'
 
 type Props = {}
@@ -18,4 +19,7 @@ const StyledContainer = styled.div`
 const StyledFeatureImage = styled.img`
   width: ${calculateVwBasedOnFigma(428)};
   margin: 0 auto;
+  ${mediaQuery.sm`
+     width: 266px;
+  `}
 `
