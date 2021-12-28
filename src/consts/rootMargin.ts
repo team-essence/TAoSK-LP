@@ -1,1 +1,1 @@
-export const ROOT_MARGIN = '-200px'
+export const ROOT_MARGIN = '-200px 0px'
