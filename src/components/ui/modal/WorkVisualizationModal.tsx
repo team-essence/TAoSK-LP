@@ -22,25 +22,23 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
               <StyledTextImage
                 src="/modal/work_text.png"
                 alt="モンスターを倒す感覚で仕事を進めよう!"
-                loading="lazy"
               />
             </StyledTextImageContainer>
             <StyledFlexContainer>
               <div>
-                <StyledDragonImage src="/modal/dragon.png" alt="enemy" loading="lazy" />
+                <StyledDragonImage src="/modal/dragon.png" alt="enemy" />
               </div>
               <StyledWeaponContainer>
-                <StyledWeaponImage src="/modal/weapon.png" alt="weapon" loading="lazy" />
+                <StyledWeaponImage src="/modal/weapon.png" alt="weapon" />
               </StyledWeaponContainer>
               <StyledEffectContainer>
-                <StyledEffectImage src="/modal/effect.png" alt="effect" loading="lazy" />
+                <StyledEffectImage src="/modal/effect.png" alt="effect" />
               </StyledEffectContainer>
             </StyledFlexContainer>
             <div>
               <StyledTitleImage
                 src="/modal/work_title.png"
                 alt="タスクは武器で、プロジェクトはモンスター!?"
-                loading="lazy"
               />
             </div>
           </StyledWrap>

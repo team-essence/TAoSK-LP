@@ -22,37 +22,23 @@ export const MobileWorkVisualizationModal: FCX<Props> = ({ className }) => {
               <StyledTitleImage
                 src="/modal/mobile/work_mobile_title.png"
                 alt="HP,MPを脳波でリアルタイム解析"
-                loading="lazy"
               />
             </StyledTitleImageContainer>
             <div>
-              <StyledDragonImage
-                src="/modal/mobile/work_mobile_dragon.png"
-                alt="enemy"
-                loading="lazy"
-              />
+              <StyledDragonImage src="/modal/mobile/work_mobile_dragon.png" alt="enemy" />
             </div>
             <StyledRightContainer>
               <div>
-                <StyledWeaponImage
-                  src="/modal/mobile/work_mobile_weapon.png"
-                  alt="weapon"
-                  loading="lazy"
-                />
+                <StyledWeaponImage src="/modal/mobile/work_mobile_weapon.png" alt="weapon" />
               </div>
               <div>
-                <StyledEffectImage
-                  src="/modal/mobile/work_mobile_effect.png"
-                  alt="effect"
-                  loading="lazy"
-                />
+                <StyledEffectImage src="/modal/mobile/work_mobile_effect.png" alt="effect" />
               </div>
             </StyledRightContainer>
             <StyledTextImageContainer>
               <StyledTextImage
                 src="/modal/mobile/work_mobile_text.png"
                 alt="モンスターを倒す感覚で仕事を進めよう!"
-                loading="lazy"
               />
             </StyledTextImageContainer>
           </StyledWrap>

@@ -22,43 +22,32 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
               <StyledTitleImage
                 src="/modal/mobile/hp_mp_mobile_title.png"
                 alt="HP,MPを脳波でリアルタイム解析"
-                loading="lazy"
               />
             </StyledTitleImageContainer>
             <div>
               <StyledInstalledUserImage
                 src="/modal/mobile/mobile_kageyama.png"
                 alt="installedUser"
-                loading="lazy"
               />
             </div>
             <StyledEggContainer>
-              <StyledEggImage src="/modal/egg.png" alt="egg" loading="lazy" />
+              <StyledEggImage src="/modal/egg.png" alt="egg" />
             </StyledEggContainer>
             <StyledMindWaveContainer>
-              <StyledMindWaveImage src="/modal/mind_wave.png" alt="mind_wave" loading="lazy" />
+              <StyledMindWaveImage src="/modal/mind_wave.png" alt="mind_wave" />
             </StyledMindWaveContainer>
             <StyledRightContainer>
               <div>
                 <StyledTextImage
                   src="/modal/mobile/hp_mp_mobile_text.png"
                   alt="顔認証でHP,MPを表示"
-                  loading="lazy"
                 />
               </div>
               <div>
-                <StyledKurauchiImage
-                  src="/modal/mobile/mobile_kurauchi.png"
-                  alt="kurauchi"
-                  loading="lazy"
-                />
+                <StyledKurauchiImage src="/modal/mobile/mobile_kurauchi.png" alt="kurauchi" />
               </div>
               <div>
-                <StyledSolutionImage
-                  src="/weapon/progress-solution.svg"
-                  alt="solution"
-                  loading="lazy"
-                />
+                <StyledSolutionImage src="/weapon/progress-solution.svg" alt="solution" />
               </div>
             </StyledRightContainer>
           </StyledWrap>

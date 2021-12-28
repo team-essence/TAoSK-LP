@@ -26,22 +26,20 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
                 <StyledStatusTitleImage
                   src="/modal/status_title.png"
                   alt="完了したタスクに応じてステータスが上昇"
-                  loading="lazy"
                 />
               </div>
               <div>
-                <StyledStatusImage src="/modal/status.png" alt="status" loading="lazy" />
+                <StyledStatusImage src="/modal/status.png" alt="status" />
               </div>
               <div>
                 <StyledStatusTextImage
                   src="/modal/status_text.png"
                   alt="社員の仕事を分析して正確な人事評価を手助け"
-                  loading="lazy"
                 />
               </div>
             </div>
             <StyledQuillContainer>
-              <StyledQuillImage src="/modal/quill.png" alt="quill" loading="lazy" />
+              <StyledQuillImage src="/modal/quill.png" alt="quill" />
             </StyledQuillContainer>
           </StyledWrap>
         </Modal>
