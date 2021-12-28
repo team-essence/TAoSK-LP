@@ -19,36 +19,27 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
         <Modal title="HP,MPの見える化">
           <StyledWrap>
             <div>
-              <StyledTitleImage
-                src="/modal/hp_mp_title.png"
-                alt="HP,MPを脳波でリアルタイム解析"
-                loading="lazy"
-              />
+              <StyledTitleImage src="/modal/hp_mp_title.png" alt="HP,MPを脳波でリアルタイム解析" />
             </div>
             <StyledFlexContainer>
               <div>
-                <StyledInstalledUserImage
-                  src="/modal/kageyama.png"
-                  alt="installedUser"
-                  loading="lazy"
-                />
+                <StyledInstalledUserImage src="/modal/kageyama.png" alt="installedUser" />
               </div>
               <div>
-                <StyledMindWaveImage src="/modal/mind_wave.png" alt="mind_wave" loading="lazy" />
+                <StyledMindWaveImage src="/modal/mind_wave.png" alt="mind_wave" />
               </div>
               <StyledKurauchiContainer>
-                <StyledKurauchiImage src="/modal/kurauchi.png" alt="kurauchi" loading="lazy" />
+                <StyledKurauchiImage src="/modal/kurauchi.png" alt="kurauchi" />
               </StyledKurauchiContainer>
             </StyledFlexContainer>
             <StyledTextImageContainer>
               <StyledTextImage
                 src="/modal/hp_mp_text.png"
                 alt="顔認証で仲間の名前,役職,HP,MPを表示"
-                loading="lazy"
               />
             </StyledTextImageContainer>
             <StyledEggContainer>
-              <StyledEggImage src="/modal/egg.png" alt="egg" loading="lazy" />
+              <StyledEggImage src="/modal/egg.png" alt="egg" />
             </StyledEggContainer>
           </StyledWrap>
         </Modal>

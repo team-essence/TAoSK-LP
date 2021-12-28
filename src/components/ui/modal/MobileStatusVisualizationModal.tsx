@@ -22,33 +22,23 @@ export const MobileStatusVisualizationModal: FCX<Props> = ({ className }) => {
               <StyledTitleImage
                 src="/modal/mobile/status_mobile_title.png"
                 alt="完了したタスクに応じてステータスが上昇"
-                loading="lazy"
               />
             </StyledTitleImageContainer>
             <div>
-              <StyledDragonImage src="/modal/mobile/status_mobile_hr.png" alt="hr" loading="lazy" />
+              <StyledDragonImage src="/modal/mobile/status_mobile_hr.png" alt="hr" />
             </div>
             <StyledRightContainer>
               <StyledClearContainer>
-                <StyledWeaponImage
-                  src="/modal/mobile/status_mobile_clear.png"
-                  alt="clear"
-                  loading="lazy"
-                />
+                <StyledWeaponImage src="/modal/mobile/status_mobile_clear.png" alt="clear" />
               </StyledClearContainer>
               <div>
-                <StyledEffectImage
-                  src="/modal/mobile/mobile_status.png"
-                  alt="effect"
-                  loading="lazy"
-                />
+                <StyledEffectImage src="/modal/mobile/mobile_status.png" alt="effect" />
               </div>
             </StyledRightContainer>
             <StyledTextImageContainer>
               <StyledTextImage
                 src="/modal/mobile/status_mobile_text.png"
                 alt="社員の仕事を分析して正確な人事評価を手助け!"
-                loading="lazy"
               />
             </StyledTextImageContainer>
           </StyledWrap>
