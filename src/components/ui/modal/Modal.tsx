@@ -14,7 +14,7 @@ export const Modal: FCX<Props> = ({ className, title, children }) => {
   return (
     <StyledWrapper>
       <StyledNamePlate>
-        <A>{title}</A>
+        <StyledGradationTitle>{title}</StyledGradationTitle>
       </StyledNamePlate>
       <StyledChildrenWrapper className={className}>{children}</StyledChildrenWrapper>
       <StyledDragonSymbolWrapper>
@@ -28,12 +28,7 @@ export const Modal: FCX<Props> = ({ className, title, children }) => {
     </StyledWrapper>
   )
 }
-const A = styled.div`
-  background: linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
-  background: -webkit-linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`
+
 const padding = `${calculateMinSizeBasedOnFigma(65)} ${calculateMinSizeBasedOnFigma(70)}
 ${calculateMinSizeBasedOnFigma(55)}` // ts-styled-pluginエラーを避けるため
 const mobilePadding = `${calculateMinSizeBasedOnFigma(132)} ${calculateMinSizeBasedOnFigma(86)}
@@ -132,4 +127,10 @@ const StyledDragonSymbolLeft = styled.div`
 const StyledDragonSymbolRight = styled.div`
   ${dragonSymbolCss}
   ${animation.bgRight}
+`
+const StyledGradationTitle = styled.div`
+  background: linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  background: -webkit-linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `

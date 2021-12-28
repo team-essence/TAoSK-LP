@@ -1,5 +1,6 @@
 import React, { FCX } from 'react'
 import { Modal } from 'components/ui/modal/Modal'
+import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled, { css } from 'styled-components'
@@ -8,7 +9,7 @@ type Props = {}
 
 export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
   const { ref, inView } = useInView({
-    rootMargin: '-200px',
+    rootMargin: ROOT_MARGIN,
     triggerOnce: true,
   })
 
@@ -26,7 +27,7 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledTextImageContainer>
             <StyledFlexContainer>
               <div>
-                <StyledDragonImage src="/modal/dragon.png" alt="dragon" loading="lazy" />
+                <StyledDragonImage src="/modal/dragon.png" alt="enemy" loading="lazy" />
               </div>
               <StyledWeaponContainer>
                 <StyledWeaponImage src="/modal/weapon.png" alt="weapon" loading="lazy" />

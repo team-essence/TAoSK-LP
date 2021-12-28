@@ -1,5 +1,6 @@
 import React, { FCX } from 'react'
 import { Modal } from 'components/ui/modal/Modal'
+import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled, { css } from 'styled-components'
@@ -8,7 +9,7 @@ type Props = {}
 
 export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
   const { ref, inView } = useInView({
-    rootMargin: '-200px',
+    rootMargin: ROOT_MARGIN,
     triggerOnce: true,
   })
 

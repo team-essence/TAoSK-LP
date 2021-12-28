@@ -1,5 +1,6 @@
 import React, { FCX } from 'react'
 import { Modal } from 'components/ui/modal/Modal'
+import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled, { css } from 'styled-components'
@@ -8,7 +9,7 @@ type Props = {}
 
 export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
   const { ref, inView } = useInView({
-    rootMargin: '-200px',
+    rootMargin: ROOT_MARGIN,
     triggerOnce: true,
   })
 
@@ -25,9 +26,9 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
               />
             </StyledTitleImageContainer>
             <div>
-              <StyledKageyamaImage
+              <StyledInstalledUserImage
                 src="/modal/mobile/mobile_kageyama.png"
-                alt="kageyama"
+                alt="installedUser"
                 loading="lazy"
               />
             </div>
@@ -84,7 +85,7 @@ const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   padding-bottom: ${calculateMinSizeBasedOnFigma(16)};
 `
-const StyledKageyamaImage = styled.img`
+const StyledInstalledUserImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
 `
 const StyledMindWaveImage = styled.img`

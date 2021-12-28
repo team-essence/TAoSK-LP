@@ -20,19 +20,28 @@ import styled from 'styled-components'
 
 export const View: FCX = ({ className }) => {
   const { innerWidth } = useWatchInnerAspect()
+  const breakpoint = 574
 
   return (
     <ViewContainer className={className}>
       <FirstViewHeader />
       <StyledFixeContainer>
         <StyledVideoAreaContainer>
-          {innerWidth >= 574 ? <VideoArea /> : <MobileVideoArea />}
+          {innerWidth >= breakpoint ? <VideoArea /> : <MobileVideoArea />}
         </StyledVideoAreaContainer>
         <StyledFeatureWrap />
         <StyledModalContainer>
-          {innerWidth >= 574 ? <HPandMPVisualizationModal /> : <MobileHPandMPVisualizationModal />}
-          {innerWidth >= 574 ? <WorkVisualizationModal /> : <MobileWorkVisualizationModal />}
-          {innerWidth >= 574 ? <StatusVisualizationModal /> : <MobileStatusVisualizationModal />}
+          {innerWidth >= breakpoint ? (
+            <HPandMPVisualizationModal />
+          ) : (
+            <MobileHPandMPVisualizationModal />
+          )}
+          {innerWidth >= breakpoint ? <WorkVisualizationModal /> : <MobileWorkVisualizationModal />}
+          {innerWidth >= breakpoint ? (
+            <StatusVisualizationModal />
+          ) : (
+            <MobileStatusVisualizationModal />
+          )}
         </StyledModalContainer>
         <StyledCarouselContainer>
           <Carousel direction="left" images={leftScrollImage} />
