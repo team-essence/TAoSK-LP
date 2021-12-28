@@ -41,7 +41,7 @@ const StyledContainer = styled.div`
 `
 // TODO: youtubeAPI or videoタグで実装
 const StyledVideo = styled.div`
-  width: 386px;
+  width: 100%;
   height: 217px;
   border-radius: 10px;
   margin-top: 24px;

@@ -7,8 +7,11 @@ import { VideoArea } from 'components/ui/videoArea/VideoArea'
 import { MobileVideoArea } from 'components/ui/videoArea/MobileVideoArea'
 import { Feature } from 'components/ui/label/Feature'
 import { HPandMPVisualizationModal } from 'components/ui/modal/HPandMPVisualizationModal'
+import { MobileHPandMPVisualizationModal } from 'components/ui/modal/MobileHPandMPVisualizationModal'
 import { WorkVisualizationModal } from 'components/ui/modal/WorkVisualizationModal'
+import { MobileWorkVisualizationModal } from 'components/ui/modal/MobileWorkVisualizationModal'
 import { StatusVisualizationModal } from 'components/ui/modal/StatusVisualizationModal'
+import { MobileStatusVisualizationModal } from 'components/ui/modal/MobileStatusVisualizationModal'
 import { Carousel } from 'components/ui/carousel/Carousel'
 import { StartTAoSK } from 'components/ui/startTAoSK/StartTAoSK'
 import { SiteFooter } from 'components/ui/footer/SiteFooter'
@@ -26,9 +29,9 @@ export const View: FCX = ({ className }) => {
         </StyledVideoAreaContainer>
         <StyledFeatureWrap />
         <StyledModalContainer>
-          <HPandMPVisualizationModal />
-          <WorkVisualizationModal />
-          <StatusVisualizationModal />
+          {innerWidth >= 574 ? <HPandMPVisualizationModal /> : <MobileHPandMPVisualizationModal />}
+          {innerWidth >= 574 ? <WorkVisualizationModal /> : <MobileWorkVisualizationModal />}
+          {innerWidth >= 574 ? <StatusVisualizationModal /> : <MobileStatusVisualizationModal />}
         </StyledModalContainer>
         <StyledCarouselContainer>
           <Carousel direction="left" images={leftScrollImage} />
