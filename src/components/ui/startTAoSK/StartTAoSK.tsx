@@ -17,19 +17,16 @@ export const StartTAoSK: FCX = ({ className }) => {
           />
         </h3>
         <StyledFlexContainer>
-          <div>
+          <StyledMainVisualContainer>
             <StyledMainVisual src="/startTaosk/login.png" alt="main-visual" />
-          </div>
+          </StyledMainVisualContainer>
           <StyledRightWrapper>
             <StyledText>
               テキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくる
             </StyledText>
             <StyledStartButton>
               <a href="!#">
-                <StyledStartButtonImage
-                  src="/startTaosk/start.svg"
-                  alt="今すぐ始める"
-                />
+                <StyledStartButtonImage src="/startTaosk/start.svg" alt="今すぐ始める" />
               </a>
             </StyledStartButton>
           </StyledRightWrapper>
@@ -46,7 +43,8 @@ const StyledContainer = styled.div`
   padding: ${calculateVwBasedOnFigma(10)};
   margin: 0 auto;
   ${mediaQuery.sm`
-     width: 371px;
+     width: 95%;
+     padding: ${calculateVwBasedOnFigma(24)};
   `}
 `
 const StyledInnerBorder = styled.div`
@@ -57,7 +55,7 @@ const StyledInnerBorder = styled.div`
     border-radius: 10px;
     padding: ${calculateVwBasedOnFigma(60)} 0;
     ${mediaQuery.sm`
-      padding: 40px 0;
+      padding: ${calculateVwBasedOnFigma(100)} 0;
     `}
   `}
 `
@@ -65,23 +63,31 @@ const StyledTitle = styled.img`
   width: ${calculateVwBasedOnFigma(711)};
   padding-bottom: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
-    width: 331px;
-    padding-bottom: 40px;
+    width: ${calculateVwBasedOnFigma(1140)};
+    padding-bottom: ${calculateVwBasedOnFigma(120)};
+  `}
+`
+const StyledMainVisualContainer = styled.div`
+  ${mediaQuery.sm`
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
   `}
 `
 const StyledMainVisual = styled.img`
   width: ${calculateVwBasedOnFigma(450)};
   height: ${calculateVwBasedOnFigma(282)};
   object-fit: cover;
+  border-radius: 10px;
   ${mediaQuery.sm`
-    width: 314px;
-    height: 196px;
+    width: 100%;
+    height: ${calculateVwBasedOnFigma(800)};
   `}
 `
 const StyledStartButtonImage = styled.img`
   width: ${calculateVwBasedOnFigma(314)};
   ${mediaQuery.sm`
-    width: 314px;
+    width: ${calculateVwBasedOnFigma(1000)};
   `}
 `
 const StyledStartButton = styled.button`
@@ -97,7 +103,7 @@ const StyledText = styled.p`
   `}
   ${mediaQuery.sm`
     -webkit-text-stroke: 2px transparent;
-    font-size: 16px;
+    font-size: ${calculateVwBasedOnFigma(54)};
   `}
 `
 const StyledFlexContainer = styled.div`
@@ -114,13 +120,14 @@ const StyledRightWrapper = styled.div`
   justify-content: center;
   width: ${calculateVwBasedOnFigma(365)};
   ${mediaQuery.sm`
-    width: 314px;
+    margin: 0 auto;
+    width: ${calculateVwBasedOnFigma(1140)};
   `}
   p {
     text-align: center;
     padding-bottom: ${calculateVwBasedOnFigma(40)};
     ${mediaQuery.sm`
-      padding: 40px 0;
+      padding: ${calculateVwBasedOnFigma(64)} 0;
     `}
   }
 `

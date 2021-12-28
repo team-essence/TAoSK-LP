@@ -1,6 +1,7 @@
 import React, { FCX } from 'react'
 import { AtLeast } from 'types/carousel'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { mediaQuery } from 'utils/response/mediaQuery'
 import styled, { keyframes, css } from 'styled-components'
 
 type Props = {
@@ -62,6 +63,10 @@ const StyledLi = styled.li`
   width: ${calculateVwBasedOnFigma(442)};
   height: ${calculateVwBasedOnFigma(280)};
   margin-left: ${calculateVwBasedOnFigma(20)};
+  ${mediaQuery.sm`
+    width: ${calculateVwBasedOnFigma(884)};
+    height: ${calculateVwBasedOnFigma(560)};
+  `}
   img {
     width: 100%;
     height: 100%;
@@ -73,4 +78,8 @@ const StyledImage = styled.img`
   width: ${calculateVwBasedOnFigma(442)};
   height: ${calculateVwBasedOnFigma(280)};
   object-fit: cover;
+  ${mediaQuery.sm`
+    width: ${calculateVwBasedOnFigma(884)};
+    height: ${calculateVwBasedOnFigma(560)};
+  `}
 `

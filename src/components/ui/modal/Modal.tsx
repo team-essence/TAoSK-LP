@@ -73,7 +73,7 @@ const StyledNamePlate = styled.p`
       /* ${strokeTextShadow('2px', theme.COLORS.TEXT.BLACK)}; */
     `}
   ${mediaQuery.sm`
-    font-size: 16px;
+    font-size: ${calculateMinSizeBasedOnFigma(60)};
     top: calc(-35px / 2);
     width: ${calculateMinSizeBasedOnFigma(1120)};
     height: ${calculateMinSizeBasedOnFigma(140)};

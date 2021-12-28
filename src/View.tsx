@@ -81,9 +81,15 @@ const StyledCarouselContainer = styled.div`
 `
 const StyledVideoAreaContainer = styled.div`
   padding-top: ${calculateVwBasedOnFigma(137)};
+  ${mediaQuery.sm`
+    padding-top: ${calculateVwBasedOnFigma(260)};
+  `}
 `
 const StyledStartTAoSKContainer = styled.div`
   margin: ${calculateVwBasedOnFigma(106)} 0;
+  ${mediaQuery.sm`
+    margin: ${calculateVwBasedOnFigma(280)} 0;
+  `}
 `
 const StyledFeatureWrap = styled(Feature)`
   margin: ${calculateVwBasedOnFigma(109)} 0 ${calculateVwBasedOnFigma(68)};
