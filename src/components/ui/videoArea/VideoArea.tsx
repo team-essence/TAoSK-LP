@@ -9,40 +9,48 @@ export const VideoArea: FCX<Props> = ({ className }) => {
     <StyledContainer className={className}>
       <StyledWeaponContainer>
         <p>
-          <StyledWeapon src="/weapon/progress-motivation.svg" alt="motivation" />
+          <StyledWeapon src="/weapon/progress-motivation.svg" alt="motivation" loading="lazy" />
         </p>
         <p>
-          <StyledWeapon src="/weapon/progress-plan.svg" alt="plan" />
+          <StyledWeapon src="/weapon/progress-plan.svg" alt="plan" loading="lazy" />
         </p>
         <p>
-          <StyledWeapon src="/weapon/progress-design.svg" alt="design" />
+          <StyledWeapon src="/weapon/progress-design.svg" alt="design" loading="lazy" />
         </p>
       </StyledWeaponContainer>
       <StyledCenterContent>
         <StyledInnerContent>
           <StyledVideo></StyledVideo>
           <StyledTextContainer>
-            <StyledTitleImage src="/videoArea/title.png" alt="全ての仕事をゲームの成果で!" />
+            <StyledTitleImage
+              src="/videoArea/title.png"
+              alt="全ての仕事をゲームの成果で!"
+              loading="lazy"
+            />
             <StyledText>
               仕事と働く人のステータスを&quot;見える化&quot;
               プロジェクトがモンスターとして、貴方の前に立ちはだかる......。
               RPGの世界で仲間と共にプロジェクトモンスターをやっつけよう！
             </StyledText>
             <a href="!#">
-              <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" />
+              <StyledStartButtonImage
+                src="/videoArea/start.svg"
+                alt="TAoSKを始める"
+                loading="lazy"
+              />
             </a>
           </StyledTextContainer>
         </StyledInnerContent>
       </StyledCenterContent>
       <StyledWeaponContainer>
         <p>
-          <StyledWeapon src="/weapon/progress-technology.svg" alt="technology" />
+          <StyledWeapon src="/weapon/progress-technology.svg" alt="technology" loading="lazy" />
         </p>
         <p>
-          <StyledWeapon src="/weapon/progress-achievement.svg" alt="achievement" />
+          <StyledWeapon src="/weapon/progress-achievement.svg" alt="achievement" loading="lazy" />
         </p>
         <p>
-          <StyledWeapon src="/weapon/progress-solution.svg" alt="solution" />
+          <StyledWeapon src="/weapon/progress-solution.svg" alt="solution" loading="lazy" />
         </p>
       </StyledWeaponContainer>
     </StyledContainer>
@@ -50,6 +58,7 @@ export const VideoArea: FCX<Props> = ({ className }) => {
 }
 
 const StyledContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -58,6 +67,7 @@ const StyledContainer = styled.div`
   background: url('/background/brown_bg.png') center center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_8};
 `
 const StyledWeapon = styled.img`
   aspect-ratio: 1 / 1;

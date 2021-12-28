@@ -14,14 +14,14 @@ export const Carousel: FCX<Props> = ({ direction, images, className }) => {
       <StyledUl direction={direction}>
         {images.map((image, index) => (
           <StyledLi key={index}>
-            <img src={image} alt="slide" />
+            <StyledImage src={image} alt="slide" loading="lazy" />
           </StyledLi>
         ))}
       </StyledUl>
       <StyledUl direction={direction}>
         {images.map((image, index) => (
           <StyledLi key={index}>
-            <img src={image} alt="slide" />
+            <StyledImage src={image} alt="slide" loading="lazy" />
           </StyledLi>
         ))}
       </StyledUl>
@@ -61,10 +61,16 @@ const StyledUl = styled.ul<{ direction: 'left' | 'right' }>`
 const StyledLi = styled.li`
   width: ${calculateVwBasedOnFigma(442)};
   height: ${calculateVwBasedOnFigma(280)};
-  margin: 0 ${calculateVwBasedOnFigma(20)};
+  margin-left: ${calculateVwBasedOnFigma(20)};
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+`
+const StyledImage = styled.img`
+  aspect-ratio: 1 / 1;
+  width: ${calculateVwBasedOnFigma(442)};
+  height: ${calculateVwBasedOnFigma(280)};
+  object-fit: cover;
 `

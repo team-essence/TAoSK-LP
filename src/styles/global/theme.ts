@@ -6,6 +6,7 @@ export const theme = {
 
   Z_INDEX: {
     INDEX_MINUS_1: -1,
+    INDEX_MINUS_2: -2,
     INDEX_0: 0,
     INDEX_1: 1,
     INDEX_2: 2,
