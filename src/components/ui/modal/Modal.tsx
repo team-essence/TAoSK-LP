@@ -13,7 +13,9 @@ type Props = {
 export const Modal: FCX<Props> = ({ className, title, children }) => {
   return (
     <StyledWrapper>
-      <StyledNamePlate>{title}</StyledNamePlate>
+      <StyledNamePlate>
+        <A>{title}</A>
+      </StyledNamePlate>
       <StyledChildrenWrapper className={className}>{children}</StyledChildrenWrapper>
       <StyledDragonSymbolWrapper>
         <StyledDragonSymbolLeft />
@@ -26,7 +28,12 @@ export const Modal: FCX<Props> = ({ className, title, children }) => {
     </StyledWrapper>
   )
 }
-
+const A = styled.div`
+  background: linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  background: -webkit-linear-gradient(-90deg, #ffffff, #fdf7eb 30%, #eeba48);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`
 const padding = `${calculateMinSizeBasedOnFigma(65)} ${calculateMinSizeBasedOnFigma(70)}
 ${calculateMinSizeBasedOnFigma(55)}` // ts-styled-pluginエラーを避けるため
 const mobilePadding = `${calculateMinSizeBasedOnFigma(132)} ${calculateMinSizeBasedOnFigma(86)}
@@ -63,7 +70,7 @@ const StyledNamePlate = styled.p`
       color: ${theme.COLORS.TEXT.WHITE};
       font-size: ${theme.FONT_SIZES.SIZE_24};
       font-weight: ${theme.FONT_WEIGHTS.BOLD};
-      ${strokeTextShadow('2px', theme.COLORS.TEXT.BLACK)};
+      /* ${strokeTextShadow('2px', theme.COLORS.TEXT.BLACK)}; */
     `}
   ${mediaQuery.sm`
     font-size: 16px;

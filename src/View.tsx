@@ -2,6 +2,7 @@ import React, { FCX } from 'react'
 import { leftScrollImage, rightScrollImage } from 'consts/carouselImage'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { mediaQuery } from 'utils/response/mediaQuery'
 import { FirstViewHeader } from 'components/ui/header/FirstViewHeader'
 import { VideoArea } from 'components/ui/videoArea/VideoArea'
 import { MobileVideoArea } from 'components/ui/videoArea/MobileVideoArea'
@@ -68,6 +69,9 @@ const StyledFixeContainer = styled.div`
 const StyledModalContainer = styled.div`
   & > div {
     margin-bottom: ${calculateVwBasedOnFigma(200)};
+    ${mediaQuery.sm`
+      margin-bottom: ${calculateVwBasedOnFigma(300)};
+    `}
   }
 `
 const StyledCarouselContainer = styled.div`
@@ -83,4 +87,7 @@ const StyledStartTAoSKContainer = styled.div`
 `
 const StyledFeatureWrap = styled(Feature)`
   margin: ${calculateVwBasedOnFigma(109)} 0 ${calculateVwBasedOnFigma(68)};
+  ${mediaQuery.sm`
+    margin: ${calculateVwBasedOnFigma(180)} 0 ${calculateVwBasedOnFigma(160)};
+  `}
 `
