@@ -82,6 +82,11 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
   const firstViewAnimation = useCallback(() => {
     if (!innerWidth || !innerHeight) return
 
+    const allTriggers = ScrollTrigger.getAll()
+    for (let i = 0; i < allTriggers.length; i++) {
+      allTriggers[i].kill(true)
+    }
+
     // それぞれのCSSプロパティの値は、アニメーション前と後で単位を合わせないと予期したスタイルにならない
     gsap.fromTo(
       '#first-view__background',
