@@ -1,4 +1,4 @@
-import React, { FCX } from 'react'
+import React, { FCX, useState } from 'react'
 import { leftScrollImage, rightScrollImage } from 'consts/carouselImage'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
@@ -16,16 +16,17 @@ import { MobileStatusVisualizationModal } from 'components/ui/modal/MobileStatus
 import { Carousel } from 'components/ui/carousel/Carousel'
 import { StartTAoSK } from 'components/ui/startTAoSK/StartTAoSK'
 import { SiteFooter } from 'components/ui/footer/SiteFooter'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const View: FCX = ({ className }) => {
   const { innerWidth } = useWatchInnerAspect()
+  const [hasFirstViewAnimationDone, setHasFirstViewAnimationDone] = useState<boolean>(false)
   const breakpoint = 574
 
   return (
     <ViewContainer className={className}>
-      <FirstViewHeader />
-      <StyledFixeContainer>
+      <FirstViewHeader setHasFirstViewAnimationDone={setHasFirstViewAnimationDone} />
+      <StyledFixeContainer hasFirstViewAnimationDone={hasFirstViewAnimationDone}>
         <StyledVideoAreaContainer>
           {innerWidth >= breakpoint ? <VideoArea /> : <MobileVideoArea />}
         </StyledVideoAreaContainer>
@@ -59,7 +60,7 @@ export const View: FCX = ({ className }) => {
 const ViewContainer = styled.div`
   overflow-x: hidden;
 `
-const StyledFixeContainer = styled.div`
+const StyledFixeContainer = styled.div<{ hasFirstViewAnimationDone: boolean }>`
   &::before {
     content: '';
     display: block;
@@ -70,9 +71,18 @@ const StyledFixeContainer = styled.div`
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
-    background-position: 50% 100%;
-    background-image: url('/background/plain.jpg');
-    background-size: cover;
+    ${({ hasFirstViewAnimationDone }) =>
+      hasFirstViewAnimationDone
+        ? css`
+            background-position: 50% 100%;
+            background-image: url('/background/plain.jpg');
+            background-size: cover;
+          `
+        : css`
+            background-position: center top;
+            background-image: url('/background/first_view_top.svg');
+            background-size: contain;
+          `}
   }
 `
 const StyledModalContainer = styled.div`

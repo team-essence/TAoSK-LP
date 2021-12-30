@@ -1,8 +1,10 @@
 import { useRef, useMemo, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { scrollTrigger } from 'consts/scrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
+import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
 
 type UseCalculateFirstViewAnimatedSizeReturn = { innerHeight: number }
 
@@ -88,6 +90,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     for (let i = 0; i < allTriggers.length; i++) {
       allTriggers[i].kill(true)
     }
+    const viewBgAspectRatio = getViewBgAspectRatio()
 
     // それぞれのCSSプロパティの値は、アニメーション前と後で単位を合わせないと予期したスタイルにならない
     gsap.fromTo(
@@ -97,15 +100,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         backgroundPosition: `0px ${initialViewBgPositionTop}px`,
       },
       {
-        scrollTrigger: {
-          trigger: '#first-view__container',
-          start: 'top',
-          end: '1000px',
-          markers: true,
-          pin: true,
-          scrub: true,
-        },
-
+        scrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
         backgroundPosition: `${innerPcAnimatedWidthPosition}px ${innerPcAnimatedHeightPosition}px`,
       },
@@ -119,18 +114,48 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         height: `${innerPcStyle.height}px`,
       },
       {
-        scrollTrigger: {
-          trigger: '#first-view__container',
-          start: 'top',
-          end: '1000px',
-          markers: true,
-          pin: true,
-          scrub: true,
-        },
+        scrollTrigger,
         top: `${innerPcAnimatedTop}px`,
         left: `${innerPcAnimatedLeft}px`,
         width: `${innerPcStyle.width * animatedBgSizeRatio}px`,
         height: `${innerPcStyle.height * animatedBgSizeRatio}px`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__top-bg',
+      // 下の要素に隙間が開いてしまうため+10する
+      {
+        backgroundSize: '100%',
+        height: `${initialViewBgPositionTop + 10}px`,
+      },
+      {
+        scrollTrigger,
+        backgroundSize: `${animatedBgSizeRatio * 100}%`,
+        height: `${innerPcAnimatedHeightPosition + 10}px`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__background-dummy',
+      // 上下の要素に隙間が開いてしまうため-20pxする
+      { height: `calc(100vw * ${viewBgAspectRatio} - 20px)` },
+      {
+        scrollTrigger,
+        height: `calc(100vw * ${viewBgAspectRatio * animatedBgSizeRatio} -20px)`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__bottom-bg',
+      // 上の要素に隙間が開いてしまうため+10pxする
+      {
+        top: '-20px',
+        backgroundSize: '100%',
+        height: `${initialViewBgPositionTop + 10}px`,
+      },
+      {
+        scrollTrigger,
+        top: '-20px',
+        backgroundSize: `${animatedBgSizeRatio * 100}%`,
+        height: `${innerPcAnimatedHeightPosition + 10}px`,
       },
     )
   }, [
