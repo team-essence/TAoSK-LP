@@ -8,10 +8,13 @@ import styled, { css } from 'styled-components'
 export const FirstViewHeader: FCX = ({ className }) => {
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
-  useCalculateFirstViewAnimatedSize()
+  const { innerHeight } = useCalculateFirstViewAnimatedSize()
 
   return (
-    <StyledFirstViewHeaderContainer id="first-view__container" className={className}>
+    <StyledFirstViewHeaderContainer
+      id="first-view__container"
+      className={className}
+      height={innerHeight}>
       <StyledFirstViewBackground id="first-view__background" />
       <StyledBgWrapper>
         <StyledTopBg />
@@ -27,10 +30,10 @@ export const FirstViewHeader: FCX = ({ className }) => {
   )
 }
 
-const StyledFirstViewHeaderContainer = styled.header`
+const StyledFirstViewHeaderContainer = styled.header<{ height: number }>`
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: ${({ height }) => height}px;
 `
 const StyledFirstViewBackground = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_2};

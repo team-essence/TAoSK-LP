@@ -4,10 +4,12 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
 
+type UseCalculateFirstViewAnimatedSizeReturn = { innerHeight: number }
+
 /**
  * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
  */
-export const useCalculateFirstViewAnimatedSize = (): void => {
+export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimatedSizeReturn => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const windowAspectRatio = useMemo<number>(
     () => innerHeight / innerWidth,
@@ -152,4 +154,6 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     }
     firstViewAnimation()
   }, [firstViewAnimation])
+
+  return { innerHeight }
 }
