@@ -24,7 +24,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return tailedHeight / 2
     }
-  }, [innerHeight, innerPcStyle.height, tailedHeight])
+  }, [isFitIntoWindow, tailedHeight])
 
   const animatedBgSizeRatio = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -32,7 +32,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return innerHeight / innerPcStyle.height
     }
-  }, [innerWidth, innerPcStyle.width])
+  }, [isFitIntoWindow, innerWidth, innerHeight, innerPcStyle.width, innerPcStyle.height])
 
   const tailedInnerPcTop = useMemo<number>(
     () => (innerPcStyle.height - innerPcStyle.width * windowAspectRatio) / 2,
@@ -41,7 +41,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
 
   const tailedInnerPcLeft = useMemo<number>(
     () => (innerPcStyle.width - innerPcStyle.height * (1 / windowAspectRatio)) / 2,
-    [innerPcStyle.width, innerPcStyle.height],
+    [innerPcStyle.width, innerPcStyle.height, windowAspectRatio],
   )
 
   const innerPcAnimatedWidthPosition = useMemo<number>(() => {
@@ -50,7 +50,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(innerPcStyle.left + tailedInnerPcLeft) * animatedBgSizeRatio
     }
-  }, [tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
+  }, [isFitIntoWindow, tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
 
   const innerPcAnimatedHeightPosition = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -59,7 +59,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(innerPcStyle.top - tailedHeight / 2) * animatedBgSizeRatio
     }
-  }, [tailedInnerPcTop, animatedBgSizeRatio])
+  }, [isFitIntoWindow, innerPcStyle.top, tailedHeight, tailedInnerPcTop, animatedBgSizeRatio])
 
   const innerPcAnimatedTop = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -67,7 +67,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return 0
     }
-  }, [tailedInnerPcTop])
+  }, [isFitIntoWindow, tailedInnerPcTop, animatedBgSizeRatio])
 
   const innerPcAnimatedLeft = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -75,7 +75,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(tailedInnerPcLeft * animatedBgSizeRatio)
     }
-  }, [innerPcStyle.left, tailedInnerPcTop])
+  }, [isFitIntoWindow, innerPcStyle.left, tailedInnerPcTop, animatedBgSizeRatio])
 
   const isRegistered = useRef<boolean>(false)
 
