@@ -1,13 +1,17 @@
 import { useRef, useMemo, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { scrollTrigger } from 'consts/scrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
+import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
+
+type UseCalculateFirstViewAnimatedSizeReturn = { innerHeight: number }
 
 /**
  * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
  */
-export const useCalculateFirstViewAnimatedSize = (): void => {
+export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimatedSizeReturn => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const windowAspectRatio = useMemo<number>(
     () => innerHeight / innerWidth,
@@ -24,7 +28,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return tailedHeight / 2
     }
-  }, [innerHeight, innerPcStyle.height, tailedHeight])
+  }, [isFitIntoWindow, tailedHeight])
 
   const animatedBgSizeRatio = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -32,7 +36,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return innerHeight / innerPcStyle.height
     }
-  }, [innerWidth, innerPcStyle.width])
+  }, [isFitIntoWindow, innerWidth, innerHeight, innerPcStyle.width, innerPcStyle.height])
 
   const tailedInnerPcTop = useMemo<number>(
     () => (innerPcStyle.height - innerPcStyle.width * windowAspectRatio) / 2,
@@ -41,7 +45,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
 
   const tailedInnerPcLeft = useMemo<number>(
     () => (innerPcStyle.width - innerPcStyle.height * (1 / windowAspectRatio)) / 2,
-    [innerPcStyle.width, innerPcStyle.height],
+    [innerPcStyle.width, innerPcStyle.height, windowAspectRatio],
   )
 
   const innerPcAnimatedWidthPosition = useMemo<number>(() => {
@@ -50,7 +54,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(innerPcStyle.left + tailedInnerPcLeft) * animatedBgSizeRatio
     }
-  }, [tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
+  }, [isFitIntoWindow, tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
 
   const innerPcAnimatedHeightPosition = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -59,7 +63,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(innerPcStyle.top - tailedHeight / 2) * animatedBgSizeRatio
     }
-  }, [tailedInnerPcTop, animatedBgSizeRatio])
+  }, [isFitIntoWindow, innerPcStyle.top, tailedHeight, tailedInnerPcTop, animatedBgSizeRatio])
 
   const innerPcAnimatedTop = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -67,7 +71,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return 0
     }
-  }, [tailedInnerPcTop])
+  }, [isFitIntoWindow, tailedInnerPcTop, animatedBgSizeRatio])
 
   const innerPcAnimatedLeft = useMemo<number>(() => {
     if (isFitIntoWindow) {
@@ -75,12 +79,18 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     } else {
       return -(tailedInnerPcLeft * animatedBgSizeRatio)
     }
-  }, [innerPcStyle.left, tailedInnerPcTop])
+  }, [isFitIntoWindow, innerPcStyle.left, tailedInnerPcTop, animatedBgSizeRatio])
 
   const isRegistered = useRef<boolean>(false)
 
   const firstViewAnimation = useCallback(() => {
     if (!innerWidth || !innerHeight) return
+
+    const allTriggers = ScrollTrigger.getAll()
+    for (let i = 0; i < allTriggers.length; i++) {
+      allTriggers[i].kill(true)
+    }
+    const viewBgAspectRatio = getViewBgAspectRatio()
 
     // それぞれのCSSプロパティの値は、アニメーション前と後で単位を合わせないと予期したスタイルにならない
     gsap.fromTo(
@@ -90,15 +100,7 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
         backgroundPosition: `0px ${initialViewBgPositionTop}px`,
       },
       {
-        scrollTrigger: {
-          trigger: '#first-view__container',
-          start: 'top',
-          end: '1000px',
-          markers: true,
-          pin: true,
-          scrub: true,
-        },
-
+        scrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
         backgroundPosition: `${innerPcAnimatedWidthPosition}px ${innerPcAnimatedHeightPosition}px`,
       },
@@ -112,18 +114,48 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
         height: `${innerPcStyle.height}px`,
       },
       {
-        scrollTrigger: {
-          trigger: '#first-view__container',
-          start: 'top',
-          end: '1000px',
-          markers: true,
-          pin: true,
-          scrub: true,
-        },
+        scrollTrigger,
         top: `${innerPcAnimatedTop}px`,
         left: `${innerPcAnimatedLeft}px`,
         width: `${innerPcStyle.width * animatedBgSizeRatio}px`,
         height: `${innerPcStyle.height * animatedBgSizeRatio}px`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__top-bg',
+      // 下の要素に隙間が開いてしまうため+10する
+      {
+        backgroundSize: '100%',
+        height: `${initialViewBgPositionTop + 10}px`,
+      },
+      {
+        scrollTrigger,
+        backgroundSize: `${animatedBgSizeRatio * 100}%`,
+        height: `${innerPcAnimatedHeightPosition + 10}px`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__background-dummy',
+      // 上下の要素に隙間が開いてしまうため-20pxする
+      { height: `calc(100vw * ${viewBgAspectRatio} - 20px)` },
+      {
+        scrollTrigger,
+        height: `calc(100vw * ${viewBgAspectRatio * animatedBgSizeRatio} -20px)`,
+      },
+    )
+    gsap.fromTo(
+      '#first-view__bottom-bg',
+      // 上の要素に隙間が開いてしまうため+10pxする
+      {
+        top: '-20px',
+        backgroundSize: '100%',
+        height: `${initialViewBgPositionTop + 10}px`,
+      },
+      {
+        scrollTrigger,
+        top: '-20px',
+        backgroundSize: `${animatedBgSizeRatio * 100}%`,
+        height: `${innerPcAnimatedHeightPosition + 10}px`,
       },
     )
   }, [
@@ -147,4 +179,6 @@ export const useCalculateFirstViewAnimatedSize = (): void => {
     }
     firstViewAnimation()
   }, [firstViewAnimation])
+
+  return { innerHeight }
 }

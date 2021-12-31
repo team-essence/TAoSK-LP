@@ -1,22 +1,33 @@
-import React, { FCX } from 'react'
+import React, { useEffect, Dispatch, FCX, SetStateAction } from 'react'
+import { scrollTriggerEndPx } from 'consts/scrollTrigger'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
-import { viewBackgroundImage } from 'consts/aspect'
 import styled, { css } from 'styled-components'
 
-export const FirstViewHeader: FCX = ({ className }) => {
+type Props = {
+  setHasFirstViewAnimationDone: Dispatch<SetStateAction<boolean>>
+}
+
+export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimationDone }) => {
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
-  useCalculateFirstViewAnimatedSize()
+  const { innerHeight } = useCalculateFirstViewAnimatedSize()
+
+  useEffect(() => {
+    setHasFirstViewAnimationDone(scrollVolume >= scrollTriggerEndPx)
+  }, [scrollVolume])
 
   return (
-    <StyledFirstViewHeaderContainer id="first-view__container" className={className}>
+    <StyledFirstViewHeaderContainer
+      id="first-view__container"
+      className={className}
+      height={innerHeight}>
       <StyledFirstViewBackground id="first-view__background" />
       <StyledBgWrapper>
-        <StyledTopBg />
-        <StyledFirstViewDummy />
-        <StyledBottomBg />
+        <StyledTopBg id="first-view__top-bg" />
+        <StyledFirstViewDummy id="first-view__background-dummy" />
+        <StyledBottomBg id="first-view__bottom-bg" />
       </StyledBgWrapper>
       <StyledInnerDisplay
         id="first-view__inner-display"
@@ -27,10 +38,10 @@ export const FirstViewHeader: FCX = ({ className }) => {
   )
 }
 
-const StyledFirstViewHeaderContainer = styled.header`
+const StyledFirstViewHeaderContainer = styled.header<{ height: number }>`
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: ${({ height }) => height}px;
 `
 const StyledFirstViewBackground = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_2};
@@ -52,7 +63,7 @@ const StyledBgWrapper = styled.div`
   height: 100%;
 `
 const StyledTopBg = styled.div`
-  flex-grow: 1;
+  top: 10px;
   width: 100vw;
   background-image: url('/background/first_view_top.svg');
   background-size: 100%;
@@ -61,9 +72,6 @@ const StyledTopBg = styled.div`
 `
 const StyledFirstViewDummy = styled.div`
   width: 100vw;
-  height: calc(
-    100vw * ${viewBackgroundImage.HEIGHT} / ${viewBackgroundImage.WIDTH} - 2px
-  ); // 上下の要素に隙間が開いてしまうため-2pxする
   background-color: transparent;
   background-repeat: no-repeat;
 `
