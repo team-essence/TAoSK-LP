@@ -1,7 +1,12 @@
 import { useRef, useMemo, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import { scrollTrigger, blurScrollTrigger } from 'consts/scrollTrigger'
+import {
+  scrollTrigger,
+  dotBlurScrollTrigger,
+  illustBlurScrollTrigger,
+  fixedToAbsoluteScrollTrigger,
+} from 'consts/scrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
 import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
@@ -169,28 +174,64 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
 
     gsap.fromTo(
       '#first-view__container',
-      {},
       {
-        scrollTrigger: {
-          trigger: '#first-view__container',
-          start: 'top',
-          end: `${1250}px`,
-          markers: true,
-          pin: true,
-          scrub: true,
-        },
+        position: 'fixed',
+      },
+      {
+        scrollTrigger,
+        position: 'fixed',
       },
     )
-    // gsap.fromTo(
-    //   '#first-view__inner-display',
-    //   {
-    //     filter: 'blur(0px)',
-    //   },
-    //   {
-    //     scrollTrigger: blurScrollTrigger,
-    //     filter: 'blur(10px)',
-    //   },
-    // )
+    gsap.fromTo(
+      '#first-view__inner-display',
+      {
+        filter: 'blur(15px)',
+        backgroundImage: 'url("/screen/before.svg")',
+      },
+      {
+        scrollTrigger: illustBlurScrollTrigger,
+        filter: 'blur(0px)',
+        backgroundImage: 'url("/screen/after.svg")',
+      },
+    )
+
+    gsap.fromTo(
+      '#first-view__inner-display',
+      {
+        filter: 'blur(0px)',
+      },
+      {
+        scrollTrigger: dotBlurScrollTrigger,
+        filter: 'blur(15px)',
+      },
+    )
+
+    console.log(initialViewBgPositionTop)
+    console.log(firstViewAnimationDummyHeight)
+    console.log(innerPcAnimatedTop)
+    gsap.fromTo(
+      '#first-view__container',
+      {
+        position: 'fixed',
+        // 2556~9くらいが多分正解
+        top: '2557px',
+      },
+      {
+        scrollTrigger: fixedToAbsoluteScrollTrigger,
+        position: 'absolute',
+        top: '2557px',
+      },
+    )
+    gsap.fromTo(
+      '#first-view__container',
+      {
+        top: '0px',
+      },
+      {
+        scrollTrigger: illustBlurScrollTrigger,
+        top: '0px',
+      },
+    )
   }, [
     innerPcStyle.width,
     innerPcStyle.height,
@@ -203,6 +244,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     innerPcAnimatedXPosition,
     innerPcAnimatedYPosition,
     innerPcAnimatedTop,
+    firstViewAnimationDummyHeight,
   ])
 
   useEffect(() => {

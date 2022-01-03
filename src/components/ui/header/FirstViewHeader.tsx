@@ -40,8 +40,12 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
         />
       </StyledFirstViewHeaderContainer>
       <StyledAnimationDummyContainer>
-        <StyledFirstViewAnimationDummy height={firstViewAnimationDummyHeight} />
-        <StyledDotBlurAnimationDummy />
+        <StyledFirstViewAnimationDummy
+          id="first-view__animation-dummy"
+          height={firstViewAnimationDummyHeight}
+        />
+        <StyledDotBlurAnimationDummy id="first-view__dot-blur-animation-dummy" />
+        <StyledIllustBlurAnimationDummy id="first-view__illust-blur-animation-dummy" />
       </StyledAnimationDummyContainer>
     </>
   )
@@ -116,11 +120,10 @@ const StyledFirstViewAnimationDummy = styled.div<{ height: number }>`
   position: relative;
   width: 100px;
   height: ${({ height }) => height + FIRST_VIEW_SCROLL_TRIGGER_END_PX}px;
-  background-color: red;
 `
 const StyledDotBlurAnimationDummy = styled.div`
   position: relative;
   width: 100px;
-  height: ${DOT_BLUR_SCROLL_TRIGGER_END_PX}px;
-  background-color: blue;
+  height: ${DOT_BLUR_SCROLL_TRIGGER_END_PX + 500}px;
 `
+const StyledIllustBlurAnimationDummy = styled(StyledDotBlurAnimationDummy)``
