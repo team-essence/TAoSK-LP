@@ -1,12 +1,15 @@
 import { useRef, useMemo, useCallback, useEffect } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import { scrollTrigger } from 'consts/scrollTrigger'
+import { scrollTrigger, blurScrollTrigger } from 'consts/scrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
 import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
 
-type UseCalculateFirstViewAnimatedSizeReturn = { innerHeight: number }
+type UseCalculateFirstViewAnimatedSizeReturn = {
+  innerHeight: number
+  firstViewAnimationDummyHeight: number
+}
 
 /**
  * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
@@ -48,7 +51,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     [innerPcStyle.width, innerPcStyle.height, windowAspectRatio],
   )
 
-  const innerPcAnimatedWidthPosition = useMemo<number>(() => {
+  const innerPcAnimatedXPosition = useMemo<number>(() => {
     if (isFitIntoWindow) {
       return -(innerPcStyle.left * animatedBgSizeRatio)
     } else {
@@ -56,7 +59,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     }
   }, [isFitIntoWindow, tailedInnerPcLeft, innerPcStyle.left, animatedBgSizeRatio])
 
-  const innerPcAnimatedHeightPosition = useMemo<number>(() => {
+  const innerPcAnimatedYPosition = useMemo<number>(() => {
     if (isFitIntoWindow) {
       const top = innerPcStyle.top + tailedHeight / 2
       return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
@@ -81,6 +84,11 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     }
   }, [isFitIntoWindow, innerPcStyle.left, tailedInnerPcTop, animatedBgSizeRatio])
 
+  const firstViewAnimationDummyHeight = useMemo<number>(
+    () => innerPcStyle.height * animatedBgSizeRatio + innerPcAnimatedTop,
+    [innerPcStyle.height, animatedBgSizeRatio, innerPcAnimatedTop],
+  )
+
   const isRegistered = useRef<boolean>(false)
 
   const firstViewAnimation = useCallback(() => {
@@ -102,7 +110,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
       {
         scrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
-        backgroundPosition: `${innerPcAnimatedWidthPosition}px ${innerPcAnimatedHeightPosition}px`,
+        backgroundPosition: `${innerPcAnimatedXPosition}px ${innerPcAnimatedYPosition}px`,
       },
     )
     gsap.fromTo(
@@ -131,7 +139,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
       {
         scrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
-        height: `${innerPcAnimatedHeightPosition + 10}px`,
+        height: `${innerPcAnimatedYPosition + 10}px`,
       },
     )
     gsap.fromTo(
@@ -155,9 +163,34 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         scrollTrigger,
         top: '-20px',
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
-        height: `${innerPcAnimatedHeightPosition + 10}px`,
+        height: `${innerPcAnimatedYPosition + 10}px`,
       },
     )
+
+    gsap.fromTo(
+      '#first-view__container',
+      {},
+      {
+        scrollTrigger: {
+          trigger: '#first-view__container',
+          start: 'top',
+          end: `${1250}px`,
+          markers: true,
+          pin: true,
+          scrub: true,
+        },
+      },
+    )
+    // gsap.fromTo(
+    //   '#first-view__inner-display',
+    //   {
+    //     filter: 'blur(0px)',
+    //   },
+    //   {
+    //     scrollTrigger: blurScrollTrigger,
+    //     filter: 'blur(10px)',
+    //   },
+    // )
   }, [
     innerPcStyle.width,
     innerPcStyle.height,
@@ -167,8 +200,8 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     innerPcAnimatedLeft,
     initialViewBgPositionTop,
     animatedBgSizeRatio,
-    innerPcAnimatedWidthPosition,
-    innerPcAnimatedHeightPosition,
+    innerPcAnimatedXPosition,
+    innerPcAnimatedYPosition,
     innerPcAnimatedTop,
   ])
 
@@ -180,5 +213,5 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     firstViewAnimation()
   }, [firstViewAnimation])
 
-  return { innerHeight }
+  return { innerHeight, firstViewAnimationDummyHeight }
 }

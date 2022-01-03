@@ -1,5 +1,8 @@
 import React, { useEffect, Dispatch, FCX, SetStateAction } from 'react'
-import { scrollTriggerEndPx } from 'consts/scrollTrigger'
+import {
+  FIRST_VIEW_SCROLL_TRIGGER_END_PX,
+  DOT_BLUR_SCROLL_TRIGGER_END_PX,
+} from 'consts/scrollTrigger'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
@@ -12,34 +15,40 @@ type Props = {
 export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimationDone }) => {
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
-  const { innerHeight } = useCalculateFirstViewAnimatedSize()
+  const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
 
   useEffect(() => {
-    setHasFirstViewAnimationDone(scrollVolume >= scrollTriggerEndPx)
+    setHasFirstViewAnimationDone(scrollVolume >= FIRST_VIEW_SCROLL_TRIGGER_END_PX)
   }, [scrollVolume])
 
   return (
-    <StyledFirstViewHeaderContainer
-      id="first-view__container"
-      className={className}
-      height={innerHeight}>
-      <StyledFirstViewBackground id="first-view__background" />
-      <StyledBgWrapper>
-        <StyledTopBg id="first-view__top-bg" />
-        <StyledFirstViewDummy id="first-view__background-dummy" />
-        <StyledBottomBg id="first-view__bottom-bg" />
-      </StyledBgWrapper>
-      <StyledInnerDisplay
-        id="first-view__inner-display"
-        scrollVolume={scrollVolume}
-        screenImage={screenImage}
-      />
-    </StyledFirstViewHeaderContainer>
+    <>
+      <StyledFirstViewHeaderContainer
+        id="first-view__container"
+        className={className}
+        height={innerHeight}>
+        <StyledFirstViewBackground id="first-view__background" />
+        <StyledBgWrapper>
+          <StyledTopBg id="first-view__top-bg" />
+          <StyledFirstViewDummy id="first-view__background-dummy" />
+          <StyledBottomBg id="first-view__bottom-bg" />
+        </StyledBgWrapper>
+        <StyledInnerDisplay
+          id="first-view__inner-display"
+          scrollVolume={scrollVolume}
+          screenImage={screenImage}
+        />
+      </StyledFirstViewHeaderContainer>
+      <StyledAnimationDummyContainer>
+        <StyledFirstViewAnimationDummy height={firstViewAnimationDummyHeight} />
+        <StyledDotBlurAnimationDummy />
+      </StyledAnimationDummyContainer>
+    </>
   )
 }
 
 const StyledFirstViewHeaderContainer = styled.header<{ height: number }>`
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: ${({ height }) => height}px;
 `
@@ -86,7 +95,7 @@ const StyledBottomBg = styled.div`
 const StyledInnerDisplay = styled.div<{ scrollVolume: number; screenImage: string }>`
   ${({ theme, scrollVolume, screenImage }) =>
     css`
-      background-image: url(${screenImage});
+      background-image: url('/screen/before.svg');
       position: absolute;
       background-repeat: no-repeat;
       background-size: 100%;
@@ -94,4 +103,24 @@ const StyledInnerDisplay = styled.div<{ scrollVolume: number; screenImage: strin
       transition: background-image 0.5s;
       z-index: ${theme.Z_INDEX.INDEX_3};
     `}
+`
+const StyledAnimationDummyContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+`
+const StyledFirstViewAnimationDummy = styled.div<{ height: number }>`
+  position: relative;
+  width: 100px;
+  height: ${({ height }) => height + FIRST_VIEW_SCROLL_TRIGGER_END_PX}px;
+  background-color: red;
+`
+const StyledDotBlurAnimationDummy = styled.div`
+  position: relative;
+  width: 100px;
+  height: ${DOT_BLUR_SCROLL_TRIGGER_END_PX}px;
+  background-color: blue;
 `
