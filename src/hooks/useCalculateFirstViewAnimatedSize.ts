@@ -206,20 +206,17 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
       },
     )
 
-    console.log(initialViewBgPositionTop)
-    console.log(firstViewAnimationDummyHeight)
-    console.log(innerPcAnimatedTop)
     gsap.fromTo(
       '#first-view__container',
       {
         position: 'fixed',
-        // 2556~9くらいが多分正解
-        top: '2557px',
+        top: '0px',
       },
       {
         scrollTrigger: fixedToAbsoluteScrollTrigger,
-        position: 'absolute',
-        top: '2557px',
+        position: 'fixed',
+        top: '-1000px',
+        ease: 'none',
       },
     )
     gsap.fromTo(

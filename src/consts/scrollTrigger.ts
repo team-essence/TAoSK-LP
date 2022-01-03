@@ -28,7 +28,7 @@ export const illustBlurScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
 export const fixedToAbsoluteScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__illust-blur-animation-dummy',
   start: 'bottom-=500px bottom',
-  end: 'bottom bottom',
+  end: 'bottom+=500px bottom',
   markers: true,
   scrub: true,
 } as const
