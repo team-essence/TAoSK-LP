@@ -4,6 +4,7 @@ import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled, { css } from 'styled-components'
+import { Spacer } from '../spacer/Spacer'
 
 type Props = {}
 
@@ -29,7 +30,14 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
                 />
               </div>
               <div>
-                <StyledStatusImage src="/modal/status.png" alt="status" />
+                <StyledStatusVideoContainer>
+                  <video loop autoPlay muted>
+                    <source src="/mp4/status.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledStatusVideoContainer>
+
+                <Spacer size={8} />
               </div>
               <div>
                 <StyledStatusTextImage
@@ -65,9 +73,6 @@ const StyledHRImage = styled.img`
 const StyledStatusTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(448)};
 `
-const StyledStatusImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(598)};
-`
 const StyledStatusTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(560)};
 `
@@ -78,4 +83,23 @@ const StyledQuillContainer = styled.div`
 `
 const StyledQuillImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(263)};
+`
+
+const StyledStatusVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(598)};
+  height: ${calculateMinSizeBasedOnFigma(184.45)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(582)};
+    height: ${calculateMinSizeBasedOnFigma(168.45)};
+    object-fit: cover;
+    object-position: 80% 0%;
+    border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  }
 `

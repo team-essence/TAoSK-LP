@@ -1,9 +1,10 @@
-import { FCX } from "react";
+import React, { FCX } from 'react'
+import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 
 type Props = {
-  size: number;
-  horizontal?: boolean;
-};
+  size: number
+  horizontal?: boolean
+}
 
 export const Spacer: FCX<Props> = ({ className, size, horizontal }) => {
   return (
@@ -11,13 +12,13 @@ export const Spacer: FCX<Props> = ({ className, size, horizontal }) => {
       style={
         horizontal
           ? {
-              width: size,
-              height: "auto",
-              display: "inline-block",
+              width: calculateMinSizeBasedOnFigma(size),
+              height: 'auto',
+              display: 'inline-block',
               flexShrink: 0,
             }
-          : { width: "auto", height: size, flexShrink: 0 }
+          : { width: 'auto', height: calculateMinSizeBasedOnFigma(size), flexShrink: 0 }
       }
     />
-  );
-};
+  )
+}
