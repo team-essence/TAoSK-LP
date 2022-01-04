@@ -10,6 +10,7 @@ import {
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useCalculateInnerPcStyle } from 'hooks/useCalculateInnerPcStyle'
 import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
+import { FIXED_TO_ABSOLUTE_SCROLL_PX } from 'consts/scrollTrigger'
 
 type UseCalculateFirstViewAnimatedSizeReturn = {
   innerHeight: number
@@ -96,7 +97,7 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
 
   const isRegistered = useRef<boolean>(false)
 
-  const firstViewAnimation = useCallback(() => {
+  const addFirstViewAnimation = useCallback(() => {
     if (!innerWidth || !innerHeight) return
 
     const allTriggers = ScrollTrigger.getAll()
@@ -171,12 +172,25 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         height: `${innerPcAnimatedYPosition + 10}px`,
       },
     )
+  }, [
+    innerPcStyle.width,
+    innerPcStyle.height,
+    innerPcStyle.top,
+    innerPcStyle.left,
+    tailedInnerPcTop,
+    innerPcAnimatedLeft,
+    initialViewBgPositionTop,
+    animatedBgSizeRatio,
+    innerPcAnimatedXPosition,
+    innerPcAnimatedYPosition,
+    innerPcAnimatedTop,
+    firstViewAnimationDummyHeight,
+  ])
 
+  const addBlurAnimation = useCallback(() => {
     gsap.fromTo(
       '#first-view__container',
-      {
-        position: 'fixed',
-      },
+      { position: 'fixed' },
       {
         scrollTrigger,
         position: 'fixed',
@@ -194,18 +208,14 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
         backgroundImage: 'url("/screen/after.svg")',
       },
     )
-
     gsap.fromTo(
       '#first-view__inner-display',
-      {
-        filter: 'blur(0px)',
-      },
+      { filter: 'blur(0px)' },
       {
         scrollTrigger: dotBlurScrollTrigger,
         filter: 'blur(15px)',
       },
     )
-
     gsap.fromTo(
       '#first-view__container',
       {
@@ -215,42 +225,25 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
       {
         scrollTrigger: fixedToAbsoluteScrollTrigger,
         position: 'fixed',
-        top: '-1000px',
+        top: `${-FIXED_TO_ABSOLUTE_SCROLL_PX}px`,
         ease: 'none',
       },
     )
     gsap.fromTo(
       '#first-view__container',
-      {
-        top: '0px',
-      },
-      {
-        scrollTrigger: illustBlurScrollTrigger,
-        top: '0px',
-      },
+      { top: '0px' },
+      { scrollTrigger: illustBlurScrollTrigger, top: '0px' },
     )
-  }, [
-    innerPcStyle.width,
-    innerPcStyle.height,
-    innerPcStyle.top,
-    innerPcStyle.left,
-    tailedInnerPcTop,
-    innerPcAnimatedLeft,
-    initialViewBgPositionTop,
-    animatedBgSizeRatio,
-    innerPcAnimatedXPosition,
-    innerPcAnimatedYPosition,
-    innerPcAnimatedTop,
-    firstViewAnimationDummyHeight,
-  ])
+  }, [])
 
   useEffect(() => {
     if (!isRegistered.current) {
       gsap.registerPlugin(ScrollTrigger)
       isRegistered.current = true
     }
-    firstViewAnimation()
-  }, [firstViewAnimation])
+    addFirstViewAnimation()
+    addBlurAnimation()
+  }, [addFirstViewAnimation, addBlurAnimation])
 
   return { innerHeight, firstViewAnimationDummyHeight }
 }

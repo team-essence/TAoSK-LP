@@ -1,7 +1,8 @@
 import React, { useEffect, Dispatch, FCX, SetStateAction } from 'react'
 import {
   FIRST_VIEW_SCROLL_TRIGGER_END_PX,
-  DOT_BLUR_SCROLL_TRIGGER_END_PX,
+  DOT_BLUR_SCROLL_PX,
+  ILLUST_BLUR_SCROLL_PX,
 } from 'consts/scrollTrigger'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
@@ -124,6 +125,8 @@ const StyledFirstViewAnimationDummy = styled.div<{ height: number }>`
 const StyledDotBlurAnimationDummy = styled.div`
   position: relative;
   width: 100px;
-  height: ${DOT_BLUR_SCROLL_TRIGGER_END_PX + 500}px;
+  height: ${DOT_BLUR_SCROLL_PX}px;
 `
-const StyledIllustBlurAnimationDummy = styled(StyledDotBlurAnimationDummy)``
+const StyledIllustBlurAnimationDummy = styled(StyledDotBlurAnimationDummy)`
+  height: ${ILLUST_BLUR_SCROLL_PX}px;
+`
