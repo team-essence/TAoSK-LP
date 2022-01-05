@@ -214,10 +214,11 @@ const StyledContents = styled.ul`
   padding: 7.262569832%;
 `
 const StyledContent = styled.li<{ hasAnimatedFirstBlur: boolean; isHovered: boolean }>`
+  position: relative;
   flex-grow: 1;
   width: 100%;
+  min-height: 0;
   background-size: 100% 100%;
-  text-align: right;
 
   ${({ hasAnimatedFirstBlur }) =>
     hasAnimatedFirstBlur &&
@@ -233,6 +234,10 @@ const StyledContent = styled.li<{ hasAnimatedFirstBlur: boolean; isHovered: bool
 `
 const StyledContentTextImg = styled.img`
   object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 59%;
+  transform: translate(-50%, -50%);
   width: 77.777777%;
   height: 100%;
 `
