@@ -12,7 +12,7 @@ import {
   DOT_BLUR_SCROLL_PX,
   ILLUST_BLUR_SCROLL_PX,
 } from 'consts/scrollTrigger'
-import { useAddFirstViewAnimation } from 'hooks/useCalculateFirstViewAnimatedSize'
+import { useAddFirstViewAnimation } from 'hooks/useAddFirstViewAnimation'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import {
   getContentsPerLogoAndContentsWidth,
