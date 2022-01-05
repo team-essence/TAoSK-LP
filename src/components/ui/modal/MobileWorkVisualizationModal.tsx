@@ -25,14 +25,25 @@ export const MobileWorkVisualizationModal: FCX<Props> = ({ className }) => {
               />
             </StyledTitleImageContainer>
             <div>
-              <StyledDragonImage src="/modal/mobile/work_mobile_dragon.png" alt="enemy" />
+              <StyledMonsterVideoContainer>
+                <video loop autoPlay muted playsInline>
+                  <source src="/mp4/monster.mp4" type="video/mp4" />
+                  <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                </video>
+              </StyledMonsterVideoContainer>
             </div>
+
             <StyledRightContainer>
               <div>
                 <StyledWeaponImage src="/modal/mobile/work_mobile_weapon.png" alt="weapon" />
               </div>
               <div>
-                <StyledEffectImage src="/modal/mobile/work_mobile_effect.png" alt="effect" />
+                <StyledAttackVideoContainer>
+                  <video loop autoPlay muted playsInline>
+                    <source src="/mp4/attack.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledAttackVideoContainer>
               </div>
             </StyledRightContainer>
             <StyledTextImageContainer>
@@ -89,4 +100,40 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(332)};
   right: 0;
+`
+
+const StyledMonsterVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(620)};
+  height: ${calculateMinSizeBasedOnFigma(880)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(570)};
+    height: ${calculateMinSizeBasedOnFigma(820)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  }
+`
+
+const StyledAttackVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(610)};
+  height: ${calculateMinSizeBasedOnFigma(400)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(560)};
+    height: ${calculateMinSizeBasedOnFigma(350)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  }
 `

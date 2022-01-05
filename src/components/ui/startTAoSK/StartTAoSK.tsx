@@ -21,9 +21,7 @@ export const StartTAoSK: FCX = ({ className }) => {
             <StyledMainVisual src="/startTaosk/login.png" alt="main-visual" />
           </StyledMainVisualContainer>
           <StyledRightWrapper>
-            <StyledText>
-              テキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくるテキストは後で送られてくる
-            </StyledText>
+            <StyledText>『TAoSK』の世界で仕事を楽しもう！</StyledText>
             <StyledStartButton>
               <a href="!#">
                 <StyledStartButtonImage src="/startTaosk/start.svg" alt="今すぐ始める" />
@@ -94,6 +92,7 @@ const StyledStartButton = styled.button`
   display: block;
 `
 const StyledText = styled.p`
+  font-size: ${({ theme }) => theme.FONT_SIZES.SIZE_24};
   color: ${({ theme }) => theme.COLORS.TEXT.WHITE};
   background: linear-gradient(0deg, #4d2709, #4d2709 100%);
   -webkit-background-clip: text;
@@ -103,7 +102,7 @@ const StyledText = styled.p`
   `}
   ${mediaQuery.sm`
     -webkit-text-stroke: 2px transparent;
-    font-size: ${calculateVwBasedOnFigma(54)};
+    font-size: ${calculateVwBasedOnFigma(64)};
   `}
 `
 const StyledFlexContainer = styled.div`

@@ -4,6 +4,7 @@ import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import styled, { css } from 'styled-components'
+import { Spacer } from '../spacer/Spacer'
 
 type Props = {}
 
@@ -26,13 +27,25 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledTextImageContainer>
             <StyledFlexContainer>
               <div>
-                <StyledDragonImage src="/modal/dragon.png" alt="enemy" />
+                <StyledMonsterVideoContainer>
+                  <video loop autoPlay muted>
+                    <source src="/mp4/monster.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledMonsterVideoContainer>
+
+                <Spacer size={8} />
               </div>
               <StyledWeaponContainer>
                 <StyledWeaponImage src="/modal/weapon.png" alt="weapon" />
               </StyledWeaponContainer>
               <StyledEffectContainer>
-                <StyledEffectImage src="/modal/effect.png" alt="effect" />
+                <StyledAttackVideoContainer>
+                  <video loop autoPlay muted>
+                    <source src="/mp4/attack.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledAttackVideoContainer>
               </StyledEffectContainer>
             </StyledFlexContainer>
             <div>
@@ -65,9 +78,6 @@ const StyledFlexContainer = styled.div`
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(677)};
 `
-const StyledDragonImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(261)};
-`
 const StyledWeaponImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(332)};
 `
@@ -87,4 +97,40 @@ const StyledTextImageContainer = styled.div`
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(491)};
+`
+
+const StyledMonsterVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(261)};
+  height: ${calculateMinSizeBasedOnFigma(313)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(245)};
+    height: ${calculateMinSizeBasedOnFigma(297)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  }
+`
+
+const StyledAttackVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(350)};
+  height: ${calculateMinSizeBasedOnFigma(260)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(334)};
+    height: ${calculateMinSizeBasedOnFigma(244)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(4)};
+  }
 `

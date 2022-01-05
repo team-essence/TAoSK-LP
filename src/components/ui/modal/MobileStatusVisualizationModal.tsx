@@ -32,7 +32,12 @@ export const MobileStatusVisualizationModal: FCX<Props> = ({ className }) => {
                 <StyledWeaponImage src="/modal/mobile/status_mobile_clear.png" alt="clear" />
               </StyledClearContainer>
               <div>
-                <StyledEffectImage src="/modal/mobile/mobile_status.png" alt="effect" />
+                <StyledStatusVideoContainer>
+                  <video loop autoPlay muted playsInline>
+                    <source src="/mp4/status.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledStatusVideoContainer>
               </div>
             </StyledRightContainer>
             <StyledTextImageContainer>
@@ -92,4 +97,23 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(360)};
   right: 0;
+`
+
+const StyledStatusVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(740)};
+  height: ${calculateMinSizeBasedOnFigma(260)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(700)};
+    height: ${calculateMinSizeBasedOnFigma(220)};
+    object-fit: cover;
+    object-position: 100% 0%;
+    border-radius: ${calculateMinSizeBasedOnFigma(8)};
+  }
 `
