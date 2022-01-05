@@ -60,6 +60,7 @@ export const theme = {
       BLACK: '#454545',
       WHITE: '#fff',
       GRAY: '#ccc',
+      BROWN: '#4d2709',
     },
 
     BACKGROUND: {

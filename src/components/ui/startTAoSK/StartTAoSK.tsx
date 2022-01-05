@@ -1,6 +1,7 @@
 import React, { FCX } from 'react'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import { mediaQuery } from 'utils/response/mediaQuery'
+import { strokeTextShadow } from 'utils/strokeTextShadow'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import styled, { css } from 'styled-components'
 
@@ -92,16 +93,12 @@ const StyledStartButton = styled.button`
   display: block;
 `
 const StyledText = styled.p`
-  font-size: ${({ theme }) => theme.FONT_SIZES.SIZE_24};
-  color: ${({ theme }) => theme.COLORS.TEXT.WHITE};
-  background: linear-gradient(0deg, #4d2709, #4d2709 100%);
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 5px transparent;
-  ${mediaQuery.md`
-    -webkit-text-stroke: 4px transparent;
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZES.SIZE_24};
+    color: ${theme.COLORS.TEXT.WHITE};
+    ${strokeTextShadow('2px', theme.COLORS.TEXT.BROWN)};
   `}
   ${mediaQuery.sm`
-    -webkit-text-stroke: 2px transparent;
     font-size: ${calculateVwBasedOnFigma(64)};
   `}
 `
