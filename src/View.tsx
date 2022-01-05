@@ -61,9 +61,10 @@ const ViewContainer = styled.div`
   overflow-x: hidden;
 `
 const StyledFirstViewHeader = styled(FirstViewHeader)`
-  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_MINUS_1};
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_0};
 `
 const StyledFixeContainer = styled.div<{ hasFirstViewAnimationDone: boolean }>`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_1};
   &::before {
     content: '';
     display: block;
@@ -108,6 +109,7 @@ const StyledVideoAreaContainer = styled.div`
   `}
 `
 const StyledStartTAoSKContainer = styled.div`
+  position: relative;
   margin: ${calculateVwBasedOnFigma(106)} 0;
   ${mediaQuery.sm`
     margin: ${calculateVwBasedOnFigma(280)} 0;
