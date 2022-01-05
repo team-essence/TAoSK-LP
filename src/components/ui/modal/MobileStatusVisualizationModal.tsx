@@ -3,7 +3,7 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 type Props = {}
 
@@ -72,9 +72,6 @@ const StyledTitleImage = styled.img`
 `
 const StyledDragonImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
-`
-const StyledEffectImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(790)};
 `
 const StyledClearContainer = styled.div`
   padding-bottom: ${calculateMinSizeBasedOnFigma(30)};

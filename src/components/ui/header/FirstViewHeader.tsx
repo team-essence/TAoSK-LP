@@ -14,7 +14,6 @@ import {
 } from 'consts/scrollTrigger'
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
-import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
 import {
   getContentsPerLogoAndContentsWidth,
   getContentsPerLogoAndContentsHeight,
@@ -38,7 +37,6 @@ export const FirstViewHeader: FCX<Props> = ({
   scrollToStartTaosk,
 }) => {
   const { scrollVolume } = useWatchScrollVolume()
-  const { screenImage } = useChangeScreenImage()
   const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
   const [hasAnimatedFirstBlur, setHasAnimatedFirstBlur] = useState<boolean>(false)
   const contentsPath = useMemo<'dot' | 'illust'>(
