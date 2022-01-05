@@ -26,7 +26,7 @@ export const MobileWorkVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledTitleImageContainer>
             <div>
               <StyledMonsterVideoContainer>
-                <video loop autoPlay muted playsInline>
+                <video loop autoPlay muted playsInline preload="auto">
                   <source src="/mp4/monster.mp4" type="video/mp4" />
                   <p>Your browser doesn&lsquo;t support HTML5 video.</p>
                 </video>

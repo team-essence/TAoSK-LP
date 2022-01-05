@@ -41,7 +41,7 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
               </StyledWeaponContainer>
               <StyledEffectContainer>
                 <StyledAttackVideoContainer>
-                  <video loop autoPlay muted>
+                  <video loop autoPlay muted preload="auto">
                     <source src="/mp4/attack.mp4" type="video/mp4" />
                     <p>Your browser doesn&lsquo;t support HTML5 video.</p>
                   </video>
