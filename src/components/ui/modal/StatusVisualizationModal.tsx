@@ -31,7 +31,7 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
               </div>
               <div>
                 <StyledStatusVideoContainer>
-                  <video loop autoPlay muted>
+                  <video loop autoPlay muted preload="auto">
                     <source src="/mp4/status.mp4" type="video/mp4" />
                     <p>Your browser doesn&lsquo;t support HTML5 video.</p>
                   </video>
