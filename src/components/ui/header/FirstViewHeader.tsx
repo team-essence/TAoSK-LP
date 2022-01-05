@@ -53,11 +53,8 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
   }, [firstViewAnimationDummyHeight, scrollVolume])
 
   return (
-    <>
-      <StyledFirstViewHeaderContainer
-        id="first-view__container"
-        className={className}
-        height={innerHeight}>
+    <StyledAllWrapper className={className}>
+      <StyledFirstViewHeaderContainer id="first-view__container" height={innerHeight}>
         <StyledFirstViewBackground id="first-view__background" />
         <StyledBgWrapper>
           <StyledTopBg id="first-view__top-bg" />
@@ -115,9 +112,13 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
         <StyledDotBlurAnimationDummy id="first-view__dot-blur-animation-dummy" />
         <StyledIllustBlurAnimationDummy id="first-view__illust-blur-animation-dummy" />
       </StyledAnimationDummyContainer>
-    </>
+    </StyledAllWrapper>
   )
 }
+
+const StyledAllWrapper = styled.div`
+  position: relative;
+`
 
 const StyledFirstViewHeaderContainer = styled.header<{ height: number }>`
   position: fixed;

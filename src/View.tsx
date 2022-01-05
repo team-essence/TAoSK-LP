@@ -25,7 +25,7 @@ export const View: FCX = ({ className }) => {
 
   return (
     <ViewContainer className={className}>
-      <FirstViewHeader setHasFirstViewAnimationDone={setHasFirstViewAnimationDone} />
+      <StyledFirstViewHeader setHasFirstViewAnimationDone={setHasFirstViewAnimationDone} />
       <StyledFixeContainer hasFirstViewAnimationDone={hasFirstViewAnimationDone}>
         <StyledVideoAreaContainer>
           {innerWidth >= breakpoint ? <VideoArea /> : <MobileVideoArea />}
@@ -60,6 +60,9 @@ export const View: FCX = ({ className }) => {
 const ViewContainer = styled.div`
   overflow-x: hidden;
 `
+const StyledFirstViewHeader = styled(FirstViewHeader)`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_MINUS_1};
+`
 const StyledFixeContainer = styled.div<{ hasFirstViewAnimationDone: boolean }>`
   &::before {
     content: '';
@@ -67,7 +70,7 @@ const StyledFixeContainer = styled.div<{ hasFirstViewAnimationDone: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: ${({ theme }) => theme.Z_INDEX.INDEX_MINUS_2};
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
