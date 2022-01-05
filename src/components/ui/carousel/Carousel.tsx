@@ -64,7 +64,7 @@ const StyledLi = styled.li`
   height: ${calculateVwBasedOnFigma(280)};
   margin-left: ${calculateVwBasedOnFigma(20)};
   ${mediaQuery.sm`
-    width: ${calculateVwBasedOnFigma(884)};
+    width: ${calculateVwBasedOnFigma(970)};
     height: ${calculateVwBasedOnFigma(560)};
   `}
   img {
@@ -79,7 +79,7 @@ const StyledImage = styled.img`
   height: ${calculateVwBasedOnFigma(280)};
   object-fit: cover;
   ${mediaQuery.sm`
-    width: ${calculateVwBasedOnFigma(884)};
+    width: ${calculateVwBasedOnFigma(970)};
     height: ${calculateVwBasedOnFigma(560)};
   `}
 `
