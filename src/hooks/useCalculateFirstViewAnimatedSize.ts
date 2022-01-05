@@ -11,16 +11,15 @@ import {
   addBackgroundDarkenAnimation,
 } from 'utils/scrollAnimation'
 
-type UseCalculateFirstViewAnimatedSizeReturn = {
+type UseAddFirstViewAnimationReturn = {
   innerHeight: number
   firstViewAnimationDummyHeight: number
 }
 
-// TODO: useCalculateFirstViewAnimatedSizeは名前が不適切なので変更する
 /**
  * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
  */
-export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimatedSizeReturn => {
+export const useAddFirstViewAnimation = (): UseAddFirstViewAnimationReturn => {
   const { innerWidth, innerHeight } = useWatchInnerAspect()
   const { addInnerPcAnimation, firstViewAnimationDummyHeight, ...innerPcAnimationVariables } =
     useFirstViewInnerPcAnimation(innerWidth, innerHeight)

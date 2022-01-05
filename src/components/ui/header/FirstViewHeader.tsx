@@ -12,7 +12,7 @@ import {
   DOT_BLUR_SCROLL_PX,
   ILLUST_BLUR_SCROLL_PX,
 } from 'consts/scrollTrigger'
-import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
+import { useAddFirstViewAnimation } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import {
   getContentsPerLogoAndContentsWidth,
@@ -37,7 +37,7 @@ export const FirstViewHeader: FCX<Props> = ({
   scrollToStartTaosk,
 }) => {
   const { scrollVolume } = useWatchScrollVolume()
-  const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
+  const { innerHeight, firstViewAnimationDummyHeight } = useAddFirstViewAnimation()
   const [hasAnimatedFirstBlur, setHasAnimatedFirstBlur] = useState<boolean>(false)
   const contentsPath = useMemo<'dot' | 'illust'>(
     () => (hasAnimatedFirstBlur ? 'illust' : 'dot'),
