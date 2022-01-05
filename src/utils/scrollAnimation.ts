@@ -57,6 +57,9 @@ export const addBlurAnimation = () => {
       filter: 'blur(15px)',
     },
   )
+}
+
+export const addBackgroundDarkenAnimation = () => {
   gsap.fromTo(
     '#first-view__inner-display-overlay',
     {
@@ -67,22 +70,4 @@ export const addBlurAnimation = () => {
       backgroundColor: convertIntoRGBA(theme.COLORS.BACKGROUND.SCORPION, 0.32),
     },
   )
-  // gsap.fromTo(
-  //   '#first-view__container',
-  //   {
-  //     position: 'fixed',
-  //     top: '0px',
-  //   },
-  //   {
-  //     scrollTrigger: fixedToAbsoluteScrollTrigger,
-  //     position: 'fixed',
-  //     top: `${-FIXED_TO_ABSOLUTE_SCROLL_PX}px`,
-  //     ease: 'none',
-  //   },
-  // )
-  // gsap.fromTo(
-  //   '#first-view__container',
-  //   { top: '0px' },
-  //   { scrollTrigger: illustBlurScrollTrigger, top: '0px' },
-  // )
 }

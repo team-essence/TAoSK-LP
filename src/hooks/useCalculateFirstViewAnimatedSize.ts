@@ -5,7 +5,11 @@ import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useFirstViewInnerPcAnimation } from 'hooks/useFirstViewInnerPcAnimation'
 import { useFirstViewBackgroundAnimation } from 'hooks/useFirstViewBackgroundAnimation'
 import { useFirstViewLogoAndContentsAnimation } from 'hooks/useFirstViewLogoAndContentsAnimation'
-import { resetAllScrollAnimation, addBlurAnimation } from 'utils/scrollAnimation'
+import {
+  resetAllScrollAnimation,
+  addBlurAnimation,
+  addBackgroundDarkenAnimation,
+} from 'utils/scrollAnimation'
 
 type UseCalculateFirstViewAnimatedSizeReturn = {
   innerHeight: number
@@ -22,9 +26,10 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     useFirstViewInnerPcAnimation(innerWidth, innerHeight)
   const { addFirstViewBackgroundAnimation, addBackgroundDummyAnimation } =
     useFirstViewBackgroundAnimation({ ...innerPcAnimationVariables })
-  const { addLogoAndContentsAnimation } = useFirstViewLogoAndContentsAnimation({
-    ...innerPcAnimationVariables,
-  })
+  const { addLogoAndContentsAnimation, addMovingLogoAndContentsAsScrollAnimation } =
+    useFirstViewLogoAndContentsAnimation({
+      ...innerPcAnimationVariables,
+    })
 
   const isRegistered = useRef<boolean>(false)
 
@@ -38,8 +43,10 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     addInnerPcAnimation()
     addFirstViewBackgroundAnimation()
     addBackgroundDummyAnimation()
+    addMovingLogoAndContentsAsScrollAnimation()
     addLogoAndContentsAnimation()
     addBlurAnimation()
+    addBackgroundDarkenAnimation()
   }, [
     addInnerPcAnimation,
     addFirstViewBackgroundAnimation,

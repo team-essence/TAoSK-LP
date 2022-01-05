@@ -1,6 +1,7 @@
 import { useMemo, useCallback } from 'react'
 import gsap from 'gsap'
 import { scrollTrigger } from 'consts/scrollTrigger'
+import { moveAsScrollScrollTrigger, MOVE_AS_SCROLL_SCROLL_PX } from 'consts/scrollTrigger'
 import {
   getLogoPerInnerPcWidthRatio,
   getLogoAspectRatio,
@@ -19,6 +20,7 @@ type UseFirstViewLogoAndContentsAnimationArg = {
 
 type UseFirstViewLogoAndContentsAnimationReturn = {
   addLogoAndContentsAnimation: () => void
+  addMovingLogoAndContentsAsScrollAnimation: () => void
 }
 
 type UseFirstViewLogoAndContentsAnimation = (
@@ -76,5 +78,19 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
     animatedBgSizeRatio,
   ])
 
-  return { addLogoAndContentsAnimation }
+  const addMovingLogoAndContentsAsScrollAnimation = useCallback(() => {
+    gsap.fromTo(
+      '#first-view__logo-and-contents',
+      {
+        top: `${innerPcAnimatedTop + animatedTop}px`,
+      },
+      {
+        scrollTrigger: moveAsScrollScrollTrigger,
+        top: `${-MOVE_AS_SCROLL_SCROLL_PX}px`,
+        ease: 'none',
+      },
+    )
+  }, [innerPcAnimatedTop, animatedTop])
+
+  return { addLogoAndContentsAnimation, addMovingLogoAndContentsAsScrollAnimation }
 }

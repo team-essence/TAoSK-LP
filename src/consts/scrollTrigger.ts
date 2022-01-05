@@ -1,8 +1,8 @@
 export const FIRST_VIEW_SCROLL_TRIGGER_END_PX = 1000
 export const DOT_BLUR_SCROLL_PX = 1000
 export const ILLUST_BLUR_SCROLL_PX = 1000
-export const FIXED_TO_ABSOLUTE_SCROLL_PX = 1000
 export const MAKE_DARKER_SCROLL_PX = 1000
+export const MOVE_AS_SCROLL_SCROLL_PX = 10000
 
 export const scrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__container',
@@ -36,11 +36,10 @@ export const makeDarkerScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   scrub: true,
 } as const
 
-// TODO: 今のところ使用していない。最後まで使用しなかった場合は削除する
-export const fixedToAbsoluteScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
+export const moveAsScrollScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__illust-blur-animation-dummy',
   start: `bottom-=${ILLUST_BLUR_SCROLL_PX / 2}px bottom`,
-  end: `bottom+=${FIXED_TO_ABSOLUTE_SCROLL_PX / 2}px bottom`,
   markers: true,
+  end: `bottom+=${MOVE_AS_SCROLL_SCROLL_PX - ILLUST_BLUR_SCROLL_PX / 2}px bottom`,
   scrub: true,
 } as const
