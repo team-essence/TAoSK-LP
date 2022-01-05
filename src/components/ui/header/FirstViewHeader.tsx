@@ -1,4 +1,12 @@
-import React, { useEffect, Dispatch, useState, FCX, SetStateAction } from 'react'
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  Dispatch,
+  FCX,
+  SetStateAction,
+} from 'react'
 import {
   FIRST_VIEW_SCROLL_TRIGGER_END_PX,
   DOT_BLUR_SCROLL_PX,
@@ -11,7 +19,9 @@ import {
   getContentsPerLogoAndContentsWidth,
   getContentsPerLogoAndContentsHeight,
 } from 'utils/getFirstViewSizeRatio'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+type ContentsType = 'aboutTAoSK' | 'concept' | 'start'
 
 type Props = {
   setHasFirstViewAnimationDone: Dispatch<SetStateAction<boolean>>
@@ -21,13 +31,25 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
   const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
-  const [contentsPath, setContentsPath] = useState<'dot' | 'illust'>('dot')
+  const [hasAnimatedFirstBlur, setHasAnimatedFirstBlur] = useState<boolean>(false)
+  const contentsPath = useMemo<'dot' | 'illust'>(
+    () => (hasAnimatedFirstBlur ? 'illust' : 'dot'),
+    [hasAnimatedFirstBlur],
+  )
+  const [nowHovered, setNowHovered] = useState<ContentsType>('aboutTAoSK')
+
+  const handleNowHovered = useCallback(
+    (contentsType: ContentsType) => {
+      if (hasAnimatedFirstBlur) setNowHovered(contentsType)
+    },
+    [hasAnimatedFirstBlur],
+  )
 
   useEffect(() => {
     const firstBlurredScrollPosition = firstViewAnimationDummyHeight + DOT_BLUR_SCROLL_PX
-    const hasAnimated = firstBlurredScrollPosition < scrollVolume
-    setHasFirstViewAnimationDone(hasAnimated)
-    setContentsPath(hasAnimated ? 'illust' : 'dot')
+    const firstViewAnimationDonePosition = firstBlurredScrollPosition + ILLUST_BLUR_SCROLL_PX
+    setHasAnimatedFirstBlur(firstBlurredScrollPosition < scrollVolume)
+    setHasFirstViewAnimationDone(firstViewAnimationDonePosition < scrollVolume)
   }, [firstViewAnimationDummyHeight, scrollVolume])
 
   return (
@@ -52,19 +74,28 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
 
           <StyledContentsWrapper>
             <StyledContents>
-              <StyledContent>
+              <StyledContent
+                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                isHovered={nowHovered === 'aboutTAoSK'}
+                onMouseEnter={() => handleNowHovered('aboutTAoSK')}>
                 <StyledContentTextImg
                   alt="TAoSKとは"
                   src={`/contents/${contentsPath}/about-taosk.svg`}
                 />
               </StyledContent>
-              <StyledContent>
+              <StyledContent
+                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                isHovered={nowHovered === 'concept'}
+                onMouseEnter={() => handleNowHovered('concept')}>
                 <StyledContentTextImg
                   alt="とくちょう"
                   src={`/contents/${contentsPath}/concept.svg`}
                 />
               </StyledContent>
-              <StyledContent>
+              <StyledContent
+                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                isHovered={nowHovered === 'start'}
+                onMouseEnter={() => handleNowHovered('start')}>
                 <StyledContentTextImg
                   alt="はじめよう"
                   src={`/contents/${contentsPath}/lets-start.svg`}
@@ -181,15 +212,23 @@ const StyledContents = styled.ul`
   height: 100%;
   padding: 7.262569832%;
 `
-const StyledContent = styled.li`
+const StyledContent = styled.li<{ hasAnimatedFirstBlur: boolean; isHovered: boolean }>`
   flex-grow: 1;
   width: 100%;
   background-size: 100% 100%;
   text-align: right;
 
-  &:hover {
-    background-image: url('/contents/selected-background.svg');
-  }
+  ${({ hasAnimatedFirstBlur }) =>
+    hasAnimatedFirstBlur &&
+    css`
+      cursor: pointer;
+    `}
+
+  ${({ isHovered }) =>
+    isHovered &&
+    css`
+      background-image: url('/contents/hovered-background.svg');
+    `}
 `
 const StyledContentTextImg = styled.img`
   object-fit: contain;
