@@ -1,7 +1,6 @@
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import {
-  scrollTrigger,
   dotBlurScrollTrigger,
   illustBlurScrollTrigger,
   fixedToAbsoluteScrollTrigger,
@@ -18,14 +17,7 @@ export const resetAllScrollAnimation = () => {
 
 /** ファーストビューでスクロールで徐々にブラーがかかるアニメーションを付与する */
 export const addBlurAnimation = () => {
-  gsap.fromTo(
-    '#first-view__container',
-    { position: 'fixed' },
-    {
-      scrollTrigger,
-      position: 'fixed',
-    },
-  )
+  // この順番でアニメーションを付与しないと期待通りのアニメーションにならない
   gsap.fromTo(
     '#first-view__inner-display',
     {

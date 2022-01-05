@@ -7,7 +7,7 @@ import {
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 type Props = {
   setHasFirstViewAnimationDone: Dispatch<SetStateAction<boolean>>
@@ -18,6 +18,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
   const { screenImage } = useChangeScreenImage()
   const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
 
+  // FIXME: 条件式が前のままで正しくないので修正する
   useEffect(() => {
     setHasFirstViewAnimationDone(scrollVolume >= FIRST_VIEW_SCROLL_TRIGGER_END_PX)
   }, [scrollVolume])
@@ -34,11 +35,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
           <StyledFirstViewDummy id="first-view__background-dummy" />
           <StyledBottomBg id="first-view__bottom-bg" />
         </StyledBgWrapper>
-        <StyledInnerDisplay
-          id="first-view__inner-display"
-          scrollVolume={scrollVolume}
-          screenImage={screenImage}
-        />
+        <StyledInnerDisplay id="first-view__inner-display" />
       </StyledFirstViewHeaderContainer>
       <StyledAnimationDummyContainer>
         <StyledFirstViewAnimationDummy
@@ -97,17 +94,12 @@ const StyledBottomBg = styled.div`
   background-position: center top;
   background-repeat: repeat-y;
 `
-const StyledInnerDisplay = styled.div<{ scrollVolume: number; screenImage: string }>`
-  ${({ theme, scrollVolume, screenImage }) =>
-    css`
-      background-image: url('/screen/before.svg');
-      position: absolute;
-      background-repeat: no-repeat;
-      background-size: 100%;
-      background-position: center;
-      transition: background-image 0.5s;
-      z-index: ${theme.Z_INDEX.INDEX_3};
-    `}
+const StyledInnerDisplay = styled.div`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_3};
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
 `
 const StyledAnimationDummyContainer = styled.div`
   position: relative;
