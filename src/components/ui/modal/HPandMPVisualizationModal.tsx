@@ -91,5 +91,7 @@ const StyledEggContainer = styled.div`
   bottom: ${calculateMinSizeBasedOnFigma(-114)};
 `
 const StyledEggImage = styled.img`
+  aspect-ratio: 1 / 1;
   width: ${calculateMinSizeBasedOnFigma(231)};
+  height: ${calculateMinSizeBasedOnFigma(180)};
 `
