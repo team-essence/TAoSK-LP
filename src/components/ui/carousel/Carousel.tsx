@@ -55,16 +55,16 @@ const StyledUl = styled.ul<{ direction: 'left' | 'right' }>`
   list-style: none;
   ${({ direction }) =>
     css`
-      animation: ${direction === 'left' ? infinityScrollLeft : infinityScrollRight} 15s infinite
+      animation: ${direction === 'left' ? infinityScrollLeft : infinityScrollRight} 20s infinite
         linear 0.5s both;
     `}
 `
 const StyledLi = styled.li`
-  width: ${calculateVwBasedOnFigma(442)};
+  width: ${calculateVwBasedOnFigma(500)};
   height: ${calculateVwBasedOnFigma(280)};
   margin-left: ${calculateVwBasedOnFigma(20)};
   ${mediaQuery.sm`
-    width: ${calculateVwBasedOnFigma(884)};
+    width: ${calculateVwBasedOnFigma(970)};
     height: ${calculateVwBasedOnFigma(560)};
   `}
   img {
@@ -75,11 +75,11 @@ const StyledLi = styled.li`
 `
 const StyledImage = styled.img`
   aspect-ratio: 1 / 1;
-  width: ${calculateVwBasedOnFigma(442)};
+  width: ${calculateVwBasedOnFigma(500)};
   height: ${calculateVwBasedOnFigma(280)};
   object-fit: cover;
   ${mediaQuery.sm`
-    width: ${calculateVwBasedOnFigma(884)};
+    width: ${calculateVwBasedOnFigma(970)};
     height: ${calculateVwBasedOnFigma(560)};
   `}
 `
