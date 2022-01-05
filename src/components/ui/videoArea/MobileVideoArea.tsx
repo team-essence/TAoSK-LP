@@ -9,7 +9,7 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
     <StyledContainer className={className}>
       <StyledTitleImageContainer>
         <StyledTitleImage
-          src="/videoArea/mb_title.png"
+          src="/videoArea/mb_title.svg"
           alt="全ての仕事をゲームの成果で!"
           loading="lazy"
         />
