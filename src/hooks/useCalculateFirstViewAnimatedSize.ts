@@ -200,12 +200,12 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
       '#first-view__inner-display',
       {
         filter: 'blur(15px)',
-        backgroundImage: 'url("/screen/before.svg")',
+        backgroundImage: 'url("/screen/before.webp")',
       },
       {
         scrollTrigger: illustBlurScrollTrigger,
         filter: 'blur(0px)',
-        backgroundImage: 'url("/screen/after.svg")',
+        backgroundImage: 'url("/screen/after.webp")',
       },
     )
     gsap.fromTo(
