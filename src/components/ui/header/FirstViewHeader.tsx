@@ -1,4 +1,4 @@
-import React, { useEffect, Dispatch, FCX, SetStateAction } from 'react'
+import React, { useEffect, Dispatch, useState, FCX, SetStateAction } from 'react'
 import {
   FIRST_VIEW_SCROLL_TRIGGER_END_PX,
   DOT_BLUR_SCROLL_PX,
@@ -7,7 +7,10 @@ import {
 import { useCalculateFirstViewAnimatedSize } from 'hooks/useCalculateFirstViewAnimatedSize'
 import { useWatchScrollVolume } from 'hooks/useWatchScrollVolume'
 import { useChangeScreenImage } from 'hooks/useChangeScreenImage'
-import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import {
+  getContentsPerLogoAndContentsWidth,
+  getContentsPerLogoAndContentsHeight,
+} from 'utils/getFirstViewSizeRatio'
 import styled from 'styled-components'
 
 type Props = {
@@ -18,11 +21,14 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
   const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
+  const [contentsPath, setContentsPath] = useState<'dot' | 'illust'>('dot')
 
-  // FIXME: 条件式が前のままで正しくないので修正する
   useEffect(() => {
-    setHasFirstViewAnimationDone(scrollVolume >= FIRST_VIEW_SCROLL_TRIGGER_END_PX)
-  }, [scrollVolume])
+    const firstBlurredScrollPosition = firstViewAnimationDummyHeight + DOT_BLUR_SCROLL_PX
+    const hasAnimated = firstBlurredScrollPosition < scrollVolume
+    setHasFirstViewAnimationDone(hasAnimated)
+    setContentsPath(hasAnimated ? 'illust' : 'dot')
+  }, [firstViewAnimationDummyHeight, scrollVolume])
 
   return (
     <>
@@ -42,12 +48,34 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
 
       <StyledLogoAndContentsContainer height={innerHeight}>
         <StyledLogoAndContents id="first-view__logo-and-contents">
-          <StyledLogoWrapper>
-            <StyledLogo src="/screen/top-logo.webp" alt="TAoSK" />
-          </StyledLogoWrapper>
+          <StyledLogo src="/screen/top-logo.webp" alt="TAoSK" />
+
+          <StyledContentsWrapper>
+            <StyledContents>
+              <StyledContent>
+                <StyledContentTextImg
+                  alt="TAoSKとは"
+                  src={`/contents/${contentsPath}/about-taosk.svg`}
+                />
+              </StyledContent>
+              <StyledContent>
+                <StyledContentTextImg
+                  alt="とくちょう"
+                  src={`/contents/${contentsPath}/concept.svg`}
+                />
+              </StyledContent>
+              <StyledContent>
+                <StyledContentTextImg
+                  alt="はじめよう"
+                  src={`/contents/${contentsPath}/lets-start.svg`}
+                />
+              </StyledContent>
+            </StyledContents>
+          </StyledContentsWrapper>
         </StyledLogoAndContents>
       </StyledLogoAndContentsContainer>
 
+      {/* ファーストビューはposition: fixedで固定されているので、同じ高さ分dummyを設置してスクロールですぐに特徴セクションが現れないようにする */}
       <StyledAnimationDummyContainer>
         <StyledFirstViewAnimationDummy
           id="first-view__animation-dummy"
@@ -132,15 +160,41 @@ const StyledLogoAndContents = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
-  gap: ${calculateMinSizeBasedOnFigma(69)};
-`
-const StyledLogoWrapper = styled.div`
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `
 const StyledLogo = styled.img`
   width: 100%;
+`
+const StyledContentsWrapper = styled.div`
+  width: ${getContentsPerLogoAndContentsWidth() * 100}%;
+  height: ${getContentsPerLogoAndContentsHeight() * 100}%;
+  background-image: url('/contents/background.svg');
+  background-size: 100% 100%;
+`
+const StyledContents = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4.4692734%;
+  width: 100%;
+  height: 100%;
+  padding: 7.262569832%;
+`
+const StyledContent = styled.li`
+  flex-grow: 1;
+  width: 100%;
+  background-size: 100% 100%;
+  text-align: right;
+
+  &:hover {
+    background-image: url('/contents/selected-background.svg');
+  }
+`
+const StyledContentTextImg = styled.img`
+  object-fit: contain;
+  width: 77.777777%;
+  height: 100%;
 `
 const StyledAnimationDummyContainer = styled.div`
   position: relative;

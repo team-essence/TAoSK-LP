@@ -3,9 +3,9 @@ import gsap from 'gsap'
 import { scrollTrigger } from 'consts/scrollTrigger'
 import { moveAsScrollScrollTrigger, MOVE_AS_SCROLL_SCROLL_PX } from 'consts/scrollTrigger'
 import {
-  getLogoPerInnerPcWidthRatio,
-  getLogoAspectRatio,
-  getLogoXPerInnerPcWidthRatio,
+  getLogoAndContentsPerInnerPcWidthRatio,
+  getLogoAndContentsAspectRatio,
+  getLogoAndContentsXPerInnerPcWidthRatio,
   getAspectLogoPositionRatio,
 } from 'utils/getFirstViewSizeRatio'
 
@@ -27,6 +27,7 @@ type UseFirstViewLogoAndContentsAnimation = (
   arg: UseFirstViewLogoAndContentsAnimationArg,
 ) => UseFirstViewLogoAndContentsAnimationReturn
 
+/** ファーストビューで画面がズームされた時のロゴと目次部分のアニメーションを計算する */
 export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAnimation = ({
   innerPcLeft,
   innerPcTop,
@@ -35,17 +36,20 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
   innerPcAnimatedTop,
   animatedBgSizeRatio,
 }) => {
-  const logoPerInnerPcWidth = getLogoPerInnerPcWidthRatio()
-  const logoAspectRatio = getLogoAspectRatio()
-  const logoXPerInnerPcWidth = getLogoXPerInnerPcWidthRatio()
+  const logoPerInnerPcWidth = getLogoAndContentsPerInnerPcWidthRatio()
+  const logoAspectRatio = getLogoAndContentsAspectRatio()
+  const logoXPerInnerPcWidth = getLogoAndContentsXPerInnerPcWidthRatio()
   const aspectLogoPositionRatio = getAspectLogoPositionRatio()
 
-  const width = useMemo(() => innerPcWidth * logoPerInnerPcWidth, [innerPcWidth])
-  const height = useMemo(() => width * logoAspectRatio, [width])
-  const left = useMemo(() => innerPcWidth * logoXPerInnerPcWidth, [innerPcWidth])
-  const top = useMemo(() => left * aspectLogoPositionRatio, [left])
-  const animatedLeft = useMemo(() => left * animatedBgSizeRatio, [left, animatedBgSizeRatio])
-  const animatedTop = useMemo(() => top * animatedBgSizeRatio, [top, animatedBgSizeRatio])
+  const width = useMemo<number>(() => innerPcWidth * logoPerInnerPcWidth, [innerPcWidth])
+  const height = useMemo<number>(() => width * logoAspectRatio, [width])
+  const left = useMemo<number>(() => innerPcWidth * logoXPerInnerPcWidth, [innerPcWidth])
+  const top = useMemo<number>(() => left * aspectLogoPositionRatio, [left])
+  const animatedLeft = useMemo<number>(
+    () => left * animatedBgSizeRatio,
+    [left, animatedBgSizeRatio],
+  )
+  const animatedTop = useMemo<number>(() => top * animatedBgSizeRatio, [top, animatedBgSizeRatio])
 
   const addLogoAndContentsAnimation = useCallback(() => {
     gsap.fromTo(
