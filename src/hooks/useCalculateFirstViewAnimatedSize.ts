@@ -4,6 +4,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { useFirstViewInnerPcAnimation } from 'hooks/useFirstViewInnerPcAnimation'
 import { useFirstViewBackgroundAnimation } from 'hooks/useFirstViewBackgroundAnimation'
+import { useFirstViewLogoAndContentsAnimation } from 'hooks/useFirstViewLogoAndContentsAnimation'
 import { resetAllScrollAnimation, addBlurAnimation } from 'utils/scrollAnimation'
 
 type UseCalculateFirstViewAnimatedSizeReturn = {
@@ -11,6 +12,7 @@ type UseCalculateFirstViewAnimatedSizeReturn = {
   firstViewAnimationDummyHeight: number
 }
 
+// TODO: useCalculateFirstViewAnimatedSizeは名前が不適切なので変更する
 /**
  * ファーストビューでスクロールした時に画面内のPCがピッタリ実際の画面に収まるような拡大率・位置を計算し、アニメーションを付与する
  */
@@ -20,6 +22,9 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     useFirstViewInnerPcAnimation(innerWidth, innerHeight)
   const { addFirstViewBackgroundAnimation, addBackgroundDummyAnimation } =
     useFirstViewBackgroundAnimation({ ...innerPcAnimationVariables })
+  const { addLogoAndContentsAnimation } = useFirstViewLogoAndContentsAnimation({
+    ...innerPcAnimationVariables,
+  })
 
   const isRegistered = useRef<boolean>(false)
 
@@ -33,8 +38,14 @@ export const useCalculateFirstViewAnimatedSize = (): UseCalculateFirstViewAnimat
     addInnerPcAnimation()
     addFirstViewBackgroundAnimation()
     addBackgroundDummyAnimation()
+    addLogoAndContentsAnimation()
     addBlurAnimation()
-  }, [addInnerPcAnimation, addFirstViewBackgroundAnimation, addBackgroundDummyAnimation])
+  }, [
+    addInnerPcAnimation,
+    addFirstViewBackgroundAnimation,
+    addBackgroundDummyAnimation,
+    addLogoAndContentsAnimation,
+  ])
 
   return { innerHeight, firstViewAnimationDummyHeight }
 }

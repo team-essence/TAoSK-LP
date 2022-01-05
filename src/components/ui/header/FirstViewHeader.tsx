@@ -41,7 +41,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
       </StyledFirstViewHeaderContainer>
 
       <StyledLogoAndContentsContainer height={innerHeight}>
-        <StyledLogoAndContents>
+        <StyledLogoAndContents id="first-view__logo-and-contents">
           <StyledLogoWrapper>
             <StyledLogo src="/screen/top-logo.webp" alt="TAoSK" />
           </StyledLogoWrapper>
@@ -64,20 +64,6 @@ const StyledFirstViewHeaderContainer = styled.header<{ height: number }>`
   position: fixed;
   width: 100vw;
   height: ${({ height }) => height}px;
-`
-const StyledLogoAndContentsContainer = styled.div<{ height: number }>`
-  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_4};
-  position: fixed;
-  width: 100vw;
-  height: ${({ height }) => height}px;
-`
-const StyledLogoAndContents = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: ${calculateMinSizeBasedOnFigma(69)};
-  margin: 0 auto;
 `
 const StyledFirstViewBackground = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_2};
@@ -135,6 +121,20 @@ const StyledInnerDisplayOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+`
+const StyledLogoAndContentsContainer = styled.div<{ height: number }>`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_4};
+  position: fixed;
+  width: 100vw;
+  height: ${({ height }) => height}px;
+`
+const StyledLogoAndContents = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  gap: ${calculateMinSizeBasedOnFigma(69)};
 `
 const StyledLogoWrapper = styled.div`
   width: 100%;

@@ -15,6 +15,9 @@ type UseFirstViewInnerPcAnimation = {
   isFitIntoWindow: boolean
   innerPcLeft: number
   innerPcTop: number
+  innerPcWidth: number
+  innerPcAnimatedTop: number
+  innerPcAnimatedLeft: number
   tailedHeight: number
   tailedInnerPcTop: number
   tailedInnerPcLeft: number
@@ -133,6 +136,9 @@ export const useFirstViewInnerPcAnimation = (
     isFitIntoWindow,
     innerPcLeft: left,
     innerPcTop: top,
+    innerPcWidth: width,
+    innerPcAnimatedTop,
+    innerPcAnimatedLeft,
     tailedHeight,
     tailedInnerPcTop,
     tailedInnerPcLeft,

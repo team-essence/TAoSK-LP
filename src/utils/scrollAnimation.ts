@@ -3,7 +3,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import {
   dotBlurScrollTrigger,
   illustBlurScrollTrigger,
-  fixedToAbsoluteScrollTrigger,
+  makeDarkerScrollTrigger,
 } from 'consts/scrollTrigger'
 import { convertIntoRGBA } from 'utils/color/convertIntoRGBA'
 import { theme } from 'styles/global/theme'
@@ -40,12 +40,30 @@ export const addBlurAnimation = () => {
     },
   )
   gsap.fromTo(
+    '#first-view__logo-and-contents',
+    {
+      filter: 'blur(15px)',
+    },
+    {
+      scrollTrigger: illustBlurScrollTrigger,
+      filter: 'blur(0px)',
+    },
+  )
+  gsap.fromTo(
+    '#first-view__logo-and-contents',
+    { filter: 'blur(0px)' },
+    {
+      scrollTrigger: dotBlurScrollTrigger,
+      filter: 'blur(15px)',
+    },
+  )
+  gsap.fromTo(
     '#first-view__inner-display-overlay',
     {
       backgroundColor: convertIntoRGBA(theme.COLORS.BACKGROUND.SCORPION, 0),
     },
     {
-      scrollTrigger: fixedToAbsoluteScrollTrigger,
+      scrollTrigger: makeDarkerScrollTrigger,
       backgroundColor: convertIntoRGBA(theme.COLORS.BACKGROUND.SCORPION, 0.32),
     },
   )

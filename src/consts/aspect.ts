@@ -16,11 +16,13 @@ export const screenBackgroundImage = {
 } as const
 
 export const logoImage = {
-  WIDTH: 2500,
-  HEIGHT: 1029,
+  WIDTH: 447.77,
+  HEIGHT: 184.27,
+  X: 298, // PC画面内部の左端をx=0, 上端をy=0とする
+  Y: 134,
 } as const
 
 export const contentsImage = {
-  WIDTH: 358,
-  HEIGHT: 264,
+  WIDTH: 109.28,
+  HEIGHT: 153.26,
 } as const
