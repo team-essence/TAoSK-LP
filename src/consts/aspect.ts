@@ -14,3 +14,13 @@ export const screenBackgroundImage = {
   WIDTH: 2300,
   HEIGHT: 1293,
 } as const
+
+export const logoImage = {
+  WIDTH: 2500,
+  HEIGHT: 1029,
+} as const
+
+export const contentsImage = {
+  WIDTH: 358,
+  HEIGHT: 264,
+} as const
