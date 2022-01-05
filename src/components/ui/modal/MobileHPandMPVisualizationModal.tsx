@@ -20,7 +20,7 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
           <StyledWrap>
             <StyledTitleImageContainer>
               <StyledTitleImage
-                src="/modal/mobile/hp_mp_mobile_title.png"
+                src="/modal/mobile/hp_mp_mobile_title.svg"
                 alt="HP,MPを脳波でリアルタイム解析"
               />
             </StyledTitleImageContainer>
@@ -39,7 +39,7 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
             <StyledRightContainer>
               <div>
                 <StyledTextImage
-                  src="/modal/mobile/hp_mp_mobile_text.png"
+                  src="/modal/mobile/hp_mp_mobile_text.svg"
                   alt="顔認証でHP,MPを表示"
                 />
               </div>

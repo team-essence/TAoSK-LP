@@ -25,7 +25,7 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
             <div>
               <div>
                 <StyledStatusTitleImage
-                  src="/modal/status_title.png"
+                  src="/modal/status_title.svg"
                   alt="完了したタスクに応じてステータスが上昇"
                 />
               </div>
@@ -41,7 +41,7 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
               </div>
               <div>
                 <StyledStatusTextImage
-                  src="/modal/status_text.png"
+                  src="/modal/status_text.svg"
                   alt="社員の仕事を分析して正確な人事評価を手助け"
                 />
               </div>
@@ -94,6 +94,7 @@ const StyledStatusVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(4)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  margin: ${calculateMinSizeBasedOnFigma(4)} 0;
 
   video {
     width: ${calculateMinSizeBasedOnFigma(582)};

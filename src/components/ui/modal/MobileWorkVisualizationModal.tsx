@@ -20,7 +20,7 @@ export const MobileWorkVisualizationModal: FCX<Props> = ({ className }) => {
           <StyledWrap>
             <StyledTitleImageContainer>
               <StyledTitleImage
-                src="/modal/mobile/work_mobile_title.png"
+                src="/modal/mobile/work_mobile_title.svg"
                 alt="HP,MPを脳波でリアルタイム解析"
               />
             </StyledTitleImageContainer>
@@ -48,7 +48,7 @@ export const MobileWorkVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledRightContainer>
             <StyledTextImageContainer>
               <StyledTextImage
-                src="/modal/mobile/work_mobile_text.png"
+                src="/modal/mobile/work_mobile_text.svg"
                 alt="モンスターを倒す感覚で仕事を進めよう!"
               />
             </StyledTextImageContainer>
@@ -92,6 +92,7 @@ const StyledTextImageContainer = styled.div`
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
+  margin-top: ${calculateMinSizeBasedOnFigma(24)};
 `
 const StyledRightContainer = styled.div`
   display: flex;

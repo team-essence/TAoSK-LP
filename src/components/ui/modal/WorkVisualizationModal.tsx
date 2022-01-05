@@ -21,7 +21,7 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
           <StyledWrap>
             <StyledTextImageContainer>
               <StyledTextImage
-                src="/modal/work_text.png"
+                src="/modal/work_text.svg"
                 alt="モンスターを倒す感覚で仕事を進めよう!"
               />
             </StyledTextImageContainer>
@@ -50,7 +50,7 @@ export const WorkVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledFlexContainer>
             <div>
               <StyledTitleImage
-                src="/modal/work_title.png"
+                src="/modal/work_title.svg"
                 alt="タスクは武器で、プロジェクトはモンスター!?"
               />
             </div>
@@ -77,6 +77,7 @@ const StyledFlexContainer = styled.div`
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(677)};
+  padding-top: ${calculateMinSizeBasedOnFigma(8)};
 `
 const StyledWeaponImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(332)};

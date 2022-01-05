@@ -19,7 +19,7 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
         <Modal title="HP,MPの見える化">
           <StyledWrap>
             <div>
-              <StyledTitleImage src="/modal/hp_mp_title.png" alt="HP,MPを脳波でリアルタイム解析" />
+              <StyledTitleImage src="/modal/hp_mp_title.svg" alt="HP,MPを脳波でリアルタイム解析" />
             </div>
             <StyledFlexContainer>
               <div>
@@ -34,7 +34,7 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledFlexContainer>
             <StyledTextImageContainer>
               <StyledTextImage
-                src="/modal/hp_mp_text.png"
+                src="/modal/hp_mp_text.svg"
                 alt="顔認証で仲間の名前,役職,HP,MPを表示"
               />
             </StyledTextImageContainer>
@@ -79,7 +79,7 @@ const StyledKurauchiImage = styled.img`
 `
 const StyledTextImageContainer = styled.div`
   position: absolute;
-  bottom: ${calculateMinSizeBasedOnFigma(-12)};
+  bottom: ${calculateMinSizeBasedOnFigma(0)};
   right: 0;
 `
 const StyledTextImage = styled.img`
