@@ -25,9 +25,18 @@ type ContentsType = 'aboutTAoSK' | 'concept' | 'start'
 
 type Props = {
   setHasFirstViewAnimationDone: Dispatch<SetStateAction<boolean>>
+  scrollToAboutTaosk: () => void
+  scrollToConcept: () => void
+  scrollToStartTaosk: () => void
 }
 
-export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimationDone }) => {
+export const FirstViewHeader: FCX<Props> = ({
+  className,
+  setHasFirstViewAnimationDone,
+  scrollToAboutTaosk,
+  scrollToConcept,
+  scrollToStartTaosk,
+}) => {
   const { scrollVolume } = useWatchScrollVolume()
   const { screenImage } = useChangeScreenImage()
   const { innerHeight, firstViewAnimationDummyHeight } = useCalculateFirstViewAnimatedSize()
@@ -41,6 +50,12 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
   const handleNowHovered = useCallback(
     (contentsType: ContentsType) => {
       if (hasAnimatedFirstBlur) setNowHovered(contentsType)
+    },
+    [hasAnimatedFirstBlur],
+  )
+  const handleScrollTo = useCallback(
+    (func: () => void) => {
+      if (hasAnimatedFirstBlur) func()
     },
     [hasAnimatedFirstBlur],
   )
@@ -74,6 +89,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
               <StyledContent
                 hasAnimatedFirstBlur={hasAnimatedFirstBlur}
                 isHovered={nowHovered === 'aboutTAoSK'}
+                onClick={() => handleScrollTo(scrollToAboutTaosk)}
                 onMouseEnter={() => handleNowHovered('aboutTAoSK')}>
                 <StyledContentTextImg
                   alt="TAoSKとは"
@@ -83,6 +99,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
               <StyledContent
                 hasAnimatedFirstBlur={hasAnimatedFirstBlur}
                 isHovered={nowHovered === 'concept'}
+                onClick={() => handleScrollTo(scrollToConcept)}
                 onMouseEnter={() => handleNowHovered('concept')}>
                 <StyledContentTextImg
                   alt="とくちょう"
@@ -92,6 +109,7 @@ export const FirstViewHeader: FCX<Props> = ({ className, setHasFirstViewAnimatio
               <StyledContent
                 hasAnimatedFirstBlur={hasAnimatedFirstBlur}
                 isHovered={nowHovered === 'start'}
+                onClick={() => handleScrollTo(scrollToStartTaosk)}
                 onMouseEnter={() => handleNowHovered('start')}>
                 <StyledContentTextImg
                   alt="はじめよう"

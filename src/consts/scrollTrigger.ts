@@ -32,14 +32,14 @@ export const makeDarkerScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__illust-blur-animation-dummy',
   start: 'bottom bottom',
   end: `bottom+=${MAKE_DARKER_SCROLL_PX}px bottom`,
-  markers: true,
+  // markers: true,
   scrub: true,
 } as const
 
 export const moveAsScrollScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__illust-blur-animation-dummy',
   start: `bottom-=${ILLUST_BLUR_SCROLL_PX / 2}px bottom`,
-  markers: true,
+  // markers: true,
   end: `bottom+=${MOVE_AS_SCROLL_SCROLL_PX - ILLUST_BLUR_SCROLL_PX / 2}px bottom`,
   scrub: true,
 } as const
