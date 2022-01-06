@@ -3,7 +3,7 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Spacer } from '../spacer/Spacer'
 
 type Props = {}
@@ -86,9 +86,6 @@ const StyledWeaponContainer = styled.div`
 `
 const StyledEffectContainer = styled.div`
   transform: translateY(20%);
-`
-const StyledEffectImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(350)};
 `
 const StyledTextImageContainer = styled.div`
   position: absolute;

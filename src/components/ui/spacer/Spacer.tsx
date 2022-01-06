@@ -9,6 +9,7 @@ type Props = {
 export const Spacer: FCX<Props> = ({ className, size, horizontal }) => {
   return (
     <div
+      className={className}
       style={
         horizontal
           ? {

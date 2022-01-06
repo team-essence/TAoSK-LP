@@ -1,4 +1,4 @@
-import React, { FCX, useState } from 'react'
+import React, { FCX, useRef, useState, useCallback } from 'react'
 import { leftScrollImage, rightScrollImage } from 'consts/carouselImage'
 import { useWatchInnerAspect } from 'hooks/useWatchInnerAspect'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
@@ -21,16 +21,39 @@ import styled, { css } from 'styled-components'
 export const View: FCX = ({ className }) => {
   const { innerWidth } = useWatchInnerAspect()
   const [hasFirstViewAnimationDone, setHasFirstViewAnimationDone] = useState<boolean>(false)
+  const aboutTaoskRef = useRef<HTMLDivElement>(null)
+  const conceptRef = useRef<HTMLDivElement>(null)
+  const startTaoskRef = useRef<HTMLDivElement>(null)
+  const scrollToAboutTaosk = useCallback(() => {
+    const top = aboutTaoskRef.current?.getBoundingClientRect().top
+    if (top) window.scrollTo({ top: top + window.scrollY })
+  }, [aboutTaoskRef])
+  const scrollToConcept = useCallback(() => {
+    const top = conceptRef.current?.getBoundingClientRect().top
+    if (top) window.scrollTo({ top: top + window.scrollY })
+  }, [conceptRef])
+  const scrollToStartTaosk = useCallback(() => {
+    const top = startTaoskRef.current?.getBoundingClientRect().top
+    if (top) window.scrollTo({ top: top + window.scrollY })
+  }, [startTaoskRef])
   const breakpoint = 574
 
   return (
     <ViewContainer className={className}>
-      <FirstViewHeader setHasFirstViewAnimationDone={setHasFirstViewAnimationDone} />
+      <StyledFirstViewHeader
+        setHasFirstViewAnimationDone={setHasFirstViewAnimationDone}
+        scrollToAboutTaosk={scrollToAboutTaosk}
+        scrollToConcept={scrollToConcept}
+        scrollToStartTaosk={scrollToStartTaosk}
+      />
       <StyledFixeContainer hasFirstViewAnimationDone={hasFirstViewAnimationDone}>
-        <StyledVideoAreaContainer>
+        <StyledVideoAreaContainer ref={aboutTaoskRef}>
           {innerWidth >= breakpoint ? <VideoArea /> : <MobileVideoArea />}
         </StyledVideoAreaContainer>
-        <StyledFeatureWrap />
+
+        <StyledFeatureWrapper ref={conceptRef}>
+          <Feature />
+        </StyledFeatureWrapper>
         <StyledModalContainer>
           {innerWidth >= breakpoint ? (
             <HPandMPVisualizationModal />
@@ -48,7 +71,7 @@ export const View: FCX = ({ className }) => {
           <Carousel direction="left" images={leftScrollImage} />
           <Carousel direction="right" images={rightScrollImage} />
         </StyledCarouselContainer>
-        <StyledStartTAoSKContainer>
+        <StyledStartTAoSKContainer ref={startTaoskRef}>
           <StartTAoSK />
         </StyledStartTAoSKContainer>
       </StyledFixeContainer>
@@ -60,14 +83,18 @@ export const View: FCX = ({ className }) => {
 const ViewContainer = styled.div`
   overflow-x: hidden;
 `
+const StyledFirstViewHeader = styled(FirstViewHeader)`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_0};
+`
 const StyledFixeContainer = styled.div<{ hasFirstViewAnimationDone: boolean }>`
+  z-index: ${({ theme }) => theme.Z_INDEX.INDEX_1};
   &::before {
     content: '';
     display: block;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: ${({ theme }) => theme.Z_INDEX.INDEX_MINUS_2};
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
@@ -105,12 +132,13 @@ const StyledVideoAreaContainer = styled.div`
   `}
 `
 const StyledStartTAoSKContainer = styled.div`
+  position: relative;
   margin: ${calculateVwBasedOnFigma(106)} 0;
   ${mediaQuery.sm`
     margin: ${calculateVwBasedOnFigma(280)} 0;
   `}
 `
-const StyledFeatureWrap = styled(Feature)`
+const StyledFeatureWrapper = styled.div`
   margin: ${calculateVwBasedOnFigma(109)} 0 ${calculateVwBasedOnFigma(68)};
   ${mediaQuery.sm`
     margin: ${calculateVwBasedOnFigma(180)} 0 ${calculateVwBasedOnFigma(160)};
