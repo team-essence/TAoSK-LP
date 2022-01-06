@@ -15,6 +15,7 @@ type UseFirstViewLogoAndContentsAnimationArg = {
   innerPcWidth: number
   innerPcAnimatedTop: number
   innerPcAnimatedLeft: number
+  innerWidth: number
   animatedBgSizeRatio: number
 }
 
@@ -34,38 +35,63 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
   innerPcWidth,
   innerPcAnimatedLeft,
   innerPcAnimatedTop,
+  innerWidth,
   animatedBgSizeRatio,
 }) => {
   const logoPerInnerPcWidth = getLogoAndContentsPerInnerPcWidthRatio()
-  const logoAspectRatio = getLogoAndContentsAspectRatio()
+  const logoAndContentsAspectRatio = getLogoAndContentsAspectRatio()
   const logoXPerInnerPcWidth = getLogoAndContentsXPerInnerPcWidthRatio()
   const aspectLogoPositionRatio = getAspectLogoPositionRatio()
 
-  const width = useMemo<number>(() => innerPcWidth * logoPerInnerPcWidth, [innerPcWidth])
-  const height = useMemo<number>(() => width * logoAspectRatio, [width])
+  const width = useMemo<number>(() => {
+    return innerPcWidth * logoPerInnerPcWidth
+  }, [innerPcWidth])
+  const height = useMemo<number>(() => {
+    return width * logoAndContentsAspectRatio
+  }, [width])
+
   const left = useMemo<number>(() => innerPcWidth * logoXPerInnerPcWidth, [innerPcWidth])
   const top = useMemo<number>(() => left * aspectLogoPositionRatio, [left])
-  const animatedLeft = useMemo<number>(
-    () => left * animatedBgSizeRatio,
-    [left, animatedBgSizeRatio],
+
+  const animatedWidth = useMemo(() => width * animatedBgSizeRatio, [width, animatedBgSizeRatio])
+  const animatedHeight = useMemo(() => height * animatedBgSizeRatio, [height, animatedBgSizeRatio])
+
+  const animatedMaxWidth = useMemo<number>(() => {
+    if (animatedWidth < innerWidth) {
+      return animatedWidth
+    } else {
+      return innerWidth
+    }
+  }, [innerWidth, animatedWidth])
+  const animatedMaxHeight = useMemo<number>(
+    () => animatedMaxWidth * logoAndContentsAspectRatio,
+    [animatedMaxWidth],
   )
-  const animatedTop = useMemo<number>(() => top * animatedBgSizeRatio, [top, animatedBgSizeRatio])
+
+  const animatedLeft = useMemo<number>(
+    () => innerPcAnimatedLeft + left * animatedBgSizeRatio,
+    [innerPcAnimatedLeft, left, animatedBgSizeRatio],
+  )
+  const animatedTop = useMemo<number>(
+    () => innerPcAnimatedTop + top * animatedBgSizeRatio,
+    [innerPcAnimatedTop, top, animatedBgSizeRatio],
+  )
 
   const addLogoAndContentsAnimation = useCallback(() => {
     gsap.fromTo(
       '#first-view__logo-and-contents',
       {
-        top: `${innerPcTop + top}px`,
-        left: `${innerPcLeft + left}px`,
-        width: `${width}px`,
-        height: `${height}px`,
+        top: `max(${innerPcTop + top}px, 0px)`,
+        left: `max(${innerPcLeft + left}px, 0px)`,
+        width: `min(${width}px, ${animatedMaxWidth}px)`,
+        height: `min(${height}px, ${animatedMaxHeight}px)`,
       },
       {
         scrollTrigger,
-        top: `${innerPcAnimatedTop + animatedTop}px`,
-        left: `${innerPcAnimatedLeft + animatedLeft}px`,
-        width: `${width * animatedBgSizeRatio}px`,
-        height: `${height * animatedBgSizeRatio}px`,
+        top: `max(${animatedTop}px, 0px)`,
+        left: `max(${animatedLeft}px, 0px)`,
+        width: `min(${animatedWidth}px, ${animatedMaxWidth}px)`,
+        height: `min(${animatedHeight}px, ${animatedMaxHeight}px)`,
       },
     )
   }, [
@@ -77,6 +103,10 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
     height,
     animatedTop,
     animatedLeft,
+    animatedWidth,
+    animatedHeight,
+    animatedMaxWidth,
+    animatedMaxHeight,
     innerPcAnimatedLeft,
     innerPcAnimatedTop,
     animatedBgSizeRatio,
