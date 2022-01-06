@@ -114,9 +114,9 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
 
   const addMovingLogoAndContentsAsScrollAnimation = useCallback(() => {
     gsap.fromTo(
-      '#first-view__logo-and-contents',
+      '#first-view__logo-and-contents-wrapper',
       {
-        top: `${innerPcAnimatedTop + animatedTop}px`,
+        top: '0px',
       },
       {
         scrollTrigger: moveAsScrollScrollTrigger,
@@ -124,7 +124,7 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
         ease: 'none',
       },
     )
-  }, [innerPcAnimatedTop, animatedTop])
+  }, [animatedTop])
 
   return { addLogoAndContentsAnimation, addMovingLogoAndContentsAsScrollAnimation }
 }

@@ -79,44 +79,46 @@ export const FirstViewHeader: FCX<Props> = ({
       </StyledFirstViewHeaderContainer>
 
       <StyledLogoAndContentsContainer height={innerHeight}>
-        <StyledLogoAndContents id="first-view__logo-and-contents">
-          <StyledLogo src="/screen/top-logo.webp" alt="TAoSK" />
+        <StyledLogoAndContentsWrapper id="first-view__logo-and-contents-wrapper">
+          <StyledLogoAndContents id="first-view__logo-and-contents">
+            <StyledLogo src="/screen/top-logo.webp" alt="TAoSK" />
 
-          <StyledContentsWrapper>
-            <StyledContents>
-              <StyledContent
-                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
-                isHovered={nowHovered === 'aboutTAoSK'}
-                onClick={() => handleScrollTo(scrollToAboutTaosk)}
-                onMouseEnter={() => handleNowHovered('aboutTAoSK')}>
-                <StyledContentTextImg
-                  alt="TAoSKとは"
-                  src={`/contents/${contentsPath}/about-taosk.svg`}
-                />
-              </StyledContent>
-              <StyledContent
-                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
-                isHovered={nowHovered === 'concept'}
-                onClick={() => handleScrollTo(scrollToConcept)}
-                onMouseEnter={() => handleNowHovered('concept')}>
-                <StyledContentTextImg
-                  alt="とくちょう"
-                  src={`/contents/${contentsPath}/concept.svg`}
-                />
-              </StyledContent>
-              <StyledContent
-                hasAnimatedFirstBlur={hasAnimatedFirstBlur}
-                isHovered={nowHovered === 'start'}
-                onClick={() => handleScrollTo(scrollToStartTaosk)}
-                onMouseEnter={() => handleNowHovered('start')}>
-                <StyledContentTextImg
-                  alt="はじめよう"
-                  src={`/contents/${contentsPath}/lets-start.svg`}
-                />
-              </StyledContent>
-            </StyledContents>
-          </StyledContentsWrapper>
-        </StyledLogoAndContents>
+            <StyledContentsWrapper>
+              <StyledContents>
+                <StyledContent
+                  hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                  isHovered={nowHovered === 'aboutTAoSK'}
+                  onClick={() => handleScrollTo(scrollToAboutTaosk)}
+                  onMouseEnter={() => handleNowHovered('aboutTAoSK')}>
+                  <StyledContentTextImg
+                    alt="TAoSKとは"
+                    src={`/contents/${contentsPath}/about-taosk.svg`}
+                  />
+                </StyledContent>
+                <StyledContent
+                  hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                  isHovered={nowHovered === 'concept'}
+                  onClick={() => handleScrollTo(scrollToConcept)}
+                  onMouseEnter={() => handleNowHovered('concept')}>
+                  <StyledContentTextImg
+                    alt="とくちょう"
+                    src={`/contents/${contentsPath}/concept.svg`}
+                  />
+                </StyledContent>
+                <StyledContent
+                  hasAnimatedFirstBlur={hasAnimatedFirstBlur}
+                  isHovered={nowHovered === 'start'}
+                  onClick={() => handleScrollTo(scrollToStartTaosk)}
+                  onMouseEnter={() => handleNowHovered('start')}>
+                  <StyledContentTextImg
+                    alt="はじめよう"
+                    src={`/contents/${contentsPath}/lets-start.svg`}
+                  />
+                </StyledContent>
+              </StyledContents>
+            </StyledContentsWrapper>
+          </StyledLogoAndContents>
+        </StyledLogoAndContentsWrapper>
       </StyledLogoAndContentsContainer>
 
       {/* ファーストビューはposition: fixedで固定されているので、同じ高さ分dummyを設置してスクロールですぐに特徴セクションが現れないようにする */}
@@ -203,6 +205,9 @@ const StyledLogoAndContentsContainer = styled.div<{ height: number }>`
   position: fixed;
   width: 100vw;
   height: ${({ height }) => height}px;
+`
+const StyledLogoAndContentsWrapper = styled.div`
+  position: relative;
 `
 const StyledLogoAndContents = styled.div`
   position: relative;
