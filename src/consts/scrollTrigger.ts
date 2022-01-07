@@ -4,7 +4,7 @@ export const ILLUST_BLUR_SCROLL_PX = 1000
 export const MAKE_DARKER_SCROLL_PX = 1000
 export const MOVE_AS_SCROLL_SCROLL_PX = 2500
 
-export const scrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
+export const firstViewScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   trigger: '#first-view__container',
   start: 'top',
   end: `${FIRST_VIEW_SCROLL_TRIGGER_END_PX}px`,

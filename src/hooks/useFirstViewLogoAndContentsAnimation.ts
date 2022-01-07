@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react'
 import gsap from 'gsap'
-import { scrollTrigger } from 'consts/scrollTrigger'
+import { firstViewScrollTrigger } from 'consts/scrollTrigger'
 import { moveAsScrollScrollTrigger, MOVE_AS_SCROLL_SCROLL_PX } from 'consts/scrollTrigger'
 import {
   getLogoAndContentsPerInnerPcWidthRatio,
@@ -87,7 +87,7 @@ export const useFirstViewLogoAndContentsAnimation: UseFirstViewLogoAndContentsAn
         height: `min(${height}px, ${animatedMaxHeight}px)`,
       },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         top: `max(${animatedTop}px, 0px)`,
         left: `max(${animatedLeft}px, 0px)`,
         width: `min(${animatedWidth}px, ${animatedMaxWidth}px)`,

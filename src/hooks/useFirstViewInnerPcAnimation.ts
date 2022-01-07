@@ -7,7 +7,7 @@ import {
   getViewBgAspectRatio,
 } from 'utils/getFirstViewSizeRatio'
 import gsap from 'gsap'
-import { scrollTrigger } from 'consts/scrollTrigger'
+import { firstViewScrollTrigger } from 'consts/scrollTrigger'
 
 type UseFirstViewInnerPcAnimation = {
   addInnerPcAnimation: () => void
@@ -112,7 +112,7 @@ export const useFirstViewInnerPcAnimation = (
         height: `${height}px`,
       },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         top: `${innerPcAnimatedTop}px`,
         left: `${innerPcAnimatedLeft}px`,
         width: `${width * animatedBgSizeRatio}px`,
