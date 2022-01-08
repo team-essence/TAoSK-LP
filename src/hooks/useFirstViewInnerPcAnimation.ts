@@ -9,10 +9,10 @@ import {
 import gsap from 'gsap'
 import { firstViewScrollTrigger } from 'consts/scrollTrigger'
 
-type UseFirstViewInnerPcAnimation = {
+type UseFirstViewInnerPcAnimationReturn = {
   addInnerPcAnimation: () => void
   firstViewAnimationDummyHeight: number
-  isFitIntoWindow: boolean
+  existsVerticallyMarginOnAdjustToInnerWidth: boolean
   innerPcLeft: number
   innerPcTop: number
   innerPcWidth: number
@@ -30,46 +30,49 @@ type UseFirstViewInnerPcAnimation = {
 export const useFirstViewInnerPcAnimation = (
   innerWidth: number,
   innerHeight: number,
-): UseFirstViewInnerPcAnimation => {
+): UseFirstViewInnerPcAnimationReturn => {
   const windowAspectRatio = useMemo<number>(
     () => innerHeight / innerWidth,
     [innerWidth, innerHeight],
   )
-  const widthRatio = getInnerPcWidthRatio()
+  const innerPcWidthRatio = getInnerPcWidthRatio()
   const innerPcAspectRatio = getInnerPcAspectRatio()
   const xPerWidthRatio = getInnerPcXPerWidthRatio()
   const aspectPositionRatio = getAspectInnerPcPositionRatio()
   const viewBgAspectRatio = getViewBgAspectRatio()
 
-  const width = useMemo<number>(() => innerWidth * widthRatio, [innerWidth])
+  const width = useMemo<number>(() => innerWidth * innerPcWidthRatio, [innerWidth])
   const height = useMemo<number>(() => width * innerPcAspectRatio, [width])
   const viewBgHeight = useMemo<number>(() => innerWidth * viewBgAspectRatio, [innerWidth])
-  const isFitIntoWindow = useMemo<boolean>(
-    () => innerHeight <= viewBgHeight,
-    [innerHeight, viewBgHeight],
+  const existsVerticallyMarginOnAdjustToInnerWidth = useMemo<boolean>(
+    () => height * (innerWidth / width) < innerHeight,
+    [height, innerWidth, width, innerHeight],
   )
 
   const tailedHeight = useMemo<number>(
-    () => (isFitIntoWindow ? viewBgHeight - innerHeight : innerHeight - viewBgHeight),
+    () =>
+      existsVerticallyMarginOnAdjustToInnerWidth
+        ? innerHeight - viewBgHeight
+        : viewBgHeight - innerHeight,
     [innerWidth, innerHeight],
   )
 
   const left = useMemo<number>(() => innerWidth * xPerWidthRatio, [innerWidth])
   const top = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return left * aspectPositionRatio - tailedHeight / 2
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return left * aspectPositionRatio + tailedHeight / 2
+    } else {
+      return left * aspectPositionRatio - tailedHeight / 2
     }
   }, [left, tailedHeight])
 
   const animatedBgSizeRatio = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return innerWidth / width
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return innerHeight / height
+    } else {
+      return innerWidth / width
     }
-  }, [isFitIntoWindow, innerWidth, innerHeight, width, height])
+  }, [existsVerticallyMarginOnAdjustToInnerWidth, innerWidth, innerHeight, width, height])
 
   const tailedInnerPcTop = useMemo<number>(
     () => (height - width * windowAspectRatio) / 2,
@@ -82,20 +85,20 @@ export const useFirstViewInnerPcAnimation = (
   )
 
   const innerPcAnimatedTop = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return -(tailedInnerPcTop * animatedBgSizeRatio)
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return 0
+    } else {
+      return -(tailedInnerPcTop * animatedBgSizeRatio)
     }
-  }, [isFitIntoWindow, tailedInnerPcTop, animatedBgSizeRatio])
+  }, [existsVerticallyMarginOnAdjustToInnerWidth, tailedInnerPcTop, animatedBgSizeRatio])
 
   const innerPcAnimatedLeft = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return 0
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return -(tailedInnerPcLeft * animatedBgSizeRatio)
+    } else {
+      return 0
     }
-  }, [isFitIntoWindow, tailedInnerPcTop, animatedBgSizeRatio])
+  }, [existsVerticallyMarginOnAdjustToInnerWidth, tailedInnerPcTop, animatedBgSizeRatio])
 
   const firstViewAnimationDummyHeight = useMemo<number>(
     () => height * animatedBgSizeRatio + innerPcAnimatedTop,
@@ -133,7 +136,7 @@ export const useFirstViewInnerPcAnimation = (
   return {
     addInnerPcAnimation,
     firstViewAnimationDummyHeight,
-    isFitIntoWindow,
+    existsVerticallyMarginOnAdjustToInnerWidth,
     innerPcLeft: left,
     innerPcTop: top,
     innerPcWidth: width,
