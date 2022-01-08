@@ -27,6 +27,7 @@ export const useAddFirstViewAnimation = (): UseAddFirstViewAnimationReturn => {
     useFirstViewBackgroundAnimation({ ...innerPcAnimationVariables })
   const { addLogoAndContentsAnimation, addMovingLogoAndContentsAsScrollAnimation } =
     useFirstViewLogoAndContentsAnimation({
+      innerWidth,
       ...innerPcAnimationVariables,
     })
 

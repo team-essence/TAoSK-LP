@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react'
 import gsap from 'gsap'
-import { scrollTrigger } from 'consts/scrollTrigger'
+import { firstViewScrollTrigger } from 'consts/scrollTrigger'
 import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
 
 type UseFirstViewBackgroundAnimationArg = {
@@ -67,7 +67,7 @@ export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = 
         backgroundPosition: `0px ${initialViewBgPositionTop}px`,
       },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
         backgroundPosition: `${innerPcAnimatedXPosition}px ${innerPcAnimatedYPosition}px`,
       },
@@ -89,7 +89,7 @@ export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = 
         height: `${initialViewBgPositionTop + 10}px`,
       },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
         height: `${innerPcAnimatedYPosition + 10}px`,
       },
@@ -99,7 +99,7 @@ export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = 
       // 上下の要素に隙間が開いてしまうため-20pxする
       { height: `calc(100vw * ${viewBgAspectRatio} - 20px)` },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         height: `calc(100vw * ${viewBgAspectRatio * animatedBgSizeRatio} -20px)`,
       },
     )
@@ -112,7 +112,7 @@ export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = 
         height: `${initialViewBgPositionTop + 10}px`,
       },
       {
-        scrollTrigger,
+        scrollTrigger: firstViewScrollTrigger,
         top: '-20px',
         backgroundSize: `${animatedBgSizeRatio * 100}%`,
         height: `${innerPcAnimatedYPosition + 10}px`,
