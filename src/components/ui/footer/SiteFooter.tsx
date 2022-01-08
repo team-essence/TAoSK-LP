@@ -57,7 +57,7 @@ const FlexContainer = styled.div`
   display: flex;
   align-items: center;
   ${mediaQuery.sm`
-     display: block;
+    display: block;
   `}
 `
 const StyledFooter = styled.footer`
@@ -65,42 +65,41 @@ const StyledFooter = styled.footer`
   height: ${calculateVwBasedOnFigma(120)};
   background: ${({ theme }) => theme.COLORS.BACKGROUND.MINE_SHAFT};
   ${mediaQuery.md`
-     height: ${calculateVwBasedOnFigma(160)};
+    height: ${calculateVwBasedOnFigma(160)};
   `}
   ${mediaQuery.sm`
-     height: ${calculateVwBasedOnFigma(700)};
+    height: ${calculateVwBasedOnFigma(700)};
   `}
 `
 const StyledFooterHead = styled(FlexContainer)`
   justify-content: space-between;
   padding: ${calculateVwBasedOnFigma(16)} ${calculateVwBasedOnFigma(64)};
   ${mediaQuery.sm`
-     padding: 20px 55px;
-     padding: ${calculateVwBasedOnFigma(80)} ${calculateVwBasedOnFigma(150)};
+    padding: ${calculateVwBasedOnFigma(80)} ${calculateVwBasedOnFigma(150)};
   `}
 `
 const StyledLogoContainer = styled(FlexContainer)`
   gap: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
-     display: flex;
-     gap: ${calculateVwBasedOnFigma(40)};
-     justify-content: center;
+    display: flex;
+    gap: ${calculateVwBasedOnFigma(40)};
+    justify-content: center;
   `}
 `
 const StyledSNSContainer = styled(FlexContainer)`
   gap: ${calculateVwBasedOnFigma(40)};
   ${mediaQuery.sm`
-     display: flex;
-     flex-direction: row-reverse;
-     gap: ${calculateVwBasedOnFigma(80)};
-     justify-content: center;
-     margin-top: ${calculateVwBasedOnFigma(100)};
+    display: flex;
+    flex-direction: row-reverse;
+    gap: ${calculateVwBasedOnFigma(80)};
+    justify-content: center;
+    margin-top: ${calculateVwBasedOnFigma(100)};
   `}
 `
 const StyledTAoSK = styled.img`
   width: ${calculateVwBasedOnFigma(117)};
   ${mediaQuery.sm`
-     width: ${calculateVwBasedOnFigma(440)};
+    width: ${calculateVwBasedOnFigma(440)};
   `}
 `
 const StyledHalTokyo = styled.img`
@@ -112,7 +111,7 @@ const StyledHalTokyo = styled.img`
 const StyledSNS = styled.img`
   width: ${calculateVwBasedOnFigma(30)};
   ${mediaQuery.sm`
-     width: ${calculateVwBasedOnFigma(110)};
+    width: ${calculateVwBasedOnFigma(110)};
   `}
 `
 const StyledPlay = styled.p`
@@ -120,8 +119,8 @@ const StyledPlay = styled.p`
   font-weight: ${({ theme }) => theme.FONT_WEIGHTS.BOLD};
   color: ${({ theme }) => theme.COLORS.TEXT.GRAY};
   ${mediaQuery.sm`
-     font-size: ${calculateVwBasedOnFigma(50)};
-     padding-bottom: ${calculateVwBasedOnFigma(16)};
+    font-size: ${calculateVwBasedOnFigma(50)};
+    padding-bottom: ${calculateVwBasedOnFigma(16)};
   `}
 `
 const StyledBorder = styled.div`

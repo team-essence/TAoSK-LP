@@ -43,7 +43,6 @@ const StyledContainer = styled.div`
   position: relative;
   width: 100%;
   height: ${calculateVwBasedOnFigma(2300)};
-  padding: 56px 14px;
   padding: ${calculateVwBasedOnFigma(190)} ${calculateVwBasedOnFigma(60)};
   background: url('/background/mb_brown_bg.png') center center;
   background-repeat: no-repeat;

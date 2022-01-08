@@ -3,6 +3,7 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { animation } from 'styles/animation/modalAnimation'
 import styled from 'styled-components'
 
 type Props = {}
@@ -19,7 +20,7 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
         <Modal title="HP,MPの見える化">
           <StyledWrap>
             <div>
-              <StyledTitleImage src="/modal/hp_mp_title.png" alt="HP,MPを脳波でリアルタイム解析" />
+              <StyledTitleImage src="/modal/hp_mp_title.png" alt="HP,MPを脳波でリアルタイム解析!" />
             </div>
             <StyledFlexContainer>
               <div>
@@ -35,7 +36,7 @@ export const HPandMPVisualizationModal: FCX<Props> = ({ className }) => {
             <StyledTextImageContainer>
               <StyledTextImage
                 src="/modal/hp_mp_text.png"
-                alt="顔認証で仲間の名前,役職,HP,MPを表示"
+                alt="顔認証で仲間の名前,役職,HP,MPを表示!"
               />
             </StyledTextImageContainer>
             <StyledEggContainer>
@@ -64,15 +65,19 @@ const StyledFlexContainer = styled.div`
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(607)};
   padding-bottom: ${calculateMinSizeBasedOnFigma(16)};
+  ${animation.firstShownChildren}
 `
 const StyledInstalledUserImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(394)};
+  ${animation.firstShownChildren}
 `
 const StyledMindWaveImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(220)};
+  ${animation.firstShownChildren}
 `
 const StyledKurauchiContainer = styled.div`
   transform: translateY(-41%);
+  ${animation.secondShownChildren}
 `
 const StyledKurauchiImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(316)};
@@ -81,6 +86,7 @@ const StyledTextImageContainer = styled.div`
   position: absolute;
   bottom: ${calculateMinSizeBasedOnFigma(-12)};
   right: 0;
+  ${animation.secondShownChildren}
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(569)};
