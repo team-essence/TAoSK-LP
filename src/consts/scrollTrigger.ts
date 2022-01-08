@@ -18,6 +18,7 @@ export const dotBlurScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   end: 'bottom bottom',
   // markers:  process.env.NODE_ENV !== 'production',
   scrub: true,
+  invalidateOnRefresh: true,
 } as const
 
 export const illustBlurScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
@@ -26,6 +27,7 @@ export const illustBlurScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {
   end: `bottom-=${ILLUST_BLUR_SCROLL_PX / 2}px bottom`,
   // markers:  process.env.NODE_ENV !== 'production',
   scrub: true,
+  invalidateOnRefresh: true,
 } as const
 
 export const makeDarkerScrollTrigger: gsap.AnimationVars['scrollTrigger'] = {

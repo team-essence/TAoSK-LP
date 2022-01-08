@@ -66,8 +66,8 @@ export const FirstViewHeader: FCX<Props> = ({
   }, [firstViewAnimationDummyHeight, scrollVolume])
 
   return (
-    <StyledAllWrapper className={className}>
-      <StyledFirstViewHeaderContainer id="first-view__container" height={innerHeight}>
+    <StyledAllWrapper id="first-view__container" className={className}>
+      <StyledFirstViewHeaderContainer height={innerHeight}>
         <StyledFirstViewBackground id="first-view__background" />
         <StyledBgWrapper>
           <StyledTopBg id="first-view__top-bg" />

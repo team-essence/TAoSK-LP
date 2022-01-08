@@ -4,6 +4,8 @@ import {
   dotBlurScrollTrigger,
   illustBlurScrollTrigger,
   makeDarkerScrollTrigger,
+  FIRST_VIEW_SCROLL_TRIGGER_END_PX,
+  DOT_BLUR_SCROLL_PX,
 } from 'consts/scrollTrigger'
 import { convertIntoRGBA } from 'utils/color/convertIntoRGBA'
 import { theme } from 'styles/global/theme'
@@ -18,7 +20,16 @@ export const resetAllScrollAnimation = () => {
 
 /** ファーストビューでスクロールで徐々にブラーがかかるアニメーションを付与する */
 export const addBlurAnimation = () => {
-  // この順番でアニメーションを付与しないと期待通りのアニメーションにならない
+  // 画面のリサイズが行われた際に、意図していない箇所でブラーがかかってしまうのを防ぐ
+  const filterBlurAtDotBlurScrollTrigger = (): string => {
+    const blurScrollPosition = FIRST_VIEW_SCROLL_TRIGGER_END_PX + DOT_BLUR_SCROLL_PX
+    if (window.scrollY >= blurScrollPosition) {
+      return 'blur(0px)'
+    } else {
+      return 'blur(15px)'
+    }
+  }
+
   gsap.fromTo(
     '#first-view__inner-display',
     {
@@ -36,7 +47,7 @@ export const addBlurAnimation = () => {
     { filter: 'blur(0px)' },
     {
       scrollTrigger: dotBlurScrollTrigger,
-      filter: 'blur(15px)',
+      filter: filterBlurAtDotBlurScrollTrigger,
     },
   )
   gsap.fromTo(
@@ -54,7 +65,7 @@ export const addBlurAnimation = () => {
     { filter: 'blur(0px)' },
     {
       scrollTrigger: dotBlurScrollTrigger,
-      filter: 'blur(15px)',
+      filter: filterBlurAtDotBlurScrollTrigger,
     },
   )
 }
