@@ -3,6 +3,7 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { animation } from 'styles/animation/modalAnimation'
 import styled from 'styled-components'
 
 type Props = {}
@@ -69,6 +70,7 @@ const StyledTitleImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   margin: 0 auto;
   padding-bottom: 4px;
+  ${animation.firstShownChildren}
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
@@ -76,15 +78,18 @@ const StyledTitleImage = styled.img`
 `
 const StyledInstalledUserImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
+  ${animation.secondShownChildren}
 `
 const StyledMindWaveImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
+  ${animation.secondShownChildren}
 `
 const StyledKurauchiImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(665)};
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(542)};
+  ${animation.secondShownChildren}
 `
 const StyledEggContainer = styled.div`
   transform: translateY(-24%);
@@ -94,6 +99,7 @@ const StyledMindWaveContainer = styled.div`
 `
 const StyledEggImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(420)};
+  ${animation.secondShownChildren}
 `
 const StyledSolutionImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(350)};
@@ -106,4 +112,5 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(332)};
   right: 0;
+  ${animation.secondShownChildren}
 `

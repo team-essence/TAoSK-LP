@@ -20,6 +20,6 @@ const StyledFeatureImage = styled.img`
   width: ${calculateVwBasedOnFigma(428)};
   margin: 0 auto;
   ${mediaQuery.sm`
-     width: 266px;
+    width: 266px;
   `}
 `

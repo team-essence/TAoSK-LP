@@ -41,9 +41,9 @@ const StyledWrapper = styled.div`
   padding: ${padding};
   z-index: ${({ theme }) => theme.Z_INDEX.MODAL};
   ${mediaQuery.sm`
-     width: 100%;
-     height: ${calculateMinSizeBasedOnFigma(1750)};
-     padding: ${mobilePadding};
+    width: 100%;
+    height: ${calculateMinSizeBasedOnFigma(1750)};
+    padding: ${mobilePadding};
   `}
 `
 const StyledNamePlate = styled.p`
@@ -74,9 +74,7 @@ const StyledNamePlate = styled.p`
     height: ${calculateMinSizeBasedOnFigma(140)};
   `}
 `
-const StyledChildrenWrapper = styled.div`
-  ${animation.children}
-`
+const StyledChildrenWrapper = styled.div``
 const StyledBackgroundWrapper = styled.div`
   z-index: ${({ theme }) => theme.Z_INDEX.INDEX_MINUS_2};
   position: absolute;
