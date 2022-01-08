@@ -4,7 +4,7 @@ import { firstViewScrollTrigger } from 'consts/scrollTrigger'
 import { getViewBgAspectRatio } from 'utils/getFirstViewSizeRatio'
 
 type UseFirstViewBackgroundAnimationArg = {
-  isFitIntoWindow: boolean
+  existsVerticallyMarginOnAdjustToInnerWidth: boolean
   innerPcLeft: number
   innerPcTop: number
   tailedHeight: number
@@ -26,7 +26,7 @@ type UseFirstViewBackgroundAnimation = (
  * ファーストビューの背景画像のアニメーションを計算する
  */
 export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = ({
-  isFitIntoWindow,
+  existsVerticallyMarginOnAdjustToInnerWidth,
   innerPcLeft,
   innerPcTop,
   tailedHeight,
@@ -35,29 +35,40 @@ export const useFirstViewBackgroundAnimation: UseFirstViewBackgroundAnimation = 
   animatedBgSizeRatio,
 }) => {
   const initialViewBgPositionTop = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return -(tailedHeight / 2)
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return tailedHeight / 2
+    } else {
+      return -(tailedHeight / 2)
     }
-  }, [isFitIntoWindow, tailedHeight])
+  }, [existsVerticallyMarginOnAdjustToInnerWidth, tailedHeight])
 
   const innerPcAnimatedXPosition = useMemo<number>(() => {
-    if (isFitIntoWindow) {
-      return -(innerPcLeft * animatedBgSizeRatio)
-    } else {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
       return -(innerPcLeft + tailedInnerPcLeft) * animatedBgSizeRatio
+    } else {
+      return -(innerPcLeft * animatedBgSizeRatio)
     }
-  }, [isFitIntoWindow, tailedInnerPcLeft, innerPcLeft, animatedBgSizeRatio])
+  }, [
+    existsVerticallyMarginOnAdjustToInnerWidth,
+    tailedInnerPcLeft,
+    innerPcLeft,
+    animatedBgSizeRatio,
+  ])
 
   const innerPcAnimatedYPosition = useMemo<number>(() => {
-    if (isFitIntoWindow) {
+    if (existsVerticallyMarginOnAdjustToInnerWidth) {
+      return -(innerPcTop - tailedHeight / 2) * animatedBgSizeRatio
+    } else {
       const top = innerPcTop + tailedHeight / 2
       return -((top + tailedInnerPcTop) * animatedBgSizeRatio)
-    } else {
-      return -(innerPcTop - tailedHeight / 2) * animatedBgSizeRatio
     }
-  }, [isFitIntoWindow, innerPcTop, tailedHeight, tailedInnerPcTop, animatedBgSizeRatio])
+  }, [
+    existsVerticallyMarginOnAdjustToInnerWidth,
+    innerPcTop,
+    tailedHeight,
+    tailedInnerPcTop,
+    animatedBgSizeRatio,
+  ])
 
   const addFirstViewBackgroundAnimation = useCallback(() => {
     gsap.fromTo(
