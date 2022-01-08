@@ -3,8 +3,9 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { Spacer } from 'components/ui/spacer/Spacer'
+import { animation } from 'styles/animation/modalAnimation'
 import styled from 'styled-components'
-import { Spacer } from '../spacer/Spacer'
 
 type Props = {}
 
@@ -80,6 +81,7 @@ const StyledTitleImage = styled.img`
 `
 const StyledWeaponImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(332)};
+  ${animation.firstShownChildren}
 `
 const StyledWeaponContainer = styled.div`
   transform: translateY(20%);
@@ -91,6 +93,7 @@ const StyledTextImageContainer = styled.div`
   position: absolute;
   top: 0;
   right: ${calculateMinSizeBasedOnFigma(200)};
+  ${animation.secondShownChildren}
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(491)};
@@ -105,6 +108,7 @@ const StyledMonsterVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(4)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  ${animation.firstShownChildren}
 
   video {
     width: ${calculateMinSizeBasedOnFigma(245)};
@@ -123,6 +127,7 @@ const StyledAttackVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(4)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  ${animation.secondShownChildren}
 
   video {
     width: ${calculateMinSizeBasedOnFigma(334)};

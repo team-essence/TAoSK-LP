@@ -80,11 +80,10 @@ export const animation = {
     animation: ${childrenKeyframes} 0.3s 1.2s both linear;
     will-change: animation, opacity, transform;
   `,
-  // TODO: 使う機会がなかったら消す
-  // thirdShownChildren: css`
-  //   animation: ${childrenKeyframes} 0.3s 1.8s both linear;
-  //   will-change: animation, opacity, transform;
-  // `,
+  thirdShownChildren: css`
+    animation: ${childrenKeyframes} 0.3s 1.8s both linear;
+    will-change: animation, opacity, transform;
+  `,
   bgLeft: css`
     animation: ${bgLeftKeyframes} 0.25s 0.15s both ease;
     will-change: animation, background-position;
