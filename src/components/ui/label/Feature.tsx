@@ -1,5 +1,5 @@
 import React, { FCX } from 'react'
-import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
 import { mediaQuery } from 'utils/response/mediaQuery'
 import styled from 'styled-components'
 
@@ -17,9 +17,9 @@ const StyledContainer = styled.div`
   text-align: center;
 `
 const StyledFeatureImage = styled.img`
-  width: ${calculateVwBasedOnFigma(428)};
+  width: ${calculateMinSizeBasedOnFigma(428)};
   margin: 0 auto;
   ${mediaQuery.sm`
-    width: 266px;
+    width: ${calculateMinSizeBasedOnFigma(266)};
   `}
 `

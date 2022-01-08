@@ -69,7 +69,7 @@ const StyledWrap = styled.div`
 const StyledTitleImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   margin: 0 auto;
-  padding-bottom: 4px;
+  padding-bottom: ${calculateMinSizeBasedOnFigma(4)};
   ${animation.firstShownChildren}
 `
 const StyledTitleImage = styled.img`

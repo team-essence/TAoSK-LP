@@ -69,7 +69,7 @@ const StyledNamePlate = styled.p`
     `}
   ${mediaQuery.sm`
     font-size: ${calculateMinSizeBasedOnFigma(60)};
-    top: calc(-35px / 2);
+    top: calc(${calculateMinSizeBasedOnFigma(-35)} / 2);
     width: ${calculateMinSizeBasedOnFigma(1120)};
     height: ${calculateMinSizeBasedOnFigma(140)};
   `}
