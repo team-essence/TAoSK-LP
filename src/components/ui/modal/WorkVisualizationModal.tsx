@@ -78,6 +78,7 @@ const StyledFlexContainer = styled.div`
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(677)};
+  ${animation.firstShownChildren}
 `
 const StyledWeaponImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(332)};

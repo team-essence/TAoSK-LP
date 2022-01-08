@@ -3,6 +3,7 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { animation } from 'styles/animation/modalAnimation'
 import styled from 'styled-components'
 
 type Props = {}
@@ -25,7 +26,7 @@ export const MobileStatusVisualizationModal: FCX<Props> = ({ className }) => {
               />
             </StyledTitleImageContainer>
             <div>
-              <StyledDragonImage src="/modal/mobile/status_mobile_hr.png" alt="hr" />
+              <StyledHumanResourcesPaperImage src="/modal/mobile/status_mobile_hr.png" alt="hr" />
             </div>
             <StyledRightContainer>
               <StyledClearContainer>
@@ -65,13 +66,15 @@ const StyledTitleImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   margin: 0 auto;
   padding-bottom: 4px;
+  ${animation.firstShownChildren}
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   padding-bottom: ${calculateMinSizeBasedOnFigma(16)};
 `
-const StyledDragonImage = styled.img`
+const StyledHumanResourcesPaperImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
+  ${animation.secondShownChildren}
 `
 const StyledClearContainer = styled.div`
   padding-bottom: ${calculateMinSizeBasedOnFigma(30)};
@@ -83,6 +86,7 @@ const StyledTextImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   transform: translateY(8%);
   margin: 0 auto;
+  ${animation.thirdShownChildren}
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
@@ -94,6 +98,7 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(360)};
   right: 0;
+  ${animation.secondShownChildren}
 `
 
 const StyledStatusVideoContainer = styled.div`

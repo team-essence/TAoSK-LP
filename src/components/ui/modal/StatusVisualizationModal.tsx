@@ -1,10 +1,11 @@
 import React, { FCX } from 'react'
 import { Modal } from 'components/ui/modal/Modal'
+import { Spacer } from 'components/ui/spacer/Spacer'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
+import { animation } from 'styles/animation/modalAnimation'
 import styled from 'styled-components'
-import { Spacer } from '../spacer/Spacer'
 
 type Props = {}
 
@@ -20,7 +21,7 @@ export const StatusVisualizationModal: FCX<Props> = ({ className }) => {
         <Modal title="ステータスの見える化">
           <StyledWrap>
             <div>
-              <StyledHRImage src="/modal/hr.png" alt="hr" loading="lazy" />
+              <StyledHumanResourcesPaperImage src="/modal/hr.png" alt="hr" loading="lazy" />
             </div>
             <div>
               <div>
@@ -67,14 +68,17 @@ const StyledWrap = styled.div`
   gap: ${calculateMinSizeBasedOnFigma(30)};
   position: relative;
 `
-const StyledHRImage = styled.img`
+const StyledHumanResourcesPaperImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(325)};
+  ${animation.secondShownChildren}
 `
 const StyledStatusTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(448)};
+  ${animation.firstShownChildren}
 `
 const StyledStatusTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(560)};
+  ${animation.secondShownChildren}
 `
 const StyledQuillContainer = styled.div`
   position: absolute;
@@ -83,6 +87,7 @@ const StyledQuillContainer = styled.div`
 `
 const StyledQuillImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(263)};
+  ${animation.firstShownChildren}
 `
 
 const StyledStatusVideoContainer = styled.div`
@@ -94,6 +99,7 @@ const StyledStatusVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(4)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  ${animation.firstShownChildren}
 
   video {
     width: ${calculateMinSizeBasedOnFigma(582)};
