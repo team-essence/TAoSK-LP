@@ -44,7 +44,12 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
                 />
               </div>
               <div>
-                <StyledKurauchiImage src="/modal/mobile/mobile_kurauchi.png" alt="kurauchi" />
+                <StyledARFaceVideoContainer>
+                  <video loop autoPlay muted playsInline>
+                    <source src="/mp4/ar_face.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledARFaceVideoContainer>
               </div>
               <div>
                 <StyledSolutionImage src="/weapon/progress-solution.svg" alt="solution" />
@@ -106,4 +111,22 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(332)};
   right: 0;
+`
+
+const StyledARFaceVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(665)};
+  height: ${calculateMinSizeBasedOnFigma(610)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(30)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(610)};
+    height: ${calculateMinSizeBasedOnFigma(570)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(30)};
+  }
 `
