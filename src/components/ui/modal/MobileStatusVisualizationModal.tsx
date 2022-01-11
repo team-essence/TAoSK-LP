@@ -21,7 +21,7 @@ export const MobileStatusVisualizationModal: FCX<Props> = ({ className }) => {
           <StyledWrap>
             <StyledTitleImageContainer>
               <StyledTitleImage
-                src="/modal/mobile/status_mobile_title.png"
+                src="/modal/mobile/status_mobile_title.svg"
                 alt="完了したタスクに応じてステータスが上昇"
               />
             </StyledTitleImageContainer>
@@ -43,7 +43,7 @@ export const MobileStatusVisualizationModal: FCX<Props> = ({ className }) => {
             </StyledRightContainer>
             <StyledTextImageContainer>
               <StyledTextImage
-                src="/modal/mobile/status_mobile_text.png"
+                src="/modal/mobile/status_mobile_text.svg"
                 alt="社員の仕事を分析して正確な人事評価を手助け!"
               />
             </StyledTextImageContainer>
@@ -90,6 +90,7 @@ const StyledTextImageContainer = styled.div`
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
+  margin-top: ${calculateMinSizeBasedOnFigma(24)};
 `
 const StyledRightContainer = styled.div`
   display: flex;

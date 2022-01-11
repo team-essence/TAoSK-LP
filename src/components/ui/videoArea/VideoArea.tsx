@@ -1,6 +1,7 @@
 import React, { FCX } from 'react'
 import { calculateVwBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
-import styled from 'styled-components'
+import { strokeTextShadow } from 'utils/strokeTextShadow'
+import styled, { css } from 'styled-components'
 
 type Props = {}
 
@@ -120,12 +121,12 @@ const StyledTextContainer = styled.div`
   width: ${calculateVwBasedOnFigma(385)};
 `
 const StyledText = styled.p`
-  font-size: ${({ theme }) => theme.FONT_SIZES.SIZE_20};
-  color: ${({ theme }) => theme.COLORS.TEXT.WHITE};
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZES.SIZE_20};
+    color: ${theme.COLORS.TEXT.WHITE};
+    ${strokeTextShadow('2px', theme.COLORS.TEXT.BROWN)};
+  `}
   padding: ${calculateVwBasedOnFigma(20)} 0;
-  background: linear-gradient(0deg, #4d2709, #4d2709 100%);
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 5px transparent;
 `
 const StyledStartButtonImage = styled.img`
   margin: 0 auto;
