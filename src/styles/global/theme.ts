@@ -67,6 +67,7 @@ export const theme = {
       WHITE: '#fff',
       BLACK: '#000',
       MINE_SHAFT: '#2A2A2A',
+      SCORPION: '#565656',
     },
 
     BORDER: {

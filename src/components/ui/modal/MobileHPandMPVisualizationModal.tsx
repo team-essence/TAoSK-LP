@@ -3,7 +3,8 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
-import styled, { css } from 'styled-components'
+import { animation } from 'styles/animation/modalAnimation'
+import styled from 'styled-components'
 
 type Props = {}
 
@@ -44,7 +45,12 @@ export const MobileHPandMPVisualizationModal: FCX<Props> = ({ className }) => {
                 />
               </div>
               <div>
-                <StyledKurauchiImage src="/modal/mobile/mobile_kurauchi.png" alt="kurauchi" />
+                <StyledARFaceVideoContainer>
+                  <video loop autoPlay muted playsInline>
+                    <source src="/mp4/ar_face.mp4" type="video/mp4" />
+                    <p>Your browser doesn&lsquo;t support HTML5 video.</p>
+                  </video>
+                </StyledARFaceVideoContainer>
               </div>
               <div>
                 <StyledSolutionImage src="/weapon/progress-solution.svg" alt="solution" />
@@ -68,7 +74,8 @@ const StyledWrap = styled.div`
 const StyledTitleImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   margin: 0 auto;
-  padding-bottom: 4px;
+  padding-bottom: ${calculateMinSizeBasedOnFigma(4)};
+  ${animation.firstShownChildren}
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
@@ -76,15 +83,18 @@ const StyledTitleImage = styled.img`
 `
 const StyledInstalledUserImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
+  ${animation.secondShownChildren}
 `
 const StyledMindWaveImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(620)};
+  ${animation.secondShownChildren}
 `
 const StyledKurauchiImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(665)};
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(542)};
+  ${animation.secondShownChildren}
 `
 const StyledEggContainer = styled.div`
   transform: translateY(-24%);
@@ -94,6 +104,7 @@ const StyledMindWaveContainer = styled.div`
 `
 const StyledEggImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(420)};
+  ${animation.secondShownChildren}
 `
 const StyledSolutionImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(350)};
@@ -106,4 +117,23 @@ const StyledRightContainer = styled.div`
   position: absolute;
   top: ${calculateMinSizeBasedOnFigma(332)};
   right: 0;
+  ${animation.secondShownChildren}
+`
+
+const StyledARFaceVideoContainer = styled.div`
+  width: ${calculateMinSizeBasedOnFigma(665)};
+  height: ${calculateMinSizeBasedOnFigma(610)};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND.WHITE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${calculateMinSizeBasedOnFigma(30)};
+  border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+
+  video {
+    width: ${calculateMinSizeBasedOnFigma(610)};
+    height: ${calculateMinSizeBasedOnFigma(570)};
+    object-fit: cover;
+    border-radius: ${calculateMinSizeBasedOnFigma(30)};
+  }
 `

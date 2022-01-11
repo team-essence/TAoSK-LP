@@ -15,7 +15,12 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
           loading="lazy"
         />
       </StyledTitleImageContainer>
-      <StyledVideo></StyledVideo>
+      <StyledVideo>
+        <iframe
+          src="https://www.youtube.com/embed/j5dQDFva35k"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </StyledVideo>
       <StyledTextContainer>
         <StyledText>
           仕事と働く人のステータスを&quot;見える化&quot;
@@ -39,7 +44,6 @@ const StyledContainer = styled.div`
   position: relative;
   width: 100%;
   height: ${calculateVwBasedOnFigma(2300)};
-  padding: 56px 14px;
   padding: ${calculateVwBasedOnFigma(190)} ${calculateVwBasedOnFigma(60)};
   background: url('/background/mb_brown_bg.png') center center;
   background-repeat: no-repeat;
@@ -50,9 +54,15 @@ const StyledContainer = styled.div`
 const StyledVideo = styled.div`
   width: 100%;
   height: ${calculateVwBasedOnFigma(840)};
-  border-radius: 10px;
   margin-top: ${calculateVwBasedOnFigma(60)};
-  background: #f0f;
+  border-radius: 10px;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: solid ${calculateVwBasedOnFigma(4)} ${({ theme }) => theme.COLORS.BORDER.WHITE};
+  }
 `
 const StyledTitleImageContainer = styled.div`
   width: ${calculateVwBasedOnFigma(1300)};

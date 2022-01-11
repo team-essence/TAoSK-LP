@@ -42,8 +42,8 @@ const StyledContainer = styled.div`
   padding: ${calculateVwBasedOnFigma(10)};
   margin: 0 auto;
   ${mediaQuery.sm`
-     width: 95%;
-     padding: ${calculateVwBasedOnFigma(24)};
+    width: 95%;
+    padding: ${calculateVwBasedOnFigma(24)};
   `}
 `
 const StyledInnerBorder = styled.div`

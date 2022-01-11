@@ -2,6 +2,8 @@ type pxStr = `${number}px`
 
 const FIGMA_WIDTH_PX = 1440
 const FIGMA_HEIGHT_PX = 900
+const FIGMA_SM_WIDTH_PX = 414
+const FIGMA_SM_HEIGHT_PX = 896
 
 /**
  * Figma の画面設計で指定されている px を、画面設計上の画面サイズ準拠で vw, vh に変換し、
@@ -13,6 +15,20 @@ export const calculateMinSizeBasedOnFigma = (px: number | pxStr): string => {
   const numPx = typeof px === 'string' ? Number(px.replace('px', '')) : px
   const vw = `${(numPx / FIGMA_WIDTH_PX) * 100}vw`
   const vh = `${(numPx / FIGMA_HEIGHT_PX) * 100}vh`
+
+  return `${numPx > 0 ? 'min' : 'max'}(${numPx}px, ${vw}, ${vh})`
+}
+
+/**
+ * Figma のスマホサイズの画面設計で指定されている px を、画面設計上の画面サイズ準拠で vw, vh に変換し、
+ * 指定したピクセル数, vw, vh で一番小さい値が適用されるように css の min 関数を返却する
+ * @param {number | pxStr} px - number | '${number}px'
+ * @returns {string}
+ */
+export const calculateSmMinSizeBasedOnFigma = (px: number | pxStr): string => {
+  const numPx = typeof px === 'string' ? Number(px.replace('px', '')) : px
+  const vw = `${(numPx / FIGMA_SM_WIDTH_PX) * 100}vw`
+  const vh = `${(numPx / FIGMA_SM_HEIGHT_PX) * 100}vh`
 
   return `${numPx > 0 ? 'min' : 'max'}(${numPx}px, ${vw}, ${vh})`
 }

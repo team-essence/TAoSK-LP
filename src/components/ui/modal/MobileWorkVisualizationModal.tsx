@@ -3,7 +3,8 @@ import { Modal } from 'components/ui/modal/Modal'
 import { ROOT_MARGIN } from 'consts/rootMargin'
 import { useInView } from 'react-intersection-observer'
 import { calculateMinSizeBasedOnFigma } from 'utils/figma/calculateSizeBasedOnFigma'
-import styled, { css } from 'styled-components'
+import { animation } from 'styles/animation/modalAnimation'
+import styled from 'styled-components'
 
 type Props = {}
 
@@ -70,25 +71,22 @@ const StyledWrap = styled.div`
 const StyledTitleImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   margin: 0 auto;
-  padding-bottom: 4px;
+  padding-bottom: ${calculateMinSizeBasedOnFigma(4)};
+  ${animation.firstShownChildren}
 `
 const StyledTitleImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   padding-bottom: ${calculateMinSizeBasedOnFigma(16)};
 `
-const StyledDragonImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(620)};
-`
-const StyledEffectImage = styled.img`
-  width: ${calculateMinSizeBasedOnFigma(610)};
-`
 const StyledWeaponImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(690)};
+  ${animation.secondShownChildren}
 `
 const StyledTextImageContainer = styled.div`
   width: ${calculateMinSizeBasedOnFigma(1120)};
   transform: translateY(28%);
   margin: 0 auto;
+  ${animation.thirdShownChildren}
 `
 const StyledTextImage = styled.img`
   width: ${calculateMinSizeBasedOnFigma(1120)};
@@ -112,6 +110,7 @@ const StyledMonsterVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(8)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  ${animation.secondShownChildren}
 
   video {
     width: ${calculateMinSizeBasedOnFigma(570)};
@@ -130,6 +129,7 @@ const StyledAttackVideoContainer = styled.div`
   justify-content: center;
   border-radius: ${calculateMinSizeBasedOnFigma(8)};
   border: solid ${calculateMinSizeBasedOnFigma(1)} ${({ theme }) => theme.COLORS.BORDER.MINE_SHAFT};
+  ${animation.secondShownChildren}
 
   video {
     width: ${calculateMinSizeBasedOnFigma(560)};

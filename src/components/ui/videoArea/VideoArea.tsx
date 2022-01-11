@@ -21,7 +21,12 @@ export const VideoArea: FCX<Props> = ({ className }) => {
       </StyledWeaponContainer>
       <StyledCenterContent>
         <StyledInnerContent>
-          <StyledVideo></StyledVideo>
+          <StyledVideo>
+            <iframe
+              src="https://www.youtube.com/embed/j5dQDFva35k"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </StyledVideo>
           <StyledTextContainer>
             <StyledTitleImage
               src="/videoArea/title.png"
@@ -99,8 +104,13 @@ const StyledInnerContent = styled.div`
 const StyledVideo = styled.div`
   width: ${calculateVwBasedOnFigma(450)};
   height: ${calculateVwBasedOnFigma(253)};
-  border-radius: 10px;
-  background: #f0f;
+
+  iframe {
+    width: ${calculateVwBasedOnFigma(450)};
+    height: ${calculateVwBasedOnFigma(253)};
+    border-radius: 10px;
+    border: solid ${calculateVwBasedOnFigma(4)} ${({ theme }) => theme.COLORS.BORDER.WHITE};
+  }
 `
 const StyledTitleImage = styled.img`
   aspect-ratio: 1 / 1;

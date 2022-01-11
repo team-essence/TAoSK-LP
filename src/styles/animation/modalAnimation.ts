@@ -72,8 +72,16 @@ export const animation = {
     animation: ${closeButtonKeyframes} 0.25s both ease;
     will-change: animation, opacity;
   `,
-  children: css`
+  firstShownChildren: css`
     animation: ${childrenKeyframes} 0.3s 0.6s both linear;
+    will-change: animation, opacity, transform;
+  `,
+  secondShownChildren: css`
+    animation: ${childrenKeyframes} 0.3s 1.2s both linear;
+    will-change: animation, opacity, transform;
+  `,
+  thirdShownChildren: css`
+    animation: ${childrenKeyframes} 0.3s 1.8s both linear;
     will-change: animation, opacity, transform;
   `,
   bgLeft: css`
