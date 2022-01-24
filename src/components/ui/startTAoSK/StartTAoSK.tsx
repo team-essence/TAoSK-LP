@@ -24,7 +24,7 @@ export const StartTAoSK: FCX = ({ className }) => {
           <StyledRightWrapper>
             <StyledText>『TAoSK』の世界で仕事を楽しもう！</StyledText>
             <StyledStartButton>
-              <a href="!#">
+              <a href="https://taosk.azurewebsites.net/" target="_blank" rel="noreferrer">
                 <StyledStartButtonImage src="/startTaosk/start.svg" alt="今すぐ始める" />
               </a>
             </StyledStartButton>

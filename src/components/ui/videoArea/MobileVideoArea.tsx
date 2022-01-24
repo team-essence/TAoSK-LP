@@ -32,7 +32,10 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
           <br />
           プロジェクトモンスターをやっつけよう！
         </StyledText>
-        <StyledStartButtonContainer href="!#">
+        <StyledStartButtonContainer
+          href="https://taosk.azurewebsites.net/"
+          target="_blank"
+          rel="noreferrer">
           <StyledStartButtonImage src="/videoArea/start.svg" alt="TAoSKを始める" loading="lazy" />
         </StyledStartButtonContainer>
       </StyledTextContainer>

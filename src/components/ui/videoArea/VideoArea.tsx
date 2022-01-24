@@ -38,7 +38,7 @@ export const VideoArea: FCX<Props> = ({ className }) => {
               プロジェクトがモンスターとして、貴方の前に立ちはだかる......。
               RPGの世界で仲間と共にプロジェクトモンスターをやっつけよう！
             </StyledText>
-            <a href="!#">
+            <a href="https://taosk.azurewebsites.net/" target="_blank" rel="noreferrer">
               <StyledStartButtonImage
                 src="/videoArea/start.svg"
                 alt="TAoSKを始める"
