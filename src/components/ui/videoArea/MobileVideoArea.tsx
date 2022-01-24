@@ -17,7 +17,7 @@ export const MobileVideoArea: FCX<Props> = ({ className }) => {
       </StyledTitleImageContainer>
       <StyledVideo>
         <iframe
-          src="https://www.youtube.com/embed/j5dQDFva35k"
+          src="https://www.youtube.com/embed/I9L4i-wEkgk"
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </StyledVideo>
