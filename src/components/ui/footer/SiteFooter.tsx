@@ -17,7 +17,7 @@ export const SiteFooter: FCX = ({ className }) => {
       <StyledFooterHead ref={sizeInspectedEl}>
         <StyledLogoContainer>
           <p>
-            <a href="!#" target="_blank" rel="noreferrer">
+            <a href="https://taosk.azurewebsites.net/" target="_blank" rel="noreferrer">
               <StyledTAoSK src="/footer/taosk.svg" alt="taosk" />
             </a>
           </p>
@@ -29,7 +29,7 @@ export const SiteFooter: FCX = ({ className }) => {
         </StyledLogoContainer>
         <StyledSNSContainer>
           <StyledPlay>
-            <a href="!#" target="_blank" rel="noreferrer">
+            <a href="https://taosk.azurewebsites.net/" target="_blank" rel="noreferrer">
               TAoSKをプレイする
             </a>
           </StyledPlay>
